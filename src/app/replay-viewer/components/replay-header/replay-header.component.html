@@ -1,0 +1,23 @@
+<div class="team team1">
+  <div class="winner" [style.visibility]="replayDescription?.winningTeam === 0 ? 'visible' : 'hidden'">Winner</div>
+  <div class="players">
+    <hero-icon *ngFor="let player of team1Players" class="player" [hero]="player.hero">
+      {{cleanName(player.hero)}}
+    </hero-icon>
+  </div>
+</div>
+<div class="map">
+  <div>
+    <div class="mode">{{gameMode}}</div>
+    <div class="name">{{replayDescription.mapName}}</div>
+  </div>
+  <div class="date">{{replayDescription.playedOn | date:'MMMM d, yyy - hh:mm a'}} - {{gameDuration}}</div>
+</div>
+<div class="team team2">
+  <div class="winner" [style.visibility]="replayDescription?.winningTeam === 1 ? 'visible' : 'hidden'">Winner</div>
+  <div class="players">
+    <hero-icon *ngFor="let player of team2Players" class="player" [hero]="player.hero">
+      {{cleanName(player.hero)}}
+    </hero-icon>
+  </div>
+</div>

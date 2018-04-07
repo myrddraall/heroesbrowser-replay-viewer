@@ -1,0 +1,26 @@
+<div class="upload-container" [class.loaded]="fileState === FileState.LOADED" [class.drag]="fileState == FileState.DRAGGING"
+  [class.loading]="fileState == FileState.LOADING" [class.parsing]="fileState == FileState.PARSING">
+  <div class="upload">
+    <input #fileInput type="file" id="file" (change)="handleFileSelected($event)" />
+    <label for="file">
+      <div>
+        <strong>Load Replay</strong>
+        <span class="dragndrop"> or drag it here</span>
+        <div class="status">{{FileState[fileState]}}</div>
+      </div>
+      <mat-progress-bar mode="indeterminate" *ngIf="fileState == FileState.LOADING || fileState == FileState.PARSING"></mat-progress-bar>
+    </label>
+  </div>
+</div>
+<div class="viewer-container" *ngIf="replayDescription">
+  <replay-header [replayDescription]="replayDescription"></replay-header>
+  <mat-sidenav-container>
+    <mat-sidenav mode="side" opened="true">
+      <replay-nav [replayDescription]="replayDescription"></replay-nav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      Main
+    
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

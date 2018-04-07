@@ -1,0 +1,9 @@
+:host{
+    display: block;
+    position: relative;
+    ::ng-deep canvas{
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+    }
+}

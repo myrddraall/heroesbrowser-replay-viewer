@@ -1,0 +1,37 @@
+:host {
+  display: block;
+  > label {
+    display: block;
+  }
+  &.section {
+    > .children{
+        padding: 8px;
+    }
+    &[level="0"] {
+      >label {
+        font-size: 16px;
+        font-weight: 500;
+        padding: 8px;
+        text-align: center;
+        text-transform: uppercase;
+        border-width: 2px;
+        border-style: solid;
+        border-top: none;
+        border-image: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), aqua, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)) 100% 58;
+      }
+      > .children{
+          padding-left: 20px;
+      }
+    }
+  }
+  &.link{
+      > label{
+          padding: 8px;
+          //padding-top: 0px;
+      }
+      &:hover{
+         
+          background: linear-gradient(to right, rgba(aqua, 0.4), rgba(aqua, 0));
+      }
+  }
+}
