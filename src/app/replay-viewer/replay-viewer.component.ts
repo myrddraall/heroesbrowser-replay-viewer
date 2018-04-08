@@ -6,7 +6,8 @@ import {
   ElementRef,
   Renderer2,
   ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  EventEmitter
 } from '@angular/core';
 
 import { Replay, BasicReplayAnalyser, ReplayDescription } from '@heroesbrowser/heroprotocol';
@@ -28,8 +29,9 @@ enum FileState {
 export class ReplayViewerComponent implements OnInit {
   public FileState = FileState;
   private _fileState: FileState = FileState.NONE;
+  public onReplayLoaded: EventEmitter<Replay> = new EventEmitter();
 
-  private replay: Replay;
+  public replay: Replay;
   private basicReplayAnalyser: BasicReplayAnalyser;
 
   @ViewChild('fileInput')
@@ -126,6 +128,7 @@ export class ReplayViewerComponent implements OnInit {
     this.replayDescription = await this.basicReplayAnalyser.replayDescription;
     setTimeout(() => {
       this.fileState = FileState.LOADED;
+      this.onReplayLoaded.next(this.replay);
     }, 0);
   }
 

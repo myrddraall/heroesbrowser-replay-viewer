@@ -1,0 +1,34 @@
+:host {
+  display: block;
+  mat-table {
+    .mat-column-hero {
+      display: flex;
+      hero-icon {
+        left: -25px;
+        padding-left: 10px;
+        width: 74px;
+        height: 64px
+      }
+    }
+    .best-team{
+      font-weight: 500;
+    }
+    .best{
+      font-weight: 700;
+    }
+    .team1 {
+      .mat-column-hero {
+        hero-icon {
+          background-color: blue;
+        }
+      }
+    }
+    .team2 {
+      .mat-column-hero {
+        hero-icon {
+          background-color: red;
+        }
+      }
+    }
+  }
+}

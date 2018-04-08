@@ -24,7 +24,6 @@ export class ReplayNavComponent implements OnChanges {
   }
 
 
-
   constructor() { }
 
   public ngOnChanges(changes: SimpleChanges): void {

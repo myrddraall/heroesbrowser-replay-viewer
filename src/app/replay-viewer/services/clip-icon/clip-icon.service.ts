@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 export type ClipFn = (ctx: CanvasRenderingContext2D, w: number, h: number) => void;
 
 export enum ClipMethod {
+  NONE,
   CIRCLE,
   HEXEGON
 }
@@ -56,13 +57,22 @@ export class ClipIconService {
     console.log('!!!!!!', canvas);
     return canvas;
   }
-
-  public loadAndClip(imgUrl: string, width: number, height: number, shape: ClipMethod | ClipFn): Promise<HTMLCanvasElement> {
+  public loadAndClip(imgUrl: string, width: number, height: number, shape?: ClipMethod.NONE): Promise<HTMLImageElement>;
+  public loadAndClip(imgUrl: string, width: number, height: number, shape: ClipMethod | ClipFn): Promise<HTMLCanvasElement>;
+  public loadAndClip(
+    imgUrl: string,
+    width: number,
+    height: number,
+    shape: ClipMethod | ClipFn
+  ): Promise<HTMLCanvasElement | HTMLImageElement> {
     return new Promise((resolve, reject) => {
-      const img = new Image();
+      const img = new Image(width, height);
       // img.setAttribute('crossOrigin', '*');
       img.onload = event => {
-        console.log('img');
+        if (!shape) {
+          resolve(img);
+          return;
+        }
         this.clip(img, width, height, shape).then((clipped) => {
           console.log('clipCallback', clipped);
           resolve(clipped);

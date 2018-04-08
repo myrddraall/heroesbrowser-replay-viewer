@@ -4,7 +4,7 @@ import { HeroProtocol } from '@heroesbrowser/heroprotocol';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { ReplayViewerModule } from './replay-viewer/replay-viewer.module';
-
+import { AppRoutingModule } from './app-routing.module';
 HeroProtocol.env = environment.production ? 'production' : 'developement';
 
 @NgModule({
@@ -13,7 +13,8 @@ HeroProtocol.env = environment.production ? 'production' : 'developement';
   ],
   imports: [
     BrowserModule,
-    ReplayViewerModule
+    ReplayViewerModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
