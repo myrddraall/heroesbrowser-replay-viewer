@@ -1,7 +1,8 @@
 :host {
   display: block;
+  padding: 40px;
   mat-table {
-    .mat-column-hero {
+    /*.mat-column-hero {
       display: flex;
       hero-icon {
         left: -25px;
@@ -9,24 +10,289 @@
         width: 74px;
         height: 64px
       }
-    }
-    .best-team{
+    }*/
+    .best-team {
       font-weight: 500;
     }
-    .best{
+    .best {
       font-weight: 700;
     }
     .team1 {
-      .mat-column-hero {
+      /*.mat-column-hero {
         hero-icon {
           background-color: blue;
         }
-      }
+      }*/
     }
     .team2 {
-      .mat-column-hero {
+      /* .mat-column-hero {
         hero-icon {
           background-color: red;
+        }
+      }*/
+    }
+  }
+}
+
+.score-table {
+  background-color: transparent;
+  .mat-column-kills {
+    min-width: 75px;
+    max-width: 75px;
+    text-align: center;
+  }
+  .mat-column-assists {
+    min-width: 75px;
+    max-width: 75px;
+    text-align: center;
+  }
+  .mat-column-deaths {
+    min-width: 75px;
+    max-width: 75px;
+    text-align: center;
+  }
+  .mat-column-siegeDamage {
+    min-width: 100px;
+    max-width: 100px;
+    text-align: center;
+  }
+  .mat-column-heroDamage {
+    min-width: 100px;
+    max-width: 100px;
+    text-align: center;
+  }
+  .mat-column-healing {
+    min-width: 100px;
+    max-width: 100px;
+    text-align: center;
+  }
+  .mat-column-damageTaken {
+    min-width: 100px;
+    max-width: 100px;
+    text-align: center;
+  }
+  .mat-column-xp {
+    min-width: 100px;
+    max-width: 100px;
+    text-align: center;
+  }
+  .mat-header-row {
+    border: none;
+    .mat-header-cell {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .icon{
+        width:32px;
+        height:32px;
+      }
+      //background-image: url('assets/screens/scorescreen/')
+      &.mat-column-kills {
+        .icon{
+          background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_kill.png')
+        }
+        &:hover{
+          .icon{
+            background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_kill_hover.png')
+          }
+        }
+      }
+      &.mat-column-assists {
+         .icon{
+          background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_assist.png')
+        }
+        &:hover{
+          .icon{
+            background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_assist_hover.png')
+          }
+        }
+      }
+      &.mat-column-deaths {
+        .icon{
+          background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_death.png')
+        }
+        &:hover{
+          .icon{
+            background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_death_hover.png')
+          }
+        }
+      }
+      &.mat-column-siegeDamage {
+        .icon{
+          background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_siegedamage.png')
+        }
+        &:hover{
+          .icon{
+            background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_siegedamage_hover.png')
+          }
+        }
+      }
+      &.mat-column-heroDamage {
+        .icon{
+          background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_herodamage.png')
+        }
+        &:hover{
+          .icon{
+            background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_herodamage_hover.png')
+          }
+        }
+      }
+      &.mat-column-healing {
+        .icon{
+          background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_healedandabsorbed.png')
+        }
+        &:hover{
+          .icon{
+            background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_healedandabsorbed_hover.png')
+          }
+        }
+      }
+      &.mat-column-damageTaken {
+        .icon{
+          background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_damagetaken.png')
+        }
+        &:hover{
+          .icon{
+            background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_damagetaken_hover.png')
+          }
+        }
+      }
+      &.mat-column-xp {
+        .icon{
+          background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_xpcontribution.png')
+        }
+        &:hover{
+          .icon{
+            background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_xpcontribution_hover.png')
+          }
+        }
+      }
+    }
+  }
+  .mat-row {
+    margin-bottom: 1px;
+    border-bottom-width: 2px;
+    &::before {
+      content: " ";
+      position: absolute;
+      top: 1px;
+      left: 1px;
+      bottom: 1px;
+      right: 1px;
+      border-top-width: 1px;
+      border-top-style: solid;
+      z-index: 2;
+    }
+    &.team1 {
+      border-image: linear-gradient(to right, rgba(#1b3874, 0) 2%, #1b3874 6%) 1;
+      &::before {
+        border-image: linear-gradient(to right, rgba(#1b3874, 0) 2%, rgba(#1b3874, 0.3) 6%) 1;
+      }
+      background: linear-gradient(to right, rgba(#111034, 0) 20px, rgba(#111034, 1) 20px) 100%;
+    }
+    &.team2 {
+      border-image: linear-gradient(to right, rgba(#660730, 0) 2%, #660730 6%) 1;
+      &::before {
+        border-image: linear-gradient(to right, rgba(#660730, 0) 2%, rgba(#660730, 0.3) 6%) 1;
+      }
+      background: linear-gradient(to right, rgba(#27021f, 0) 20px, rgba(#27021f, 1) 20px) 100%;
+    }
+    .mat-cell {
+      font-size: 18px;
+      font-weight: 500;
+      text-shadow: 0px 0px 1px black, 0px 0px 1px black, 1px 3px 2px black, 1px 3px 2px black;
+      .player-cell {
+        display: flex;
+        background-repeat: no-repeat;
+        background-position-y: -6px;
+        height: 54px;
+        left: -28px;
+        min-width: 260px;
+        overflow-y: hidden;
+        hero-icon {
+          top: -24px;
+          left: 16px;
+          width: 96px;
+          height: 96px;
+        }
+        .icon-overlay {
+          position: absolute;
+          top: 0px;
+          left: 16px;
+          width: 96px;
+          height: 54px;
+          z-index: 5;
+        }
+        .name {
+          margin-left: 28px;
+          padding-right: 14px;
+          >* {
+            white-space: nowrap;
+          }
+          .hero-name {
+            font-weight: 700;
+            padding-top: 8px;
+            padding-bottom: 2px;
+          }
+          .player-name {
+            font-size: 14px;
+          }
+        }
+       
+      }
+    }
+    &.team1 {
+      $glowColor: blue;
+      .mat-cell {
+        color: lighten($color: $glowColor, $amount: 40);
+        .player-cell {
+          background-image: url('assets/screens/scorescreen/player_row_blue.png');
+          .icon-overlay {
+            background: linear-gradient(to right, rgba(#111034, 0) 16%, rgba(#111034, 1) 100%) 100%;
+          }
+          .name {
+            .hero-name {
+              color: lighten($color: $glowColor, $amount: 45);
+              text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor;
+            }
+          }
+        }
+        &.best-team {
+          color: lighten($color: $glowColor, $amount: 45);
+          font-weight: 700;
+        }
+        &.best {
+          font-weight: 700;
+          color: lighten($color: $glowColor, $amount: 45);
+          text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor;
+        }
+      }
+    }
+    &.team2 {
+      $glowColor: red;
+      .mat-cell {
+        color: lighten($color: $glowColor, $amount: 40);
+        .player-cell {
+          background-image: url('assets/screens/scorescreen/player_row_red.png');
+          .icon-overlay {
+            background: linear-gradient(to right, rgba(#27021f, 0) 16%, rgba(#27021f, 1) 100%) 100%;
+          }
+          .name {
+            .hero-name {
+              color: lighten($color: $glowColor, $amount: 45);
+              text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor;
+            }
+          }
+        }
+        &.best-team {
+          color: lighten($color: $glowColor, $amount: 45);
+          font-weight: 700;
+        }
+        &.best {
+          font-weight: 700;
+          color: lighten($color: $glowColor, $amount: 45);
+          text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor;
         }
       }
     }
