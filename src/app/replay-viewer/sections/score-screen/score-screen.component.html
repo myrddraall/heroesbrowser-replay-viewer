@@ -39,12 +39,12 @@
   <ng-container matColumnDef="healing">
     <mat-header-cell *matHeaderCellDef>Healing/Shielding</mat-header-cell>
     <mat-cell *matCellDef="let player" [class.best]="isBest('Healing', player)" [class.best-team]="isBest('Healing', player, player.team)">
-      {{player.scores.Healing}} </mat-cell>
+      {{player.scores.Healing || ''}} </mat-cell>
   </ng-container>
   <ng-container matColumnDef="damageTaken">
     <mat-header-cell *matHeaderCellDef>Damage Taken</mat-header-cell>
     <mat-cell *matCellDef="let player" [class.best]="isBest('DamageTaken', player)" [class.best-team]="isBest('DamageTaken', player, player.team)">
-      {{player.scores.DamageTaken}} </mat-cell>
+      {{player.scores.DamageTaken || ''}} </mat-cell>
   </ng-container>
   <ng-container matColumnDef="xp">
     <mat-header-cell *matHeaderCellDef>XP Contribution</mat-header-cell>
