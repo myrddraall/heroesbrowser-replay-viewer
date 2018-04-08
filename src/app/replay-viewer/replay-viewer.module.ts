@@ -12,7 +12,8 @@ import { ScoreScreenComponent } from './sections/score-screen/score-screen.compo
 import {
   MatSidenavModule,
   MatProgressBarModule,
-  MatTableModule
+  MatTableModule,
+  MatSortModule
 } from '@angular/material';
 
 @NgModule({
@@ -22,6 +23,7 @@ import {
     MatSidenavModule,
     MatProgressBarModule,
     MatTableModule,
+    MatSortModule,
     ReplayViewerRoutingModule
   ],
   exports: [

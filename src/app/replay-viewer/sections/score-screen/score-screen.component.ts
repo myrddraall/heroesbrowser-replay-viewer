@@ -1,7 +1,7 @@
-import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, AfterViewInit } from '@angular/core';
 import { ReplayViewerComponent } from '../../replay-viewer.component';
 import { Replay, ReplayDescription, ScoreAnalyser, IPlayerScores } from '@heroesbrowser/heroprotocol';
-
+import { MatTableDataSource, MatSort } from '@angular/material';
 interface IPlayerScoreRecord {
   hero: string;
   name: string;
@@ -16,11 +16,13 @@ interface IPlayerScoreRecord {
   styleUrls: ['./score-screen.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ScoreScreenComponent implements OnInit {
+export class ScoreScreenComponent implements OnInit, AfterViewInit {
 
   private replay: Replay;
   public replayDescription: ReplayDescription;
   private scoreScreenAnalyser: ScoreAnalyser;
+  @ViewChild(MatSort) sort: MatSort;
+  public dataSource: MatTableDataSource<IPlayerScoreRecord> = new MatTableDataSource();
 
   public scoreData: IPlayerScoreRecord[];
   public highScores: {
@@ -49,14 +51,42 @@ export class ScoreScreenComponent implements OnInit {
     replayViewer.onReplayLoaded.subscribe(replay => {
       this.replayLoaded();
     });
-
+    this.dataSource.sortingDataAccessor = this.getSortData.bind(this);
   }
 
   ngOnInit() {
-    this.replayLoaded();
+
 
   }
 
+  ngAfterViewInit() {
+    this.replayLoaded();
+    this.dataSource.sort = this.sort;
+    this.sort.start = 'desc';
+  }
+
+  private getSortData(data: IPlayerScoreRecord, sortHeaderId: string): string | number {
+    switch (sortHeaderId) {
+      case 'kills':
+        return data.scores.SoloKill;
+      case 'assists':
+        return data.scores.Assists;
+      case 'deaths':
+        return data.scores.Deaths;
+      case 'siegeDamage':
+        return data.scores.SiegeDamage;
+      case 'heroDamage':
+        return data.scores.HeroDamage;
+      case 'healing':
+        return data.scores.Healing;
+      case 'damageTaken':
+        return data.scores.DamageTaken;
+      case 'xp':
+        return data.scores.ExperienceContribution;
+      default:
+        return 0;
+    }
+  }
 
   private async replayLoaded() {
     const hs = {
@@ -114,16 +144,12 @@ export class ScoreScreenComponent implements OnInit {
         scores: pScore
       });
     }
+    this.dataSource.data = this.scoreData;
+
     this.changeDetectorRef.markForCheck();
   }
 
   public isBest(statName: string, player: IPlayerScoreRecord, scope: string | number = 'game'): boolean {
-    console.log(
-      'isBest',
-      scope,
-      statName,
-      this.highScores[scope][statName], player.scores[statName], this.highScores[scope][statName] === player.scores[statName]
-    );
     return this.highScores[scope][statName] === player.scores[statName];
   }
 }
