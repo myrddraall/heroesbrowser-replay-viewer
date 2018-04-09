@@ -34,103 +34,99 @@
   }
 }
 
-@mixin awardUrl($team, $award){
-  &::before{
+@mixin awardUrl($team, $award) {
+  &::before {
     display: none;
   }
-  background-image: url('assets/screens/scorescreen/awards/storm_ui_scorescreen_mvp_#{to-lower-case($award)}_#{$team}.png')
+  background-image: url('/assets/screens/scorescreen/awards/storm_ui_scorescreen_mvp_#{to-lower-case($award)}_#{$team}.png')
 }
-@mixin awards($team){
+
+@mixin awards($team) {
   &.mat-column-award {
     .award {
-      &[award="MostTeamfightHeroDamageDone"]{
+      &[award="MostTeamfightHeroDamageDone"] {
         @include awardUrl($team, 'Scrapper');
       }
-      &[award="MostRoots"]{
+      &[award="MostRoots"] {
         @include awardUrl($team, 'Trapper');
       }
-      &[award="MVP"]{
+      &[award="MVP"] {
         @include awardUrl($team, 'MVP');
       }
-      &[award="MostMercCampsCaptured"]{
+      &[award="MostMercCampsCaptured"] {
         @include awardUrl($team, 'headhunter');
       }
-      &[award="MostTeamfightDamageTaken"]{
+      &[award="MostTeamfightDamageTaken"] {
         @include awardUrl($team, 'bulwark');
       }
-      &[award="HighestKillStreak"]{
+      &[award="HighestKillStreak"] {
         @include awardUrl($team, 'skull');
       }
-      &[award="MostSiegeDamageDone"]{
+      &[award="MostSiegeDamageDone"] {
         @include awardUrl($team, 'siegemaster');
       }
-      &[award="ClutchHealer"]{
+      &[award="ClutchHealer"] {
         @include awardUrl($team, 'clutchhealer');
       }
-      &[award="MostHeroDamageDone"]{
+      &[award="MostHeroDamageDone"] {
         @include awardUrl($team, 'Painbringer');
       }
-      &[award="MostHealing"]{
+      &[award="MostHealing"] {
         @include awardUrl($team, 'MainHealer');
       }
-      &[award="MostDamageTaken"]{
+      &[award="MostDamageTaken"] {
         @include awardUrl($team, 'guardian');
       }
-      &[award="MostXPContribution"]{
+      &[award="MostXPContribution"] {
         @include awardUrl($team, 'experienced');
       }
-      &[award="MostSilences"]{
+      &[award="MostSilences"] {
         @include awardUrl($team, 'Silencer');
       }
-      &[award="MostVengeancesPerformed"]{
+      &[award="MostVengeancesPerformed"] {
         @include awardUrl($team, 'Avenger');
       }
-      &[award="MostEscapes"]{
+      &[award="MostEscapes"] {
         @include awardUrl($team, 'escapeartist');
-      }
-      
-      // MAP SPECIFIC
-      &[award="MostTimeInTemple"]{
+      } // MAP SPECIFIC
+      &[award="MostTimeInTemple"] {
         @include awardUrl($team, 'templemaster');
       }
-      &[award="MostDamageDoneToZerg"]{
+      &[award="MostDamageDoneToZerg"] {
         @include awardUrl($team, 'zergcrusher');
       }
-      &[award="MostDragonShrinesCaptured"]{
+      &[award="MostDragonShrinesCaptured"] {
         @include awardUrl($team, 'Shriner');
       }
-      &[award="MostTimeInTemple"]{
+      &[award="MostTimeInTemple"] {
         @include awardUrl($team, 'templemaster');
       }
-      &[award="MostCurseDamageDone"]{
+      &[award="MostCurseDamageDone"] {
         @include awardUrl($team, 'masterofthecurse');
       }
-      &[award="MostSkullsCollected"]{
+      &[award="MostSkullsCollected"] {
         @include awardUrl($team, 'skullcollector');
       }
-      &[award="MostImmortalDamage"]{
+      &[award="MostImmortalDamage"] {
         @include awardUrl($team, 'ImmortalSlayer');
       }
-      &[award="MostNukeDamageDone"]{
+      &[award="MostNukeDamageDone"] {
         @include awardUrl($team, 'dabomb');
       }
-      &[award="MostCoinsPaid"]{
+      &[award="MostCoinsPaid"] {
         @include awardUrl($team, 'Moneybags');
       }
-      &[award="MostTimeOnPoint"]{
+      &[award="MostTimeOnPoint"] {
         @include awardUrl($team, 'pointguard');
       }
-      &[award="MostDamageToPlants"]{
+      &[award="MostDamageToPlants"] {
         @include awardUrl($team, 'gardenterror');
       }
-      &[award="MostGemsTurnedIn"]{
+      &[award="MostGemsTurnedIn"] {
         @include awardUrl($team, 'jeweler');
-      }
-      
-     // &[award="MostDamageToMinions"]{
-    //    @include awardUrl($team, 'Moneybags');
-     // }
-      
+      } // &[award="MostDamageToMinions"]{
+      //    @include awardUrl($team, 'Moneybags');
+      // }
     }
   }
 }
@@ -187,84 +183,84 @@
       .icon {
         width: 32px;
         height: 32px;
-      } //background-image: url('assets/screens/scorescreen/')
+      } //background-image: url('/assets/screens/scorescreen/')
       &.mat-column-kills {
         .icon {
-          background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_kill.png')
+          background-image: url('/assets/screens/scorescreen/storm_ui_scorescreen_icon_kill.png')
         }
         &:hover {
           .icon {
-            background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_kill_hover.png')
+            background-image: url('/assets/screens/scorescreen/storm_ui_scorescreen_icon_kill_hover.png')
           }
         }
       }
       &.mat-column-assists {
         .icon {
-          background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_assist.png')
+          background-image: url('/assets/screens/scorescreen/storm_ui_scorescreen_icon_assist.png')
         }
         &:hover {
           .icon {
-            background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_assist_hover.png')
+            background-image: url('/assets/screens/scorescreen/storm_ui_scorescreen_icon_assist_hover.png')
           }
         }
       }
       &.mat-column-deaths {
         .icon {
-          background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_death.png')
+          background-image: url('/assets/screens/scorescreen/storm_ui_scorescreen_icon_death.png')
         }
         &:hover {
           .icon {
-            background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_death_hover.png')
+            background-image: url('/assets/screens/scorescreen/storm_ui_scorescreen_icon_death_hover.png')
           }
         }
       }
       &.mat-column-siegeDamage {
         .icon {
-          background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_siegedamage.png')
+          background-image: url('/assets/screens/scorescreen/storm_ui_scorescreen_icon_siegedamage.png')
         }
         &:hover {
           .icon {
-            background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_siegedamage_hover.png')
+            background-image: url('/assets/screens/scorescreen/storm_ui_scorescreen_icon_siegedamage_hover.png')
           }
         }
       }
       &.mat-column-heroDamage {
         .icon {
-          background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_herodamage.png')
+          background-image: url('/assets/screens/scorescreen/storm_ui_scorescreen_icon_herodamage.png')
         }
         &:hover {
           .icon {
-            background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_herodamage_hover.png')
+            background-image: url('/assets/screens/scorescreen/storm_ui_scorescreen_icon_herodamage_hover.png')
           }
         }
       }
       &.mat-column-healing {
         .icon {
-          background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_healedandabsorbed.png')
+          background-image: url('/assets/screens/scorescreen/storm_ui_scorescreen_icon_healedandabsorbed.png')
         }
         &:hover {
           .icon {
-            background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_healedandabsorbed_hover.png')
+            background-image: url('/assets/screens/scorescreen/storm_ui_scorescreen_icon_healedandabsorbed_hover.png')
           }
         }
       }
       &.mat-column-damageTaken {
         .icon {
-          background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_damagetaken.png')
+          background-image: url('/assets/screens/scorescreen/storm_ui_scorescreen_icon_damagetaken.png')
         }
         &:hover {
           .icon {
-            background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_damagetaken_hover.png')
+            background-image: url('/assets/screens/scorescreen/storm_ui_scorescreen_icon_damagetaken_hover.png')
           }
         }
       }
       &.mat-column-xp {
         .icon {
-          background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_xpcontribution.png')
+          background-image: url('/assets/screens/scorescreen/storm_ui_scorescreen_icon_xpcontribution.png')
         }
         &:hover {
           .icon {
-            background-image: url('assets/screens/scorescreen/storm_ui_scorescreen_icon_xpcontribution_hover.png')
+            background-image: url('/assets/screens/scorescreen/storm_ui_scorescreen_icon_xpcontribution_hover.png')
           }
         }
       }
@@ -314,18 +310,18 @@
         .award {
           width: 54px;
           height: 54px;
-          background-image: url('assets/screens/scorescreen/awards/unknown.png');
+          background-image: url('/assets/screens/scorescreen/awards/unknown.png');
           background-repeat: no-repeat;
           background-position: center center;
           background-size: 100% 100%;
           z-index: 10;
-          &[award="MostTeamfightHeroDamageDone"]{
-            background-image: url('assets/screens/scorescreen/awards/unknown.png');
+          &[award="MostTeamfightHeroDamageDone"] {
+            background-image: url('/assets/screens/scorescreen/awards/unknown.png');
           }
-          &::before{
+          &::before {
             position: absolute;
             background-color: red;
-            left:50px;
+            left: 50px;
             z-index: 100;
             content: attr(award);
           }
@@ -373,9 +369,9 @@
     &.team1 {
       $glowColor: blue;
       .mat-cell {
-        color: lighten($color: $glowColor, $amount: 40);
+        color: lighten($color: $glowColor, $amount: 30);
         .player-cell {
-          background-image: url('assets/screens/scorescreen/player_row_blue.png');
+          background-image: url('/assets/screens/scorescreen/player_row_blue.png');
           .icon-overlay {
             background: linear-gradient(to right, rgba(#111034, 0) 16%, rgba(#111034, 1) 100%) 100%;
           }
@@ -401,9 +397,9 @@
     &.team2 {
       $glowColor: red;
       .mat-cell {
-        color: lighten($color: $glowColor, $amount: 40);
+        color: lighten($color: $glowColor, $amount: 30);
         .player-cell {
-          background-image: url('assets/screens/scorescreen/player_row_red.png');
+          background-image: url('/assets/screens/scorescreen/player_row_red.png');
           .icon-overlay {
             background: linear-gradient(to right, rgba(#27021f, 0) 16%, rgba(#27021f, 1) 100%) 100%;
           }
@@ -424,6 +420,126 @@
           text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor;
         }
         @include awards('red');
+      }
+    }
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::before{
+    content: "";
+    position: absolute;
+    width:100%;
+    height:100%;
+    background-image: url('/assets/screens/bgs/triangle-divider-purple.png');
+    background-size: 150% auto;
+    background-position: 50% -110px;
+    background-repeat: no-repeat;
+    transform: rotate(180deg);
+    opacity: 0.6;
+  }
+
+  >* {
+    padding: 20px;
+  }
+  .info {
+    font-size: 36px;
+    font-weight: 700;
+    margin-left: 60px;
+    margin-right: 60px;
+    color: #6b667e;
+    text-shadow: 0px 0px 4px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 4px black, 0px 0px 4px black;
+  }
+  .team {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 700;
+    .kills {
+      margin-left: 20px;
+      margin-right: 20px;
+      font-size: 72px;
+      font-weight: 700;
+      line-height: 72px;
+      .num {
+        position: absolute;
+        z-index: 5;
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
+      .glow {
+        color: transparent;
+      }
+    }
+    .kill-icon {
+      width: 37px;
+      height: 34px;
+      margin-top: 10px;
+    }
+    .winner {
+      font-size: 32px;
+      line-height: 32px;
+    }
+    .level {
+      top: 3px;
+    }
+    &.team1 {
+      text-align: right;
+      .kill-icon {
+        background-image: url('/assets/screens/scorescreen/storm_ui_scorescreen_icon_kills_blue.png');
+      }
+      $glowColorDark: blue;
+      $glowColor: lighten($color: $glowColorDark,
+      $amount: 10);
+      $glowColorLight: lighten($color: $glowColor,
+      $amount: 35);
+      .kills {
+        .num {
+          background-image: linear-gradient(to bottom, rgba($glowColorLight, 1) 50%, rgba($glowColor, 1) 130%);
+        }
+        .glow {
+          text-shadow: 0px 0px 2px $glowColor, 0px 0px 2px $glowColor, 0px 0px 2px $glowColorDark, 0px 0px 2px $glowColorDark, 0px 0px 8px $glowColorLight;
+          opacity: 0.6;
+        }
+      }
+      .level{
+        color: lighten($glowColor, 10);
+        text-shadow: 0px 0px 3px rgba($glowColorLight, 0.3);
+      }
+      .winner{
+        text-shadow: 0px 0px 8px rgba($glowColorDark, 0.8), 0px 0px 8px rgba($glowColorDark, 0.8), 0px 0px 8px rgba($glowColorDark, 0.8);
+      }
+    }
+    &.team2 {
+      .kill-icon {
+        background-image: url('/assets/screens/scorescreen/storm_ui_scorescreen_icon_kills_red.png');
+      }
+      $glowColorDark: red;
+      $glowColor: lighten($color: $glowColorDark,
+      $amount: 10);
+      $glowColorLight: lighten($color: $glowColor,
+      $amount: 35);
+      .kills {
+        .num {
+          background-image: linear-gradient(to bottom, rgba($glowColorLight, 1) 50%, rgba($glowColor, 1) 130%);
+        }
+        .glow {
+          text-shadow: 0px 0px 2px $glowColor, 0px 0px 2px $glowColor, 0px 0px 2px $glowColorDark, 0px 0px 2px $glowColorDark, 0px 0px 8px $glowColorLight;
+          opacity: 0.6;
+        }
+      }
+      .level{
+        color: lighten($glowColor, 10);
+        text-shadow: 0px 0px 3px rgba($glowColorLight, 0.3);
+      }
+      .winner{
+        text-shadow: 0px 0px 8px rgba($glowColorDark, 0.8), 0px 0px 8px rgba($glowColorDark, 0.8), 0px 0px 8px rgba($glowColorDark, 0.8);
       }
     }
   }

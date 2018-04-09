@@ -1,7 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, AfterViewInit } from '@angular/core';
 import { ReplayViewerComponent } from '../../replay-viewer.component';
-import { Replay, ReplayDescription, ScoreAnalyser, IPlayerScores } from '@heroesbrowser/heroprotocol';
+import { Replay, ReplayDescription, ScoreAnalyser, IPlayerScores, IScoreScreenData } from '@heroesbrowser/heroprotocol';
 import { MatTableDataSource, MatSort } from '@angular/material';
+import * as linq from 'linq';
+
 interface IPlayerScoreRecord {
   hero: string;
   name: string;
@@ -19,18 +21,17 @@ interface IPlayerScoreRecord {
 export class ScoreScreenComponent implements OnInit, AfterViewInit {
 
   private replay: Replay;
-  public replayDescription: ReplayDescription;
   private scoreScreenAnalyser: ScoreAnalyser;
-  @ViewChild(MatSort) sort: MatSort;
-  public dataSource: MatTableDataSource<IPlayerScoreRecord> = new MatTableDataSource();
-
-  public scoreData: IPlayerScoreRecord[];
-  public highScores: {
+  private highScores: {
     game: { [stat: string]: number },
     0: { [stat: string]: number },
     1: { [stat: string]: number },
   };
 
+  public replayDescription: ReplayDescription;
+  @ViewChild(MatSort) sort: MatSort;
+  public dataSource: MatTableDataSource<IPlayerScoreRecord> = new MatTableDataSource();
+  public scoreData: IScoreScreenData;
   public displayCols: string[] = [
     'hero',
     'award',
@@ -110,8 +111,11 @@ export class ScoreScreenComponent implements OnInit, AfterViewInit {
     this.replay = this.replayViewer.replay;
     this.replayDescription = this.replayViewer.replayDescription;
     this.scoreScreenAnalyser = new ScoreAnalyser(this.replay);
-    const scoreData = await this.scoreScreenAnalyser.scoreScreenData;
-    this.scoreData = [];
+
+    this.scoreData = await this.scoreScreenAnalyser.scoreScreenData;
+
+    const scoreData = this.scoreData.playerScores;
+    const scoreDataSet: IPlayerScoreRecord[] = [];
     for (let i = 0; i < scoreData.length; i++) {
       const player = this.replayDescription.players[i];
       const pScore = scoreData[i];
@@ -136,7 +140,7 @@ export class ScoreScreenComponent implements OnInit, AfterViewInit {
         }
       }
 
-      this.scoreData.push({
+      scoreDataSet.push({
         hero: player.hero,
         name: player.name,
         team: player.team,
@@ -144,7 +148,9 @@ export class ScoreScreenComponent implements OnInit, AfterViewInit {
         scores: pScore
       });
     }
-    this.dataSource.data = this.scoreData;
+
+    const sorted = linq.from(scoreDataSet).orderBy(p => p.team).toArray();
+    this.dataSource.data = sorted;
 
     this.changeDetectorRef.markForCheck();
   }
