@@ -14,7 +14,9 @@
   </ng-container>
   <ng-container matColumnDef="award">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
-    <mat-cell *matCellDef="let player"></mat-cell>
+    <mat-cell *matCellDef="let player">
+      <div class="award" *ngFor="let award of player.scores.Awards" [attr.tooltip]="award" [attr.award]="award"></div>
+    </mat-cell>
   </ng-container>
   <ng-container matColumnDef="kills">
     <mat-header-cell *matHeaderCellDef mat-sort-header><div class="icon"></div></mat-header-cell>
