@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, ChangeDetectionStrategy, SimpleChanges } from '@angular/core';
-import { ReplayDescription, GameType, BasicPlayerData } from '@heroesbrowser/heroprotocol';
+import { ReplayDescription, GameType } from '@heroesbrowser/heroprotocol';
 import { IReplayNavItem, IReplayNavItemLink, IReplayNavItemSection } from './nav-item/IReplayNavItemData';
 
 @Component({

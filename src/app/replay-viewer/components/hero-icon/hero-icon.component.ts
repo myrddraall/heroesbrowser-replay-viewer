@@ -15,16 +15,12 @@ export class HeroIconComponent implements OnChanges {
   private _heroImage: HTMLCanvasElement | HTMLImageElement;
 
   @Input()
-  public get shape(): ClipMethod | string | number {
+  public get shape(): ClipMethod | string {
     return this._shape;
   }
 
-  public set shape(value: ClipMethod | string | number) {
-    if (typeof value === 'string') {
+  public set shape(value: ClipMethod | string) {
       this._shape = ClipMethod[value.toUpperCase()];
-    } else {
-      this._shape = value;
-    }
   }
 
   public get heroImage(): HTMLCanvasElement | HTMLImageElement {
@@ -48,9 +44,10 @@ export class HeroIconComponent implements OnChanges {
   private async clipHeroImage() {
     this._heroImage = await this.clipIconService.loadAndClip(
       '//d1i1jxrdh2kvwy.cloudfront.net/Images/Heroes/Portraits/' + this.cleanName(this.hero) + '.png',
-      48, 48, this._shape
+      75, 75, this._shape
     );
     this.renderer.appendChild(this.elementRef.nativeElement, this.heroImage);
+    this.renderer.addClass(this.elementRef.nativeElement, 'shape-' + this._shape);
   }
 
   public cleanName(name: string): string {

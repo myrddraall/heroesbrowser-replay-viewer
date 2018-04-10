@@ -48,11 +48,12 @@
     display: flex;
     flex-direction: row;
     .player {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      margin-left: 3px;
-      margin-right: 3px;
+      width: 65px;
+      height: 65px;
+      //border-radius: 50%;
+      margin-left: -6px;
+      margin-right: -6px;
+      margin-top: -8px;
     }
   }
   .team .winner {
@@ -62,8 +63,8 @@
   }
   .team1 {
     .player {
-      border: 2px solid navy;
-      box-shadow: 0px 0px 8px blue;
+      //border: 2px solid navy;
+      //box-shadow: 0px 0px 8px blue;
     }
     .winner {
       text-shadow: 0px 0px 18px blue, 0px 0px 18px blue, 0px 0px 18px blue;
@@ -71,8 +72,8 @@
   }
   .team2 {
     .player {
-      border: 2px solid maroon;
-      box-shadow: 0px 0px 8px red;
+     // border: 2px solid maroon;
+     // box-shadow: 0px 0px 8px red;
     }
     .winner {
       text-shadow: 0px 0px 18px red, 0px 0px 18px red, 0px 0px 18px red;

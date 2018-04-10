@@ -1,9 +1,40 @@
-:host{
-    display: block;
-    position: relative;
-    ::ng-deep canvas, ::ng-deep img{
-        z-index: 1;
-        width: 100%;
-        height: 100%;
+:host {
+  display: block;
+  position: relative;
+  ::ng-deep canvas,
+  ::ng-deep img {
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+  }
+  &.shape-circle {
+    ::ng-deep canvas,
+    ::ng-deep img {
+      border-radius: 50%;
     }
+  }
+  :host-context(.team1),
+  :host-context(.team2) {
+    &.shape-circle {
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      ::ng-deep canvas,
+      ::ng-deep img {
+        width: 65%;
+        height: 65%;
+        top: 18%;
+        left: 18%;
+      }
+    }
+  }
+  :host-context(.team1) {
+    &.shape-circle {
+      background-image: url('/assets/frames/storm_ui_profiledialog_heroframe_ally.png');
+    }
+  }
+  :host-context(.team2) {
+    &.shape-circle {
+      background-image: url('/assets/frames/storm_ui_profiledialog_heroframe_enemy.png');
+    }
+  }
 }

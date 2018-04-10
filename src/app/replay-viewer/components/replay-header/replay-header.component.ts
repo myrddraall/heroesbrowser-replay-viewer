@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, HostBinding } from '@angular/core';
-import { ReplayDescription, GameType, BasicPlayerData } from '@heroesbrowser/heroprotocol';
+import { ReplayDescription, GameType, IPlayerSlot } from '@heroesbrowser/heroprotocol';
 import * as linq from 'linq';
 import { paramCase } from 'change-case';
 import { duration } from 'moment';
@@ -13,8 +13,8 @@ export class ReplayHeaderComponent implements OnInit {
   private _replayDescription: ReplayDescription;
   public gameMode: string;
   public gameDuration: string;
-  public team1Players: BasicPlayerData[];
-  public team2Players: BasicPlayerData[];
+  public team1Players: IPlayerSlot[];
+  public team2Players: IPlayerSlot[];
   @HostBinding('class')
   private mapClass: string[] = [];
 

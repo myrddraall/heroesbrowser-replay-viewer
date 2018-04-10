@@ -4,15 +4,12 @@ import { Injectable } from '@angular/core';
 export type ClipFn = (ctx: CanvasRenderingContext2D, w: number, h: number) => void;
 
 export enum ClipMethod {
-  NONE,
-  CIRCLE,
-  HEXEGON
+  NONE = 'none',
+  CIRCLE = 'circle',
+  HEXEGON = 'hexegon'
 }
 
-const clipMethods: { [name: number]: ClipFn } = {
-  [ClipMethod.CIRCLE]: (ctx, w: number, h: number) => {
-    ctx.arc(w / 2, w / 2, w / 2, 0, 2 * Math.PI);
-  },
+const clipMethods: { [name: string]: ClipFn } = {
   [ClipMethod.HEXEGON]: (ctx, w, h) => {
     ctx.moveTo(w * 0.52, h * 0.04);
     ctx.lineTo(w, h * 0.28);
@@ -67,7 +64,7 @@ export class ClipIconService {
       const img = new Image(width, height);
       // img.setAttribute('crossOrigin', '*');
       img.onload = event => {
-        if (!shape) {
+        if (!shape || (!(typeof shape === 'function') && !clipMethods[shape])) {
           resolve(img);
           return;
         }
