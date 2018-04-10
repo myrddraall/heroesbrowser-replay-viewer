@@ -8,7 +8,7 @@ import {
   ComponentFactoryResolver
 } from '@angular/core';
 import { ReplayViewerComponent } from '../../replay-viewer.component';
-import { Replay, ReplayDescription, ScoreAnalyser, IPlayerScores, IScoreScreenData } from '@heroesbrowser/heroprotocol';
+import { Replay, ReplayDescription, ScoreAnalyser, IPlayerScores, IScoreScreenData, PlayerAnalyser } from '@heroesbrowser/heroprotocol';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { AbstractSectionComponent } from '../AbstractSection';
 import * as linq from 'linq';
@@ -126,6 +126,9 @@ export class ScoreScreenComponent extends AbstractSectionComponent implements On
       this.replayDescription = this.replayViewer.replayDescription;
       this.scoreScreenAnalyser = new ScoreAnalyser(this.replay);
 
+      // const pa = new PlayerAnalyser(this.replay);
+      // await pa.testPlayerData;
+
       this.scoreData = await this.scoreScreenAnalyser.scoreScreenData;
 
       const scoreData = this.scoreData.playerScores;
@@ -174,7 +177,7 @@ export class ScoreScreenComponent extends AbstractSectionComponent implements On
       this.changeDetectorRef.markForCheck();
     } catch (e) {
       this.scoreData = null;
-      if (e.name === 'ReplayToOldError') {
+      if (e.name === 'ReplayVersionOutOfRangeError') {
         this.setNotSupportedMessage(e.message);
         return;
       }

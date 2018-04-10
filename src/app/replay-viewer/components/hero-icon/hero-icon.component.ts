@@ -40,7 +40,6 @@ export class HeroIconComponent implements OnChanges {
     if (changes.hero || changes.shape) {
       if (this.hero) {
         this.clipHeroImage();
-        console.log(this.heroImage);
       }
     }
   }

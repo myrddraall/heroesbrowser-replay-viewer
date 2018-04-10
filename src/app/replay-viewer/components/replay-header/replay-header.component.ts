@@ -26,7 +26,6 @@ export class ReplayHeaderComponent implements OnInit {
     this._replayDescription = desc;
 
     this.mapClass = [paramCase(desc.mapName)];
-    console.log(desc);
     this.gameMode = GameType[desc.gameType];
 
     const dur = duration(desc.gameDuration, 's');

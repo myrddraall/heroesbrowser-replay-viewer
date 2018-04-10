@@ -72,9 +72,7 @@ export class ReplayViewerComponent implements OnInit {
 
   @HostListener('dragleave', ['$event'])
   public handleDragLeave(event: DragEvent) {
-    console.log('dragleave', event);
     if (!(<HTMLElement>this.elmRef.nativeElement).contains(event.fromElement)) {
-      console.log('handleDragLeave', event);
       this.fileState = this.replay ? FileState.LOADED : FileState.NONE;
       return false;
     }

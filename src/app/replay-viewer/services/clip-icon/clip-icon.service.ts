@@ -35,7 +35,6 @@ export class ClipIconService {
     shape: ClipMethod | ClipFn
   ) {
     const img = await createImageBitmap(imgData);
-    console.log(img);
     const canvas: HTMLCanvasElement = document.createElement('canvas');
     canvas.width = w;
     canvas.height = h;
@@ -54,7 +53,6 @@ export class ClipIconService {
     ctx.clip();
     ctx.drawImage(img, 0, 0, w, h);
     ctx.restore();
-    console.log('!!!!!!', canvas);
     return canvas;
   }
   public loadAndClip(imgUrl: string, width: number, height: number, shape?: ClipMethod.NONE): Promise<HTMLImageElement>;
@@ -74,7 +72,6 @@ export class ClipIconService {
           return;
         }
         this.clip(img, width, height, shape).then((clipped) => {
-          console.log('clipCallback', clipped);
           resolve(clipped);
         }).catch(err => {
           reject(err);
