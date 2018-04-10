@@ -1,4 +1,5 @@
-<label>{{item?.label}}</label>
+<label *ngIf="item.type === 'section'">{{item?.label}}</label>
+<label *ngIf="item.type === 'link'" [routerLink]="item['path']" routerLinkActive="active">{{item?.label}}</label>
 <div class="children" *ngIf="item.type === 'section' && item['children']?.length">
   <nav-item *ngFor="let child of item['children']" [item]="child" [level]="level + 1"></nav-item>
 </div>

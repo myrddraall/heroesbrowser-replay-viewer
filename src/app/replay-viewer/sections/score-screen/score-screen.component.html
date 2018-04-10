@@ -1,104 +1,107 @@
-<mat-table #table class="score-table" [dataSource]="dataSource" matSort>
-  <ng-container matColumnDef="hero">
-    <mat-header-cell *matHeaderCellDef></mat-header-cell>
-    <mat-cell *matCellDef="let player" style="overflow:visible;">
-      <div class="player-cell">
-        <hero-icon [hero]="player.hero" shape="none"></hero-icon>
-        <div class="icon-overlay"></div>
-        <div class="name">
-          <div class="hero-name">{{player.hero}}</div>
-          <div class="player-name">{{player.name}}</div>
+<section *ngIf="scoreData">
+  <mat-table #table class="score-table" [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="hero">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let player" style="overflow:visible;">
+        <div class="player-cell">
+          <hero-icon [hero]="player.hero" shape="none"></hero-icon>
+          <div class="icon-overlay"></div>
+          <div class="name">
+            <div class="hero-name">{{player.hero}}</div>
+            <div class="player-name">{{player.name}}</div>
+          </div>
         </div>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="award">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let player">
+        <div class="award" *ngFor="let award of player.scores.Awards" [attr.tooltip]="award" [attr.award]="award"></div>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="kills">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        <div class="icon"></div>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let player" [class.best]="isBest('SoloKill', player)" [class.best-team]="isBest('SoloKill', player, player.team)">{{player.scores.SoloKill}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="assists">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        <div class="icon"></div>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let player" [class.best]="isBest('Assists', player)" [class.best-team]="isBest('Assists', player, player.team)">{{player.scores.Assists}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="deaths">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        <div class="icon"></div>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let player" [class.best]="isBest('Deaths', player)" [class.best-team]="isBest('Deaths', player, player.team)">
+        {{player.scores.Deaths}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="siegeDamage">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        <div class="icon"></div>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let player" [class.best]="isBest('SiegeDamage', player)" [class.best-team]="isBest('SiegeDamage', player, player.team)">
+        {{player.scores.SiegeDamage | number}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="heroDamage">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        <div class="icon"></div>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let player" [class.best]="isBest('HeroDamage', player)" [class.best-team]="isBest('HeroDamage', player, player.team)">
+        {{player.scores.HeroDamage | number}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="healing">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        <div class="icon"></div>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let player" [class.best]="isBest('Healing', player)" [class.best-team]="isBest('Healing', player, player.team)">
+        {{(player.scores.Healing || '') | number}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="damageTaken">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        <div class="icon"></div>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let player" [class.best]="isBest('DamageTaken', player)" [class.best-team]="isBest('DamageTaken', player, player.team)">
+        {{(player.scores.DamageTaken || '') | number}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="xp">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        <div class="icon"></div>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let player" [class.best]="isBest('ExperienceContribution', player)" [class.best-team]="isBest('ExperienceContribution', player, player.team)">
+        {{player.scores.ExperienceContribution | number}} </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayCols"></mat-header-row>
+    <mat-row *matRowDef="let player; columns: displayCols" [class.team1]="player.team === 0" [class.team2]="player.team === 1"></mat-row>
+  </mat-table>
+  <div class="footer">
+    <div class="team team1">
+      <div>
+        <div class="winner">{{ scoreData?.winningTeam === 0 ? 'Victory' : 'Defeat'}}</div>
+        <div class="level">Level {{scoreData?.team1Level}}</div>
       </div>
-    </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="award">
-    <mat-header-cell *matHeaderCellDef></mat-header-cell>
-    <mat-cell *matCellDef="let player">
-      <div class="award" *ngFor="let award of player.scores.Awards" [attr.tooltip]="award" [attr.award]="award"></div>
-    </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="kills">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>
-      <div class="icon"></div>
-    </mat-header-cell>
-    <mat-cell *matCellDef="let player" [class.best]="isBest('SoloKill', player)" [class.best-team]="isBest('SoloKill', player, player.team)">{{player.scores.SoloKill}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="assists">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>
-      <div class="icon"></div>
-    </mat-header-cell>
-    <mat-cell *matCellDef="let player" [class.best]="isBest('Assists', player)" [class.best-team]="isBest('Assists', player, player.team)">{{player.scores.Assists}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="deaths">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>
-      <div class="icon"></div>
-    </mat-header-cell>
-    <mat-cell *matCellDef="let player" [class.best]="isBest('Deaths', player)" [class.best-team]="isBest('Deaths', player, player.team)">
-      {{player.scores.Deaths}} </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="siegeDamage">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>
-      <div class="icon"></div>
-    </mat-header-cell>
-    <mat-cell *matCellDef="let player" [class.best]="isBest('SiegeDamage', player)" [class.best-team]="isBest('SiegeDamage', player, player.team)">
-      {{player.scores.SiegeDamage | number}} </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="heroDamage">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>
-      <div class="icon"></div>
-    </mat-header-cell>
-    <mat-cell *matCellDef="let player" [class.best]="isBest('HeroDamage', player)" [class.best-team]="isBest('HeroDamage', player, player.team)">
-      {{player.scores.HeroDamage | number}} </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="healing">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>
-      <div class="icon"></div>
-    </mat-header-cell>
-    <mat-cell *matCellDef="let player" [class.best]="isBest('Healing', player)" [class.best-team]="isBest('Healing', player, player.team)">
-      {{(player.scores.Healing || '') | number}} </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="damageTaken">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>
-      <div class="icon"></div>
-    </mat-header-cell>
-    <mat-cell *matCellDef="let player" [class.best]="isBest('DamageTaken', player)" [class.best-team]="isBest('DamageTaken', player, player.team)">
-      {{(player.scores.DamageTaken || '') | number}} </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="xp">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>
-      <div class="icon"></div>
-    </mat-header-cell>
-    <mat-cell *matCellDef="let player" [class.best]="isBest('ExperienceContribution', player)" [class.best-team]="isBest('ExperienceContribution', player, player.team)">
-      {{player.scores.ExperienceContribution | number}} </mat-cell>
-  </ng-container>
-  <mat-header-row *matHeaderRowDef="displayCols"></mat-header-row>
-  <mat-row *matRowDef="let player; columns: displayCols" [class.team1]="player.team === 0" [class.team2]="player.team === 1"></mat-row>
-</mat-table>
-<div class="footer">
-  <div class="team team1">
-    <div>
-      <div class="winner" >{{ scoreData?.winningTeam === 0 ? 'Victory' : 'Defeat'}}</div>
-      <div class="level">Level {{scoreData?.team1Level}}</div>
+      <div class="kills">
+        <div class="num">{{scoreData?.team1Kills}}</div>
+        <div class="glow">{{scoreData?.team1Kills}}</div>
+      </div>
+      <div class="kill-icon"></div>
     </div>
-    <div class="kills">
-      <div class="num">{{scoreData?.team1Kills}}</div>
-      <div class="glow">{{scoreData?.team1Kills}}</div>
+    <div class="info">
+      VS
     </div>
-    <div class="kill-icon"></div>
-  </div>
-  <div class="info">
-    VS
-  </div>
-  <div class="team team2">
-    <div class="kill-icon"></div>
-    <div class="kills">
+    <div class="team team2">
+      <div class="kill-icon"></div>
+      <div class="kills">
         <div class="num">{{scoreData?.team2Kills}}</div>
         <div class="glow">{{scoreData?.team2Kills}}</div>
-    </div>
-    <div>
-      <div class="winner">{{ scoreData?.winningTeam === 1 ? 'Victory' : 'Defeat'}}</div>
-      <div class="level">Level {{scoreData?.team2Level}}</div>
+      </div>
+      <div>
+        <div class="winner">{{ scoreData?.winningTeam === 1 ? 'Victory' : 'Defeat'}}</div>
+        <div class="level">Level {{scoreData?.team2Level}}</div>
+      </div>
     </div>
   </div>
-</div>
+</section>
+<div #statusRef></div>

@@ -15,6 +15,9 @@ import {
   MatTableModule,
   MatSortModule
 } from '@angular/material';
+import { DraftComponent } from './sections/draft/draft.component';
+import { SectionNotSupportedComponent } from './components/section-not-supported/section-not-supported.component';
+import { SectionLoadingComponent } from './components/section-loading/section-loading.component';
 
 @NgModule({
   imports: [
@@ -35,8 +38,15 @@ import {
     HeroIconComponent,
     ReplayNavComponent,
     NavItemComponent,
-    ScoreScreenComponent
+    ScoreScreenComponent,
+    DraftComponent,
+    SectionNotSupportedComponent,
+    SectionLoadingComponent
   ],
-  providers: [ClipIconService]
+  providers: [ClipIconService],
+  entryComponents: [
+    SectionNotSupportedComponent,
+    SectionLoadingComponent
+  ]
 })
 export class ReplayViewerModule { }

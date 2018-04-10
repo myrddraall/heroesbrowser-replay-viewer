@@ -39,16 +39,22 @@ export class ReplayNavComponent implements OnChanges {
         const scoreScreen: IReplayNavItemLink = {
           type: 'link',
           label: 'Score Screen',
-          path: []
+          path: ['/score']
         };
         overview.children.push(scoreScreen);
 
-        const draft: IReplayNavItemLink = {
-          type: 'link',
-          label: 'Draft',
-          path: []
-        };
-        overview.children.push(draft);
+        const gameType = this.replayDescription.gameType;
+        // tslint:disable-next-line:no-bitwise
+        if ((gameType & GameType.FLAG_DRAFT) === GameType.FLAG_DRAFT) {
+          const draft: IReplayNavItemLink = {
+            type: 'link',
+            label: 'Draft',
+            path: ['/draft']
+          };
+          overview.children.push(draft);
+        }
+
+
         this.navData.push(overview);
       } else {
         this.navData = undefined;
