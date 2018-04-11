@@ -1,6 +1,17 @@
-<p>
-  Comming Soon(TM)
-</p>
-
-
-<div class="heroicontest" style="width:75px; height:75px; background-image:url('http://d1i1jxrdh2kvwy.cloudfront.net/Images/Heroes/Portraits/Jaina.png')" ></div>
+<section *ngIf="dataSource">
+  <div class="draft">
+    <div class="draft-item" *ngFor="let draft of dataSource" [class.team1]="draft.team === 0" [class.team2]="draft.team === 1" [class.pick]="draft.type ==='pick'" [class.ban]="draft.type ==='ban'">
+      <div class="player-cell">
+        <hero-icon [hero]="draft.hero" shape="none"></hero-icon>
+        <div class="icon-overlay"></div>
+        <div class="name">
+          <div class="hero-name">{{draft.hero}}</div>
+          <div class="player-name">{{draft['playerName']}}</div>
+        </div>
+      </div>
+      <div class="type"><div>{{draft.type}}</div></div>
+      <div class="space"></div>
+    </div>
+  </div>
+</section>
+<div #statusRef></div>

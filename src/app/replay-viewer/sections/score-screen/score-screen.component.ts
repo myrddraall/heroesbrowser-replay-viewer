@@ -8,7 +8,7 @@ import {
   ComponentFactoryResolver
 } from '@angular/core';
 import { ReplayViewerComponent } from '../../replay-viewer.component';
-import { Replay, ReplayDescription, ScoreAnalyser, IPlayerScores, IScoreScreenData, PlayerAnalyser } from '@heroesbrowser/heroprotocol';
+import { Replay, ReplayDescription, ScoreAnalyser, IPlayerScores, IScoreScreenData } from '@heroesbrowser/heroprotocol';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { AbstractSectionComponent } from '../AbstractSection';
 import * as linq from 'linq';
@@ -27,7 +27,7 @@ interface IPlayerScoreRecord {
   styleUrls: ['./score-screen.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ScoreScreenComponent extends AbstractSectionComponent implements OnInit, AfterViewInit {
+export class ScoreScreenComponent extends AbstractSectionComponent implements AfterViewInit {
 
   private replay: Replay;
   private scoreScreenAnalyser: ScoreAnalyser;
@@ -66,12 +66,8 @@ export class ScoreScreenComponent extends AbstractSectionComponent implements On
     this.dataSource.sortingDataAccessor = this.getSortData.bind(this);
   }
 
-  ngOnInit() {
 
-
-  }
-
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     super.ngAfterViewInit();
     this.replayLoaded();
   }
