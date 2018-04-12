@@ -18,6 +18,8 @@ interface IPlayerScoreRecord {
   name: string;
   team: number;
   won: boolean;
+  hasChatSilence: boolean;
+  hasVoiceSilence: boolean;
   scores: IPlayerScores;
 }
 
@@ -158,6 +160,8 @@ export class ScoreScreenComponent extends AbstractSectionComponent implements Af
           name: player.name,
           team: player.team,
           won: player.won,
+          hasChatSilence: player.hasChatSilence,
+          hasVoiceSilence: player.hasVoiceSilence,
           scores: pScore
         });
       }
