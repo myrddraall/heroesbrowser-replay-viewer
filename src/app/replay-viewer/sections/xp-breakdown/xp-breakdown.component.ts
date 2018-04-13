@@ -18,6 +18,8 @@ import { Chart, ChartPoint } from 'chart.js';
 
 interface ITeamChartPoint extends ChartPoint {
   team: number;
+  level: number;
+  x: number;
 }
 
 const lvlXP = [
@@ -67,6 +69,9 @@ export class XpBreakdownComponent extends AbstractSectionComponent implements Af
   private xpOverviewChartCanvas: ElementRef;
   private xpOverviewChart: Chart;
   private xpOverviewChartData: Array<ITeamChartPoint[]>;
+  @ViewChild('chartTooltip')
+  private chartTooltip: ElementRef;
+  public toolTipData: ITeamChartPoint[] = [];
 
   constructor(
     private replayViewer: ReplayViewerComponent,
@@ -115,6 +120,37 @@ export class XpBreakdownComponent extends AbstractSectionComponent implements Af
         responsive: true,
         legend: {
           display: false
+        },
+        tooltips: {
+          enabled: false,
+          custom: (tooltipModel) => {
+            console.log('tooltipModel', tooltipModel);
+            const ttElement = this.chartTooltip.nativeElement;
+
+            if (tooltipModel.opacity === 0) {
+              this.renderer.setStyle(ttElement, 'display', 'none');
+            } else {
+              this.renderer.setStyle(ttElement, 'display', '');
+              this.renderer.setStyle(ttElement, 'top', tooltipModel.y + 'px');
+              this.renderer.setStyle(ttElement, 'left', tooltipModel.x + 'px');
+              this.toolTipData = [];
+              if (tooltipModel.dataPoints) {
+                for (let i = 0; i < tooltipModel.dataPoints.length; i++) {
+                  const element = tooltipModel.dataPoints[i];
+                  console.log('element', element);
+                  let data: ITeamChartPoint;
+                  if (element.index === 0) {
+                    data = { x: 0, y: 0, team: element.datasetIndex, level: 1 };
+                  } else {
+                    data = this.xpOverviewChartData[element.datasetIndex][element.index - 1];
+                  }
+                  this.toolTipData.push(data);
+                }
+                console.log('this.toolTipData', this.toolTipData);
+                this.changeDetectorRef.markForCheck();
+              }
+            }
+          }
         },
         scales: {
           xAxes: [{
@@ -175,6 +211,7 @@ export class XpBreakdownComponent extends AbstractSectionComponent implements Af
     const q = linq.from(this.xpData);
     const converted = q.select(_ => (<ITeamChartPoint>{
       team: _.team,
+      level: _.teamLevel,
       x: _.time,
       y: _.creepXP + _.heroXP + _.minionXP + _.structureXP + _.trickleXP
     }));

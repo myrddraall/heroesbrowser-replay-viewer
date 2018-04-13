@@ -3,9 +3,20 @@
     sn
   </mat-sidenav>
   <mat-sidenav-content>
-   <div class="chart-container">
-     <canvas #xpOverviewChart></canvas>
-   </div>
+    <div class="chart-container">
+      <canvas #xpOverviewChart></canvas>
+      <div #chartTooltip class="chart-tooltip" style="display:none;">
+        <div *ngFor="let data of toolTipData" class="team-tip" [class.team1]="data.team === 0" [class.team2]="data.team === 1">
+          <div class="team">Team {{data.team + 1}}</div>
+          <div class="lvl">
+            <label>Level</label> {{data.level}}</div>
+          <div class="xp">
+            <label>XP</label> {{data.y | number: '0.0-0'}}</div>
+          <div class="xp">
+            <label>Time</label> {{(data.x / 60) | number: '0.0-0'}}m</div>
+        </div>
+      </div>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
 <div #statusRef></div>
