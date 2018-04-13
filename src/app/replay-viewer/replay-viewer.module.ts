@@ -18,6 +18,7 @@ import {
 import { DraftComponent } from './sections/draft/draft.component';
 import { SectionNotSupportedComponent } from './components/section-not-supported/section-not-supported.component';
 import { SectionLoadingComponent } from './components/section-loading/section-loading.component';
+import { XpBreakdownComponent } from './sections/xp-breakdown/xp-breakdown.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { SectionLoadingComponent } from './components/section-loading/section-lo
     ScoreScreenComponent,
     DraftComponent,
     SectionNotSupportedComponent,
-    SectionLoadingComponent
+    SectionLoadingComponent,
+    XpBreakdownComponent
   ],
   providers: [ClipIconService],
   entryComponents: [

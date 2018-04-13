@@ -3,11 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReplayViewerComponent } from './replay-viewer.component';
 import { ScoreScreenComponent } from './sections/score-screen/score-screen.component';
 import { DraftComponent } from './sections/draft/draft.component';
+import { XpBreakdownComponent } from './sections/xp-breakdown/xp-breakdown.component';
+
 const replayViewerRoutes: Routes = [
     {
         path: '',
         component: ReplayViewerComponent,
         children: [
+            {
+                path: 'xp-breakdown',
+                component: XpBreakdownComponent
+            },
             {
                 path: 'draft',
                 component: DraftComponent

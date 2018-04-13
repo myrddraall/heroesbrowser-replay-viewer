@@ -13,16 +13,15 @@ import { Replay, DraftAnalyser, IHeroPick, IHeroBan } from '@heroesbrowser/herop
 import { AbstractSectionComponent } from '../AbstractSection';
 import * as linq from 'linq';
 
-@Component({
-  selector: 'app-draft',
-  templateUrl: './draft.component.html',
-  styleUrls: ['./draft.component.scss'],
+
+/*@Component({
+  selector: 'stub-stub',
+  templateUrl: './stub.component.html',
+  styleUrls: ['./stub.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
-})
-export class DraftComponent extends AbstractSectionComponent implements AfterViewInit {
+})*/
+export class StubComponent extends AbstractSectionComponent implements AfterViewInit {
   private replay: Replay;
-  private draftAnalyser: DraftAnalyser;
-  public dataSource: Array<IHeroPick | IHeroBan> = [];
 
   constructor(
     private replayViewer: ReplayViewerComponent,
@@ -39,13 +38,13 @@ export class DraftComponent extends AbstractSectionComponent implements AfterVie
     super.ngAfterViewInit();
     this.replayLoaded();
   }
+
   private async replayLoaded() {
     try {
       this.clearNotSupported();
-      this.setLoadingMessage('Loading Draft Data');
+      this.setLoadingMessage('Loading XP Data');
       this.replay = this.replayViewer.replay;
-      this.draftAnalyser = new DraftAnalyser(this.replay);
-      this.dataSource = await this.draftAnalyser.draft;
+
       this.changeDetectorRef.markForCheck();
     } catch (e) {
       if (e.name === 'ReplayVersionOutOfRangeError') {
@@ -57,4 +56,5 @@ export class DraftComponent extends AbstractSectionComponent implements AfterVie
       this.clearLoading();
     }
   }
+
 }

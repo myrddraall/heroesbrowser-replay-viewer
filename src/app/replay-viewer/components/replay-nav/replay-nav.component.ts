@@ -54,6 +54,13 @@ export class ReplayNavComponent implements OnChanges {
           overview.children.push(draft);
         }
 
+        const xpBreakdown: IReplayNavItemLink = {
+          type: 'link',
+          label: 'Experience',
+          path: ['/xp-breakdown']
+        };
+        overview.children.push(xpBreakdown);
+
 
         this.navData.push(overview);
       } else {
