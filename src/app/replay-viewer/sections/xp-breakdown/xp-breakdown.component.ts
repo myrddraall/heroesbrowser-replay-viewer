@@ -6,7 +6,8 @@ import {
   ViewChild,
   ElementRef,
   AfterViewInit,
-  ComponentFactoryResolver
+  ComponentFactoryResolver,
+  Renderer2
 } from '@angular/core';
 
 import { ReplayViewerComponent } from '../../replay-viewer.component';
@@ -18,6 +19,38 @@ import { Chart, ChartPoint } from 'chart.js';
 interface ITeamChartPoint extends ChartPoint {
   team: number;
 }
+
+const lvlXP = [
+  2010,
+  4164,
+  6318,
+  8472,
+  10626,
+  13929,
+  17232,
+  20535,
+  23838,
+  27141,
+  31593,
+  36045,
+  40497,
+  44949,
+  49401,
+  55001,
+  60601,
+  66201,
+  71801,
+  80801,
+  90801,
+  102301,
+  115301,
+  130301,
+  147301,
+  166801,
+  188801,
+  213801,
+  241801,
+];
 
 @Component({
   selector: 'xp-breakdown',
@@ -38,7 +71,8 @@ export class XpBreakdownComponent extends AbstractSectionComponent implements Af
   constructor(
     private replayViewer: ReplayViewerComponent,
     changeDetectorRef: ChangeDetectorRef,
-    componentFactoryResolver: ComponentFactoryResolver
+    componentFactoryResolver: ComponentFactoryResolver,
+    private renderer: Renderer2
   ) {
     super(componentFactoryResolver, changeDetectorRef);
     replayViewer.onReplayLoaded.subscribe(replay => {
@@ -79,22 +113,56 @@ export class XpBreakdownComponent extends AbstractSectionComponent implements Af
       options: {
         showLines: true,
         responsive: true,
+        legend: {
+          display: false
+        },
         scales: {
           xAxes: [{
             type: 'linear',
+            scaleLabel: {
+              labelString: 'Time (minutes)',
+              display: true
+            },
             ticks: <any>{
               stepSize: 60,
               callback: function (value, index, values) {
-                console.log('==', value, index, values);
-                return  index + 'm';
+                return index + 'm';
               }
             },
             display: true,
 
           }],
-          yAxes: [{
-            display: true
-          }],
+          yAxes: [
+            {
+              display: true,
+              position: 'left',
+              scaleLabel: {
+                labelString: 'Experience',
+                display: true
+              },
+              gridLines: {
+                drawOnChartArea: false, // only want the grid lines for one axis to show up
+              },
+            }, {
+              position: 'right',
+              display: true,
+              scaleLabel: {
+                labelString: 'Level',
+                display: true
+              },
+              ticks: <any>{
+                min: 0,
+                max: 0,
+                stepSize: 1,
+                callback: function (value, index, values) {
+                  const lvlIndex = lvlXP.indexOf(value);
+                  if (lvlIndex !== -1) {
+                    return 'lvl ' + (lvlIndex + 2);
+                  }
+                }
+              }
+            }
+          ],
         },
         title: {
           text: 'XP Overview'
@@ -140,7 +208,12 @@ export class XpBreakdownComponent extends AbstractSectionComponent implements Af
         }
       ]
     };
-    this.xpOverviewChart.update(5);
+
+    console.log('++++++++++', this.xpOverviewChart['scales']['y-axis-0']['max']);
+    this.xpOverviewChart.update();
+    console.log('++++++++++', this.xpOverviewChart['scales']['y-axis-0']['max']);
+    this.xpOverviewChart.config.options.scales.yAxes[1].ticks.max = this.xpOverviewChart['scales']['y-axis-0']['max'];
+    this.xpOverviewChart.update(1000);
   }
 
 }
