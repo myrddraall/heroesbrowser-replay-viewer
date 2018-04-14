@@ -8,11 +8,11 @@
     </mat-form-field>
     <div class="xp-type-filter">
       <mat-checkbox class="all" [checked]="xpTypesCheckedCount === 5" (click)="onXPTypeChange('all', $event)">All</mat-checkbox>
-      <mat-checkbox [checked]="xpTypesChecked.creepXP" (click)="onXPTypeChange('creepXP', $event)">Creep XP</mat-checkbox>
-      <mat-checkbox [checked]="xpTypesChecked.heroXP" (click)="onXPTypeChange('heroXP', $event)">Hero XP</mat-checkbox>
-      <mat-checkbox [checked]="xpTypesChecked.minionXP" (click)="onXPTypeChange('minionXP', $event)">Minion XP</mat-checkbox>
-      <mat-checkbox [checked]="xpTypesChecked.structureXP" (click)="onXPTypeChange('structureXP', $event)">Structure XP</mat-checkbox>
-      <mat-checkbox [checked]="xpTypesChecked.trickleXP" (click)="onXPTypeChange('trickleXP', $event)">Trickle XP</mat-checkbox>
+      <mat-checkbox class="creepXP" [checked]="xpTypesChecked.creepXP" (click)="onXPTypeChange('creepXP', $event)">Creep XP</mat-checkbox>
+      <mat-checkbox class="heroXP" [checked]="xpTypesChecked.heroXP" (click)="onXPTypeChange('heroXP', $event)">Hero XP</mat-checkbox>
+      <mat-checkbox class="minionXP" [checked]="xpTypesChecked.minionXP" (click)="onXPTypeChange('minionXP', $event)">Minion XP</mat-checkbox>
+      <mat-checkbox class="structureXP" [checked]="xpTypesChecked.structureXP" (click)="onXPTypeChange('structureXP', $event)">Structure XP</mat-checkbox>
+      <mat-checkbox class="trickleXP" [checked]="xpTypesChecked.trickleXP" (click)="onXPTypeChange('trickleXP', $event)">Trickle XP</mat-checkbox>
     </div>
     <button mat-raised-button color="primary" (click)="resetZoom()">Reset Zoom</button>
   </mat-sidenav>

@@ -566,6 +566,7 @@ export class XpBreakdownComponent extends AbstractSectionComponent implements Af
 
   public onXPTypeChange(type: string, event: MouseEvent) {
     event.preventDefault();
+    let changed = false;
     const oCount = this.xpTypesCheckedCount;
     if (type === 'all') {
       this.xpTypesChecked.creepXP = true;
@@ -573,15 +574,32 @@ export class XpBreakdownComponent extends AbstractSectionComponent implements Af
       this.xpTypesChecked.minionXP = true;
       this.xpTypesChecked.structureXP = true;
       this.xpTypesChecked.trickleXP = true;
+      if (this.xpTypesCheckedCount !== 5) {
+        changed = true;
+      }
       this.xpTypesCheckedCount = 5;
     } else {
-      const current = this.xpTypesChecked[type];
-      if (!(current && this.xpTypesCheckedCount === 1)) {
-        this.xpTypesChecked[type] = !current;
-        this.xpTypesCheckedCount += current ? -1 : 1;
+      if (event.ctrlKey || event.shiftKey || event.altKey) {
+        const oCheck = this.xpTypesChecked[type];
+        if (!this.xpTypesChecked[type]) {
+          changed = true;
+        }
+        this.xpTypesChecked.creepXP = false;
+        this.xpTypesChecked.heroXP = false;
+        this.xpTypesChecked.minionXP = false;
+        this.xpTypesChecked.structureXP = false;
+        this.xpTypesChecked.trickleXP = false;
+        this.xpTypesChecked[type] = true;
+        this.xpTypesCheckedCount = 1;
+      } else {
+        const current = this.xpTypesChecked[type];
+        if (!(current && this.xpTypesCheckedCount === 1)) {
+          this.xpTypesChecked[type] = !current;
+          this.xpTypesCheckedCount += current ? -1 : 1;
+        }
       }
     }
-    if (oCount !== this.xpTypesCheckedCount) {
+    if (changed || oCount !== this.xpTypesCheckedCount) {
       this.generateXPOverviewChartData();
       this.updateXPOverviewChartData();
     }

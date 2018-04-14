@@ -77,6 +77,51 @@
       >.all {
         margin-left: 0px;
       }
+      .mat-checkbox-checked {
+        ::ng-deep {
+          .mat-checkbox-background {
+            background-color: transparent !important;
+          }
+          .mat-checkbox-checkmark-path {
+            stroke: white !important;
+          }
+        }
+      }
+      .creepXP.mat-checkbox-checked {
+        ::ng-deep {
+          .mat-checkbox-background {
+            background-color: #b8860b !important;
+          }
+        }
+      }
+      .heroXP.mat-checkbox-checked {
+        ::ng-deep {
+          .mat-checkbox-background {
+            background-color: #680202 !important;
+          }
+        }
+      }
+      .minionXP.mat-checkbox-checked {
+        ::ng-deep {
+          .mat-checkbox-background {
+            background-color: #191970 !important;
+          }
+        }
+      }
+      .structureXP.mat-checkbox-checked {
+        ::ng-deep {
+          .mat-checkbox-background {
+            background-color: #013801 !important;
+          }
+        }
+      }
+      .trickleXP.mat-checkbox-checked {
+        ::ng-deep {
+          .mat-checkbox-background {
+            background-color: #274141 !important;
+          }
+        }
+      }
     }
   }
 }
