@@ -6,9 +6,31 @@
       <div>
         <strong>Load Replay</strong>
         <span class="dragndrop"> or drag it here</span>
-        <div class="status">{{FileState[fileState]}}</div>
+        <div class="status" *ngIf="fileState !== FileState.ERROR" >{{FileState[fileState]}}</div>
       </div>
-      <mat-progress-bar mode="indeterminate" *ngIf="fileState == FileState.LOADING || fileState == FileState.PARSING"></mat-progress-bar>
+      <mat-progress-bar mode="indeterminate" *ngIf="fileState === FileState.LOADING || fileState === FileState.PARSING"></mat-progress-bar>
+      <div class="error" *ngIf="fileState === FileState.ERROR">
+        <ng-container [ngSwitch]="loadError.name">
+          <div *ngSwitchCase="'FailedToLoadProtocolError'">
+            <h3>{{loadError.message}}</h3>
+            <p>If there has been a patch recently the protocol may just not be released yet. Please try again later.
+              <br/> Older replay files should still work.</p>
+            <p>Protocol files are released by Blizzard at
+              <a href="https://github.com/Blizzard/heroprotocol">https://github.com/Blizzard/heroprotocol</a> as files named 'protocol{{'{'}}VERSION{{'}'}}.py'.
+              <br/> If the file 'protocol{{loadError['version']}}.py' exists there and you are still seeing this message please report the issue to our
+              <a href="https://github.com/myrddraall/heroesbrowser-replay-viewer/issues">github issue tracker</a>
+            </p>
+          </div>
+          <div *ngSwitchDefault>
+            <h3>Unexpected Error</h3>
+            <p>OOPS! Something went wrong that we didn't account for. Please report the error below to the
+              <a href="https://github.com/myrddraall/heroesbrowser-replay-viewer/issues">github issue tracker</a>
+            </p>
+            <p>{{loadError.message}}</p>
+            <pre>{{loadError.stack}}</pre>
+          </div>
+        </ng-container>
+      </div>
     </label>
   </div>
 </div>

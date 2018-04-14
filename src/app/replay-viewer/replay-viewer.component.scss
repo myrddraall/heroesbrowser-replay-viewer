@@ -95,4 +95,16 @@
       }
     }
   }
+
+  .error{
+    h3{
+      margin-top:20px;
+    }
+    a, a:visited{
+      color: aqua;
+    }
+    pre{
+      text-align: left;
+    }
+  }
 }

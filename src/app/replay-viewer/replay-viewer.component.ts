@@ -17,7 +17,8 @@ enum FileState {
   DRAGGING,
   LOADING,
   PARSING,
-  LOADED
+  LOADED,
+  ERROR
 }
 
 @Component({
@@ -30,7 +31,7 @@ export class ReplayViewerComponent implements OnInit {
   public FileState = FileState;
   private _fileState: FileState = FileState.NONE;
   public onReplayLoaded: EventEmitter<Replay> = new EventEmitter();
-
+  public loadError: Error;
   public replay: Replay;
   private basicReplayAnalyser: BasicReplayAnalyser;
 
@@ -121,14 +122,25 @@ export class ReplayViewerComponent implements OnInit {
     if (this.replay) {
       this.replay.dispose();
     }
-    this.replay = new Replay(replayData);
-    this.basicReplayAnalyser = new BasicReplayAnalyser(this.replay);
-    this.replayDescription = await this.basicReplayAnalyser.replayDescription;
-    setTimeout(() => {
-      this.fileState = FileState.LOADED;
-      this.onReplayLoaded.next(this.replay);
-      this.logGameData();
-    }, 0);
+    try {
+      this.replay = new Replay(replayData);
+      await this.replay.initialize();
+
+      this.basicReplayAnalyser = new BasicReplayAnalyser(this.replay);
+      this.replayDescription = await this.basicReplayAnalyser.replayDescription;
+      setTimeout(() => {
+        this.fileState = FileState.LOADED;
+        this.onReplayLoaded.next(this.replay);
+        this.logGameData();
+      }, 0);
+
+    } catch (e) {
+      console.error(e);
+      this.loadError = e;
+      this.fileState = FileState.ERROR;
+      this.replay.dispose();
+      this.replay = undefined;
+    }
   }
 
   private async logGameData() {
@@ -137,7 +149,7 @@ export class ReplayViewerComponent implements OnInit {
     // console.log('details', await this.replay.details);
     // console.log('attributeEvents', await this.replay.attributeEvents);
     // console.log('messageEvents', await this.replay.messageEvents);
-     console.log('trackerEvents', await this.replay.trackerEvents);
+    console.log('trackerEvents', await this.replay.trackerEvents);
     // console.log('gameEvents', await this.replay.gameEvents);
   }
 

@@ -15,6 +15,7 @@ import { Replay, XPAnalyser, IPeriodicXP } from '@heroesbrowser/heroprotocol';
 import { AbstractSectionComponent } from '../AbstractSection';
 import * as linq from 'linq';
 import { Chart, ChartPoint } from 'chart.js';
+import * as zoomPlugin from 'chartjs-plugin-zoom';
 
 interface ITeamChartPoint extends ChartPoint {
   team: number;
@@ -125,12 +126,60 @@ export class XpBreakdownComponent extends AbstractSectionComponent implements Af
   private createXPOverviewChart() {
     this.xpOverviewChart = new Chart(this.xpOverviewChartCanvas.nativeElement, {
       type: 'line',
-      options: {
+      plugins: [zoomPlugin],
+      options: <any>{
         showLines: true,
         responsive: true,
         legend: {
           display: false
         },
+        pan: {
+          enabled: false
+        },
+        zoom: {
+          enabled: false
+        },
+        /* pan: {
+           // Boolean to enable panning
+           enabled: true,
+
+           // Panning directions. Remove the appropriate direction to disable
+           // Eg. 'y' would only allow panning in the y direction
+           mode: 'xy',
+           rangeMin: {
+             // Format of min pan range depends on scale type
+             x: null,
+             y: null
+           },
+           rangeMax: {
+             // Format of max pan range depends on scale type
+             x: null,
+             y: null
+           }
+         },
+
+         // Container for zoom options
+         zoom: {
+           // Boolean to enable zooming
+           enabled: true,
+
+           // Enable drag-to-zoom behavior
+           drag: true,
+
+           // Zooming directions. Remove the appropriate direction to disable
+           // Eg. 'y' would only allow zooming in the y direction
+           mode: 'xy',
+           rangeMin: {
+             // Format of min zoom range depends on scale type
+             x: null,
+             y: null
+           },
+           rangeMax: {
+             // Format of max zoom range depends on scale type
+             x: null,
+             y: null
+           }
+         },*/
         tooltips: {
           enabled: false,
           custom: (tooltipModel) => {
@@ -174,7 +223,7 @@ export class XpBreakdownComponent extends AbstractSectionComponent implements Af
             ticks: <any>{
               stepSize: 60,
               callback: function (value, index, values) {
-                return index + 'm';
+                return (Math.round((value / 60 * 10)) / 10)  + 'm';
               }
             },
             display: true,
@@ -277,8 +326,9 @@ export class XpBreakdownComponent extends AbstractSectionComponent implements Af
     };
 
     if (this.xpTypesCheckedCount === 5) {
-      this.xpOverviewChart.update();
+      this.xpOverviewChart.update(0, false);
       this.xpOverviewChart.config.options.scales.yAxes[1].display = true;
+      this.xpOverviewChart.config.options.scales.yAxes[1].ticks.min = this.xpOverviewChart['scales']['y-axis-0']['min'];
       this.xpOverviewChart.config.options.scales.yAxes[1].ticks.max = this.xpOverviewChart['scales']['y-axis-0']['max'];
     } else {
       this.xpOverviewChart.config.options.scales.yAxes[1].display = false;
