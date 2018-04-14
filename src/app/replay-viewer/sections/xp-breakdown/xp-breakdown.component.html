@@ -1,31 +1,43 @@
 <mat-sidenav-container>
   <mat-sidenav mode="side" opened="true" position="end">
-    
+    <mat-form-field color="accent" >
+      <mat-select placeholder="View" [(value)]="chartType">
+        <mat-option [value]="'line'">Line</mat-option>
+        <mat-option [value]="'bar'">Bar</mat-option>
+      </mat-select>
+    </mat-form-field>
     <div class="xp-type-filter">
-        <mat-checkbox class="all" [checked]="xpTypesCheckedCount === 5" (click)="onXPTypeChange('all', $event)">All</mat-checkbox>
-        <mat-checkbox [checked]="xpTypesChecked.creepXP" (click)="onXPTypeChange('creepXP', $event)">Creep XP</mat-checkbox>
-        <mat-checkbox [checked]="xpTypesChecked.heroXP" (click)="onXPTypeChange('heroXP', $event)">Hero XP</mat-checkbox>
-        <mat-checkbox [checked]="xpTypesChecked.minionXP" (click)="onXPTypeChange('minionXP', $event)">Minion XP</mat-checkbox>
-        <mat-checkbox [checked]="xpTypesChecked.structureXP" (click)="onXPTypeChange('structureXP', $event)">Structure XP</mat-checkbox>
-        <mat-checkbox [checked]="xpTypesChecked.trickleXP" (click)="onXPTypeChange('trickleXP', $event)">Trickle XP</mat-checkbox>
+      <mat-checkbox class="all" [checked]="xpTypesCheckedCount === 5" (click)="onXPTypeChange('all', $event)">All</mat-checkbox>
+      <mat-checkbox [checked]="xpTypesChecked.creepXP" (click)="onXPTypeChange('creepXP', $event)">Creep XP</mat-checkbox>
+      <mat-checkbox [checked]="xpTypesChecked.heroXP" (click)="onXPTypeChange('heroXP', $event)">Hero XP</mat-checkbox>
+      <mat-checkbox [checked]="xpTypesChecked.minionXP" (click)="onXPTypeChange('minionXP', $event)">Minion XP</mat-checkbox>
+      <mat-checkbox [checked]="xpTypesChecked.structureXP" (click)="onXPTypeChange('structureXP', $event)">Structure XP</mat-checkbox>
+      <mat-checkbox [checked]="xpTypesChecked.trickleXP" (click)="onXPTypeChange('trickleXP', $event)">Trickle XP</mat-checkbox>
     </div>
+    <button mat-raised-button color="primary" (click)="resetZoom()">Reset Zoom</button>
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="chart-container">
-      <canvas #xpOverviewChart></canvas>
+      <canvas #xpOverviewLineChart [style.display]="chartType === 'line'? 'block' : 'none'"></canvas>
+      <canvas #xpOverviewBarChart [style.display]="chartType === 'bar'? 'block' : 'none'"></canvas>
       <div #chartTooltip class="chart-tooltip" style="display:none;">
         <div class="team-tip time" *ngIf="toolTipData">
-            <label>Game Time:</label> {{(toolTipData[0].x / 60) | number: '0.0-1'}}
+          <label>Game Time:</label> {{(toolTipData[0].x / 60) | number: '0.0-1'}}
         </div>
-        <div class="team-tip compare" *ngIf="toolTipData && toolTipData[0].y !== toolTipData[1].y" [class.team1]="toolTipData[0].y > toolTipData[1].y" [class.team2]="toolTipData[0].y < toolTipData[1].y">
+        <div class="team-tip compare" *ngIf="toolTipData && toolTipData[0].y !== toolTipData[1].y" [class.team1]="toolTipData[0].y > toolTipData[1].y"
+          [class.team2]="toolTipData[0].y < toolTipData[1].y">
           <div class="team">Advantage Team {{toolTipData[0].y > toolTipData[1].y ? 1 : 2}}</div>
-          <div class="lvl"><label>Levels:</label> {{abs(toolTipData[0].level - toolTipData[1].level)}}</div>
-          <div class="xp"><label>XP:</label> {{abs(toolTipData[0].y - toolTipData[1].y) | number: '0.0-0'}}</div>
+          <div class="lvl">
+            <label>Levels:</label> {{abs(toolTipData[0].level - toolTipData[1].level)}}</div>
+          <div class="xp">
+            <label>XP:</label> {{abs(toolTipData[0].y - toolTipData[1].y) | number: '0.0-0'}}</div>
         </div>
         <div *ngFor="let data of toolTipData" class="team-tip" [class.team1]="data.team === 0" [class.team2]="data.team === 1">
           <div class="team">Team {{data.team + 1}}</div>
-          <div class="lvl"><label>Level:</label> {{data.level}}</div>
-          <div class="xp"><label>XP:</label> {{data.y | number: '0.0-0'}}</div>
+          <div class="lvl">
+            <label>Level:</label> {{data.level}}</div>
+          <div class="xp">
+            <label>XP:</label> {{data.y | number: '0.0-0'}}</div>
         </div>
       </div>
     </div>

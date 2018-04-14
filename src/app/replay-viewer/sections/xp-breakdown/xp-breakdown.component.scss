@@ -1,65 +1,81 @@
 :host {
   display: block;
-  height:100%;
-
-  .mat-drawer-container{
+  height: 100%;
+  .mat-drawer-container {
     height: 100%;
+    background-color: transparent;
   }
-  .mat-sidenav-content{
+  .mat-sidenav-content {
     padding: 40px;
   }
-  .chart-tooltip{
+  .chart-tooltip {
     display: flex;
     flex-wrap: wrap;
     position: absolute;
-    width:200px;
+    width: 200px;
     pointer-events: none;
     z-index: 50;
     background-color: rgba($color: #000000, $alpha: 0.8);
     font-size: 13px;
-    .team-tip{
+    .team-tip {
       padding: 8px;
       margin: 4px;
       width: 92px;
-      border: 1px solid  rgba($color: #ffffff, $alpha: 0.6);
-      &.compare, &.time{
-        width:192px;
+      border: 1px solid rgba($color: #ffffff, $alpha: 0.6);
+      &.compare,
+      &.time {
+        width: 192px;
       }
-      &.team1{
+      &.team1 {
         $glowColor: lighten($color: blue, $amount: 30);
         border: 1px solid $glowColor;
-        .team{
-          
+        .team {
           color: $glowColor;
         }
       }
-      &.team2{
+      &.team2 {
         $glowColor: lighten($color: red, $amount: 30);
         border: 1px solid $glowColor;
-        .team{
+        .team {
           color: $glowColor;
         }
       }
     }
-    label{
+    label {
       color: rgba($color: #ffffff, $alpha: 0.6);
     }
-    .team{
+    .team {
       font-weight: 700;
       font-size: 16px;
     }
   }
-
-  .mat-sidenav{
-    .xp-type-filter{
+  .mat-sidenav {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    border-width: 1px;
+    border-style: solid;
+    border: none;
+    border-left: solid;
+    border-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(blueviolet, 0.4), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)) 200 100%;
+    padding: 40px;
+    >* {
+      margin-bottom: 20px;
+      &.mat-form-field {
+        margin-bottom: 0px;
+      }
+    }
+    .mat-select {
+      width: 200px;
+    }
+    .xp-type-filter {
       display: flex;
       flex-direction: column;
-      padding: 20px;
-      >*{
-        margin-left:10px;
+      >* {
+        margin-left: 10px;
       }
-      >.all{
-        margin-left:0px;
+      >.all {
+        margin-left: 0px;
       }
     }
   }

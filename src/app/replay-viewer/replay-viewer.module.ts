@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ReplayViewerComponent } from './replay-viewer.component';
 import { ReplayHeaderComponent } from './components/replay-header/replay-header.component';
 import { HeroIconComponent } from './components/hero-icon/hero-icon.component';
@@ -14,7 +15,10 @@ import {
   MatProgressBarModule,
   MatTableModule,
   MatSortModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatButtonModule,
+  MatSelectModule,
+  MatFormFieldModule
 } from '@angular/material';
 import { DraftComponent } from './sections/draft/draft.component';
 import { SectionNotSupportedComponent } from './components/section-not-supported/section-not-supported.component';
@@ -25,12 +29,16 @@ import { XpBreakdownComponent } from './sections/xp-breakdown/xp-breakdown.compo
   imports: [
     CommonModule,
     BrowserAnimationsModule,
+    FormsModule,
     MatSidenavModule,
     MatProgressBarModule,
     MatTableModule,
     MatSortModule,
     MatCheckboxModule,
-    ReplayViewerRoutingModule
+    MatButtonModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    ReplayViewerRoutingModule,
   ],
   exports: [
     ReplayViewerComponent
