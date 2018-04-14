@@ -73,6 +73,16 @@ export class XpBreakdownComponent extends AbstractSectionComponent implements Af
   private chartTooltip: ElementRef;
   public toolTipData: ITeamChartPoint[];
 
+  public xpTypesChecked = {
+    creepXP: true,
+    heroXP: true,
+    minionXP: true,
+    structureXP: true,
+    trickleXP: true
+  };
+
+  public xpTypesCheckedCount = 5;
+
   constructor(
     private replayViewer: ReplayViewerComponent,
     changeDetectorRef: ChangeDetectorRef,
@@ -211,12 +221,30 @@ export class XpBreakdownComponent extends AbstractSectionComponent implements Af
 
   private generateXPOverviewChartData() {
     const q = linq.from(this.xpData);
-    const converted = q.select(_ => (<ITeamChartPoint>{
-      team: _.team,
-      level: _.teamLevel,
-      x: _.time,
-      y: _.creepXP + _.heroXP + _.minionXP + _.structureXP + _.trickleXP
-    }));
+    const converted = q.select(_ => {
+      let xp = 0;
+      if (this.xpTypesChecked.creepXP) {
+        xp += _.creepXP;
+      }
+      if (this.xpTypesChecked.heroXP) {
+        xp += _.heroXP;
+      }
+      if (this.xpTypesChecked.minionXP) {
+        xp += _.minionXP;
+      }
+      if (this.xpTypesChecked.structureXP) {
+        xp += _.structureXP;
+      }
+      if (this.xpTypesChecked.trickleXP) {
+        xp += _.trickleXP;
+      }
+      return <ITeamChartPoint>{
+        team: _.team,
+        level: _.teamLevel,
+        x: _.time,
+        y: xp
+      };
+    });
 
     this.xpOverviewChartData = [
       converted.where(_ => _.team === 0).toArray(),
@@ -248,15 +276,42 @@ export class XpBreakdownComponent extends AbstractSectionComponent implements Af
       ]
     };
 
-    console.log('++++++++++', this.xpOverviewChart['scales']['y-axis-0']['max']);
-    this.xpOverviewChart.update();
-    console.log('++++++++++', this.xpOverviewChart['scales']['y-axis-0']['max']);
-    this.xpOverviewChart.config.options.scales.yAxes[1].ticks.max = this.xpOverviewChart['scales']['y-axis-0']['max'];
+    if (this.xpTypesCheckedCount === 5) {
+      this.xpOverviewChart.update();
+      this.xpOverviewChart.config.options.scales.yAxes[1].display = true;
+      this.xpOverviewChart.config.options.scales.yAxes[1].ticks.max = this.xpOverviewChart['scales']['y-axis-0']['max'];
+    } else {
+      this.xpOverviewChart.config.options.scales.yAxes[1].display = false;
+    }
     this.xpOverviewChart.update(1000);
   }
 
   public abs(a: number): number {
     return Math.abs(a);
+  }
+
+  public onXPTypeChange(type: string, event: MouseEvent) {
+    event.preventDefault();
+    const oCount = this.xpTypesCheckedCount;
+    if (type === 'all') {
+      this.xpTypesChecked.creepXP = true;
+      this.xpTypesChecked.heroXP = true;
+      this.xpTypesChecked.minionXP = true;
+      this.xpTypesChecked.structureXP = true;
+      this.xpTypesChecked.trickleXP = true;
+      this.xpTypesCheckedCount = 5;
+    } else {
+      const current = this.xpTypesChecked[type];
+      if (!(current && this.xpTypesCheckedCount === 1)) {
+        this.xpTypesChecked[type] = !current;
+        this.xpTypesCheckedCount += current ? -1 : 1;
+      }
+      console.log(this.xpTypesCheckedCount);
+    }
+    if (oCount !== this.xpTypesCheckedCount) {
+      this.generateXPOverviewChartData();
+      this.updateXPOverviewChartData();
+    }
   }
 
 }

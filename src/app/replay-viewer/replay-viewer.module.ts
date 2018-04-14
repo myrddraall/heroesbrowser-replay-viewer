@@ -13,7 +13,8 @@ import {
   MatSidenavModule,
   MatProgressBarModule,
   MatTableModule,
-  MatSortModule
+  MatSortModule,
+  MatCheckboxModule
 } from '@angular/material';
 import { DraftComponent } from './sections/draft/draft.component';
 import { SectionNotSupportedComponent } from './components/section-not-supported/section-not-supported.component';
@@ -28,6 +29,7 @@ import { XpBreakdownComponent } from './sections/xp-breakdown/xp-breakdown.compo
     MatProgressBarModule,
     MatTableModule,
     MatSortModule,
+    MatCheckboxModule,
     ReplayViewerRoutingModule
   ],
   exports: [

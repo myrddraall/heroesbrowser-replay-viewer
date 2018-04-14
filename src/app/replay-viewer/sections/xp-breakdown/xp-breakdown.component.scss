@@ -49,4 +49,18 @@
       font-size: 16px;
     }
   }
+
+  .mat-sidenav{
+    .xp-type-filter{
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      >*{
+        margin-left:10px;
+      }
+      >.all{
+        margin-left:0px;
+      }
+    }
+  }
 }
