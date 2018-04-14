@@ -9,18 +9,22 @@
     padding: 40px;
   }
   .chart-tooltip{
+    display: flex;
+    flex-wrap: wrap;
     position: absolute;
-    width: auto;
-    height: auto;
-    min-width: 100px;
-    min-height: 50px;
-    
+    width:200px;
+    pointer-events: none;
     z-index: 50;
     background-color: rgba($color: #000000, $alpha: 0.8);
     font-size: 13px;
     .team-tip{
-      padding: 4px;
+      padding: 8px;
       margin: 4px;
+      width: 92px;
+      border: 1px solid  rgba($color: #ffffff, $alpha: 0.6);
+      &.compare, &.time{
+        width:192px;
+      }
       &.team1{
         $glowColor: lighten($color: blue, $amount: 30);
         border: 1px solid $glowColor;

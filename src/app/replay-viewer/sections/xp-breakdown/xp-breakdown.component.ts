@@ -71,7 +71,7 @@ export class XpBreakdownComponent extends AbstractSectionComponent implements Af
   private xpOverviewChartData: Array<ITeamChartPoint[]>;
   @ViewChild('chartTooltip')
   private chartTooltip: ElementRef;
-  public toolTipData: ITeamChartPoint[] = [];
+  public toolTipData: ITeamChartPoint[];
 
   constructor(
     private replayViewer: ReplayViewerComponent,
@@ -131,19 +131,21 @@ export class XpBreakdownComponent extends AbstractSectionComponent implements Af
               this.renderer.setStyle(ttElement, 'display', 'none');
             } else {
               this.renderer.setStyle(ttElement, 'display', '');
-              this.renderer.setStyle(ttElement, 'top', tooltipModel.y + 'px');
+              this.renderer.setStyle(ttElement, 'top', (tooltipModel.y - 100) + 'px');
               this.renderer.setStyle(ttElement, 'left', tooltipModel.x + 'px');
               this.toolTipData = [];
               if (tooltipModel.dataPoints) {
-                for (let i = 0; i < tooltipModel.dataPoints.length; i++) {
-                  const element = tooltipModel.dataPoints[i];
-                  console.log('element', element);
-                  let data: ITeamChartPoint;
-                  if (element.index === 0) {
-                    data = { x: 0, y: 0, team: element.datasetIndex, level: 1 };
-                  } else {
-                    data = this.xpOverviewChartData[element.datasetIndex][element.index - 1];
-                  }
+                const element = tooltipModel.dataPoints[0];
+                let data: ITeamChartPoint;
+                if (element.index === 0) {
+                  data = { x: 0, y: 0, team: 0, level: 1 };
+                  this.toolTipData.push(data);
+                  data = { x: 0, y: 0, team: 1, level: 1 };
+                  this.toolTipData.push(data);
+                } else {
+                  data = this.xpOverviewChartData[0][element.index - 1];
+                  this.toolTipData.push(data);
+                  data = this.xpOverviewChartData[1][element.index - 1];
                   this.toolTipData.push(data);
                 }
                 console.log('this.toolTipData', this.toolTipData);
@@ -251,6 +253,10 @@ export class XpBreakdownComponent extends AbstractSectionComponent implements Af
     console.log('++++++++++', this.xpOverviewChart['scales']['y-axis-0']['max']);
     this.xpOverviewChart.config.options.scales.yAxes[1].ticks.max = this.xpOverviewChart['scales']['y-axis-0']['max'];
     this.xpOverviewChart.update(1000);
+  }
+
+  public abs(a: number): number {
+    return Math.abs(a);
   }
 
 }
