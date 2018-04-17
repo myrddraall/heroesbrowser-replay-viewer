@@ -30,6 +30,7 @@
     "chart.js": "^2.7.2",
     "chartjs-plugin-zoom": "^0.6.3",
     "core-js": "^2.4.1",
+    "heatmapjs": "^2.0.2",
     "linq": "^3.1.0",
     "moment": "^2.22.0",
     "rxjs": "^5.5.8",

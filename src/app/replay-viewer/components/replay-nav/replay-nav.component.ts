@@ -61,6 +61,15 @@ export class ReplayNavComponent implements OnChanges {
         };
         overview.children.push(xpBreakdown);
 
+        if (this.replayDescription.mapName === 'Cursed Hollow') {
+          const globeMap: IReplayNavItemLink = {
+            type: 'link',
+            label: 'Minion Deaths',
+            path: ['/minion-deaths']
+          };
+          overview.children.push(globeMap);
+        }
+
 
         this.navData.push(overview);
       } else {

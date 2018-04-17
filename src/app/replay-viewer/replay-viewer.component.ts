@@ -10,6 +10,8 @@ import {
   EventEmitter
 } from '@angular/core';
 
+import { Router } from '@angular/router';
+
 import { Replay, BasicReplayAnalyser, ReplayDescription } from '@heroesbrowser/heroprotocol';
 
 enum FileState {
@@ -44,7 +46,8 @@ export class ReplayViewerComponent implements OnInit {
   constructor(
     private renderer: Renderer2,
     private elmRef: ElementRef,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private router: Router
   ) { }
 
   public get fileState(): FileState {
@@ -123,6 +126,7 @@ export class ReplayViewerComponent implements OnInit {
       this.replay.dispose();
     }
     try {
+      await this.router.navigate(['/']);
       this.replay = new Replay(replayData);
       await this.replay.initialize();
 
@@ -148,9 +152,9 @@ export class ReplayViewerComponent implements OnInit {
     // console.log('initData', await this.replay.initData);
     // console.log('details', await this.replay.details);
     // console.log('attributeEvents', await this.replay.attributeEvents);
-    // console.log('messageEvents', await this.replay.messageEvents);
+    console.log('messageEvents', await this.replay.messageEvents);
     console.log('trackerEvents', await this.replay.trackerEvents);
-    // console.log('gameEvents', await this.replay.gameEvents);
+    console.log('gameEvents', await this.replay.gameEvents);
   }
 
 }

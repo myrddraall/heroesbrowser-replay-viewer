@@ -24,7 +24,8 @@ import { DraftComponent } from './sections/draft/draft.component';
 import { SectionNotSupportedComponent } from './components/section-not-supported/section-not-supported.component';
 import { SectionLoadingComponent } from './components/section-loading/section-loading.component';
 import { XpBreakdownComponent } from './sections/xp-breakdown/xp-breakdown.component';
-
+import { GlobeMapComponent } from './sections/globe-map/globe-map.component';
+import { MapsModule } from './maps/maps.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -38,6 +39,7 @@ import { XpBreakdownComponent } from './sections/xp-breakdown/xp-breakdown.compo
     MatButtonModule,
     MatSelectModule,
     MatFormFieldModule,
+    MapsModule,
     ReplayViewerRoutingModule,
   ],
   exports: [
@@ -53,7 +55,8 @@ import { XpBreakdownComponent } from './sections/xp-breakdown/xp-breakdown.compo
     DraftComponent,
     SectionNotSupportedComponent,
     SectionLoadingComponent,
-    XpBreakdownComponent
+    XpBreakdownComponent,
+    GlobeMapComponent
   ],
   providers: [ClipIconService],
   entryComponents: [
