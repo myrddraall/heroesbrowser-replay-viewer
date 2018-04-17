@@ -19,7 +19,7 @@ import { MapRegion } from '../../../../types';
 export class CursedHollowBG0Component extends BattlegroundMapBGBase {
 
     constructor() {
-        super('/assets/maps/cursedhollow.jpg');
+        super('assets/maps/cursedhollow.jpg');
     }
 
     public get mapRegions(): MapRegion[] {
