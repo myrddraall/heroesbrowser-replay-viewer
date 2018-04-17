@@ -7,12 +7,12 @@
 $custom-typography: mat-typography-config( $font-family: '"Exo 2", monospace');
 @include angular-material-typography($custom-typography);
 $dark-primary: mat-palette($mat-blue-grey);
-$dark-accent : mat-palette($mat-amber,
+$dark-accent: mat-palette($mat-amber,
 A200,
 A100,
 A400);
-$dark-warn : mat-palette($mat-deep-orange);
-$dark-theme : mat-dark-theme($dark-primary,
+$dark-warn: mat-palette($mat-deep-orange);
+$dark-theme: mat-dark-theme($dark-primary,
 $dark-accent,
 $dark-warn);
 @include angular-material-theme($dark-theme);
@@ -35,3 +35,6 @@ body {
   overflow-y: hidden;
 }
 
+[hidden] {
+  display: none !important;
+}

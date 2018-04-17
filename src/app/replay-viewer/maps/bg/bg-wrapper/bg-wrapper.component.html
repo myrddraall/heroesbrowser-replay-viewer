@@ -1,4 +1,8 @@
-<img *ngIf="showImage" class="background-image" [attr.src]="backgroundImage" />
+<ng-container *ngIf="showImage">
+  <div class="background-image-container" *ngFor="let region of regions; let i = index" [attr.region]="i">
+    <img class="background-image" [attr.src]="backgroundImage" />
+  </div>
+</ng-container>
 <ng-container *ngIf="showMinimap">
   <ng-content></ng-content>
 </ng-container>

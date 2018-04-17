@@ -1,9 +1,9 @@
-<mat-sidenav-container>
+<mat-sidenav-container [hidden]="hasError">
   <mat-sidenav mode="side" opened="true" position="end">
     <button (click)="cycleViewMode()">{{MapViewMode[viewMode]}}</button>
   </mat-sidenav>
   <mat-sidenav-content>
-    <map-viewer [replay]="replay" [viewMode]="viewMode" [heatmap]="heatmap"></map-viewer>
+    <map-viewer [replay]="replay" [viewMode]="viewMode" [heatmap]="heatmap" (error)="onMapviewError($event)"></map-viewer>
   </mat-sidenav-content>
 </mat-sidenav-container>
 <div #statusRef></div>

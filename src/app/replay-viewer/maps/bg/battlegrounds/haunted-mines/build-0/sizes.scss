@@ -1,0 +1,41 @@
+:host {
+  ::ng-deep{
+    .background-image-container[region="0"]{
+      top:-5%;
+      height: 50%;
+      left: -5%;
+      width:110%;
+      .background-image{
+        top:-10%;
+        height: 221%;
+        left: 0.8%;
+        width:91%;
+      }
+    }
+    .background-image-container[region="1"]{
+      top:45%;
+      height: 50%;
+      left: -5%;
+      width:110%;
+      .background-image{
+        top:-92%;
+        height: 180%;
+        left: 13.8%;
+        width:77%;
+      }
+    }
+  }
+ /* ::ng-deep .background-image {
+    top: -9%;
+    left: -3.6%;
+    width: 99%;
+    height: 107.2%;
+  }*/
+  .minimap {
+    opacity: 0.3;
+    top: 0.8%;
+    height: 90.1%;
+    left: 2.2%;
+    width: 88.5%;
+  }
+}

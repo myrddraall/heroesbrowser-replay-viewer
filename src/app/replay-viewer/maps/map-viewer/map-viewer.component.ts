@@ -11,10 +11,12 @@ import {
   SimpleChanges,
   ChangeDetectorRef,
   ElementRef,
-  Renderer2
+  Renderer2,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { snakeCase } from 'change-case';
-import { Replay, ReplayMapAnalyser, IMapDescriptor, IRect, IPoint } from '@heroesbrowser/heroprotocol';
+import { Replay, ReplayMapAnalyser, IMapDescriptor, IRect, IPoint, MapNotSupportedError } from '@heroesbrowser/heroprotocol';
 
 import { MapRegion, MapCoordinateMapper, MapDebugData, MapViewMode } from '../types';
 import { BattlegroundMapBGBase } from '../bg/bg-base/BattlegroundMapBGBase';
@@ -35,6 +37,9 @@ export class MapViewerComponent implements AfterViewInit, OnChanges {
   public regions: MapRegion[] = [];
   public regionHeatMaps: string[] = [];
   public showDebug = false;
+
+  @Output()
+  public error: EventEmitter<Error> = new EventEmitter();
 
   @Input()
   public replay: Replay;
@@ -99,7 +104,7 @@ export class MapViewerComponent implements AfterViewInit, OnChanges {
       .where(_ => _.id === mapId && build >= _.minBuild)
       .orderByDescending(_ => _.minBuild)
       .firstOrDefault();
-    return mapVersion.component;
+    return mapVersion ? mapVersion.component : undefined;
   }
 
   private async createMapComponent() {
@@ -120,11 +125,17 @@ export class MapViewerComponent implements AfterViewInit, OnChanges {
   }
 
   private showMapNotSupportedError(mapName: string) {
-
+    this.error.next(new MapNotSupportedError(`${this.mapDescriptor.name} is not supported... Yet`));
   }
 
   public updateDebugRegion(index: number, prop: string, value: number) {
-    // this._mapRegionRects[index][prop] = value;
+    if (prop === 'ox') {
+      this.regions[index].offset.x = +value;
+    } else if (prop === 'oy') {
+      this.regions[index].offset.y = +value;
+    } else {
+      this.regions[index].cropArea[prop] = +value;
+    }
     this.render();
   }
 
@@ -173,14 +184,26 @@ export class MapViewerComponent implements AfterViewInit, OnChanges {
     const regions = this.regions = this.mapComponent.instance.mapRegions;
     const locations = await this.replayMapAnalyser.getMajorLocations();
 
+    const debugPoints = await this.replayMapAnalyser.getMercSpawns();
+
+    this.regions[0].mapSize = mapDesc.size;
+    this.debugData.mapDescriptor = this.mapDescriptor;
+    this.debugData.displayRegions = [];
+    this.debugData.points = new MapCoordinateMapper(debugPoints, this.regions[0].mapRect).flip(false, true).toArray();
+
     for (let i = 0; i < regions.length; i++) {
       const region = regions[i];
+
+      this.debugData.displayRegions[i] = region.cropArea;
+
       region.clear();
       region.mapSize = mapDesc.size;
       region.cores = locations.cores;
       region.towers = locations.towers;
       region.towns = locations.towns;
       region.wells = locations.wells;
+
+      region.addPointSet(debugPoints);
 
       region.calculatePositions();
     }

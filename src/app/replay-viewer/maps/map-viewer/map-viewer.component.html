@@ -4,19 +4,24 @@
       [attr.height]="region.height" style="stroke:rgb(0, 255, 0);stroke-width:0.25; fill:transparent" />
     <circle *ngFor="let point of debugData.points" [attr.cx]="point.x" [attr.cy]="point.y" r="0.5" fill="red"></circle>
   </svg>
-  <div class="region-override" *ngFor="let region of region; let i = index">
-    x:
-    <input type="number" #x [value]="region.cropArea.x" (keyup)="updateDebugRegion(i, 'x', x.value)" (click)="updateDebugRegion(i, 'x', x.value)"
-    /> 
-    width:
-    <input type="number" #w [value]="region.cropArea.width" (keyup)="updateDebugRegion(i, 'width', w.value)" (click)="updateDebugRegion(i, 'width', w.value)"
-    /> 
-    y:
-    <input type="number" #y [value]="region.cropArea.y" (keyup)="updateDebugRegion(i, 'y', y.value)" (click)="updateDebugRegion(i, 'y', y.value)"
-    /> 
-    height:
-    <input type="number" #h [value]="region.cropArea.height" (keyup)="updateDebugRegion(i, 'height', h.value)" (click)="updateDebugRegion(i, 'height', h.value)"
-    />
+  <div style="position:fixed; z-index:1000; top: 1vh;">
+    <div class="region-override" *ngFor="let region of regions; let i = index">
+      x:
+      <input type="number" #x [value]="region.cropArea.x" (keyup)="updateDebugRegion(i, 'x', x.value)" (click)="updateDebugRegion(i, 'x', x.value)"
+      /> width:
+      <input type="number" #w [value]="region.cropArea.width" (keyup)="updateDebugRegion(i, 'width', w.value)" (click)="updateDebugRegion(i, 'width', w.value)"
+      /> y:
+      <input type="number" #y [value]="region.cropArea.y" (keyup)="updateDebugRegion(i, 'y', y.value)" (click)="updateDebugRegion(i, 'y', y.value)"
+      /> height:
+      <input type="number" #h [value]="region.cropArea.height" (keyup)="updateDebugRegion(i, 'height', h.value)" (click)="updateDebugRegion(i, 'height', h.value)"
+      />
+      ox:
+      <input type="number" #ox [value]="region.offset.x" (keyup)="updateDebugRegion(i, 'ox', ox.value)" (click)="updateDebugRegion(i, 'ox', ox.value)"
+      />
+      oy:
+      <input type="number" #oy [value]="region.offset.y" (keyup)="updateDebugRegion(i, 'oy', oy.value)" (click)="updateDebugRegion(i, 'oy', oy.value)"
+      />
+    </div>
   </div>
 </div>
 <svg style="display: none;">
@@ -34,8 +39,7 @@
     <g>
       <path d="m 5.655945,0.8319 c -2.66994,0 -4.82508,2.1552 -4.82508,4.8251 0,2.67 2.15514,4.8251 4.82508,4.8251 2.66995,0 4.82509,-2.1551 4.82509,-4.8251 0,-2.6699 -2.15514,-4.8251 -4.82509,-4.8251 z"
         style="fill-opacity:1;stroke:#000000;stroke-width:0;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-        fill="currentColor"
-        class="bg" />
+        fill="currentColor" class="bg" />
       <path d="m 6.662935,8.6776 0,-6.0421 -2.01402,0 0,6.0421 z m 2.01401,-4.0281 -6.04205,0 0,2.014 6.04205,0 z M 5.655935,0 c 3.11905,0 5.65594,2.5369 5.65594,5.656 0,3.119 -2.53689,5.658 -5.65594,5.658 C 2.536895,11.314 5e-6,8.775 5e-6,5.656 5e-6,2.5369 2.536895,0 5.655935,0 Z m 0,0.8309 c -2.66994,0 -4.82508,2.1551 -4.82508,4.8251 0,2.6699 2.15514,4.8251 4.82508,4.8251 2.66995,0 4.82509,-2.1552 4.82509,-4.8251 0,-2.67 -2.15514,-4.8251 -4.82509,-4.8251 z"
         style="fill-opacity:1;stroke:#000000;stroke-width:0;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
         class="outline" />
@@ -46,9 +50,9 @@
       <path d="M 6,17 0,17 0.0354,15.75 C 0.0549,15.0625 0.71394,13.375 1.49996,12 L 2.92909,9.5 2.96449,7.25 2.99989,5 l -1,0 -1,0 0,-2.5 0,-2.5 5,0 5,0 0,2.5 0,2.5 -1,0 -1,0 0.0354,2.25 0.0354,2.25 1.42913,2.5 c 0.78602,1.375 1.44507,3.0625 1.46456,3.75 l 0.0354,1.25 -6,0 z"
         style="fill:#000000" class="outline" />
       <path d="M 6,16 11.05136,16 9.52568,13.0497 8,10.0993 8,7.5497 8,5 6,5 4,5 4,7.5497 4,10.0993 2.47432,13.0497 0.94864,16 6,16 Z"
-      fill="currentColor" class="bg" />
+        fill="currentColor" class="bg" />
       <path d="M 6,4 10,4 9.9847,2.25 9.9694,0.5 8.98472,2 8.00003,3.5 l -1,-1.5 -1,-1.5 -1,1.5 -1,1.5 L 3.01534,2 2.03066,0.5 2.01536,2.25 2.00006,4 l 4,0 z"
-      fill="currentColor" class="bg" />
+        fill="currentColor" class="bg" />
     </g>
   </symbol>
   <symbol id="map-town-symbol" viewBox="0 0 21.508931 27.999989">
@@ -56,12 +60,12 @@
       <path d="M 0.46056,26.75 0,25.5 2.91329,22.4152 5.82659,19.3304 6.43167,15.6018 7.03674,11.8731 4.8956,8.9771 2.75446,6.081 l 0,-2.4335 0,-2.4335 L 4.29285,0.6237 5.83123,0.0333 6.65132,2.2503 7.47142,4.4672 8.18033,2.2336 8.88923,0 l 1.86523,0 1.86523,0 0.7089,2.2336 0.70891,2.2336 0.8201,-2.2169 0.82009,-2.217 1.53838,0.5904 1.53839,0.5903 0,2.4335 0,2.4335 -2.14114,2.8961 -2.14114,2.896 0.60507,3.7287 0.60508,3.7286 2.9133,3.0848 2.9133,3.0848 -0.46057,1.25 -0.46057,1.25 -9.83333,0 -9.83333,0 -0.46057,-1.25 z"
         style="fill:#000000" class="outline" />
       <path d="m 20.0111,25.5 -0.24336,-1 -8.17305,-0.2931 C 7.09951,24.0457 2.793,24.1549 2.02467,24.4498 L 0.6277,24.9859 1.27262,26.0294 1.91754,27.0729 11.086,26.7865 20.25446,26.5 20.0111,25.5 Z"
-      fill="currentColor" class="bg" />
+        fill="currentColor" class="bg" />
       <path d="m 17.25446,22 -0.61803,-1 -5.88197,0 -5.88197,0 -0.61803,1 -0.61803,1 7.11803,0 7.11803,0 -0.61803,-1 z" fill="currentColor"
         class="bg" />
       <path d="m 14.25446,14.5 0,-5.5 -3.5,0 -3.5,0 0,5.5 0,5.5 3.5,0 3.5,0 0,-5.5 z" fill="currentColor" class="bg" />
       <path d="M 17.58912,5.1347 17.92379,2.7694 16.83912,1.6847 15.75446,0.6 l 0,2.2 0,2.2 L 14.37109,5 12.98772,5 12.46471,3 11.9417,1 10.75446,1 9.56722,1 9.04421,3 8.5212,5 7.13783,5 5.75446,5 l 0,-2.059 0,-2.059 -1,0.618 -1,0.6181 0,2.2743 c 0,1.2509 0.31903,2.5933 0.70896,2.9833 L 5.17238,8.0846 11.21342,7.7923 17.25446,7.5 17.58912,5.1347 Z"
-      fill="currentColor" class="bg" />
+        fill="currentColor" class="bg" />
     </g>
   </symbol>
 </svg>
@@ -72,25 +76,25 @@
   <div class="region-container" *ngFor="let region of regions; let i = index">
     <svg class="map-area" [attr.viewBox]="region.viewBox"></svg>
     <svg class="map-vector-icons" [attr.viewBox]="region.viewBox">
-      <circle *ngFor="let point of region.pointPositions" [attr.cx]="point.x" [attr.cy]="point.y" r="0.5" fill="red"></circle>
+      <circle *ngFor="let point of region.pointPositions" [attr.cx]="point.x" [attr.cy]="point.y" r="0.5" fill="lime"></circle>
       <g *ngFor="let core of region.corePositions" class="map-symbol core" [class.team1]="core.team === 0" [class.team2]="core.team === 1"
-        [attr.transform]="'translate(' + core.x + ' ' + core.y + ') scale(0.06) translate(-110 -100)'">
+        [attr.transform]="'translate(' + core.x + ' ' + core.y + ') scale(0.06) translate(-110 ' + (region.cropArea.height / -2) +')'">
         <use href="#map-core-symbol"></use>
       </g>
       <g *ngFor="let well of region.wellPositions" class="map-symbol well" [class.team1]="well.team === 0" [class.team2]="well.team === 1"
-        [attr.transform]="'translate(' + well.x + ' ' + well.y + ') scale(0.02) translate(-110 -100)'">
+        [attr.transform]="'translate(' + well.x + ' ' + well.y + ') scale(0.02) translate(-110 ' + (region.cropArea.height / -2) +')'">
         <use href="#map-moon-well-symbol"></use>
       </g>
       <g *ngFor="let tower of region.towerPositions" class="map-symbol tower" [class.team1]="tower.team === 0" [class.team2]="tower.team === 1"
-        [attr.transform]="'translate(' + tower.x + ' ' + tower.y + ') scale(0.025) translate(-110 -100)'">
+        [attr.transform]="'translate(' + tower.x + ' ' + tower.y + ') scale(0.025) translate(-110 ' + (region.cropArea.height / -2) +')'">
         <use href="#map-tower-symbol"></use>
       </g>
       <g *ngFor="let town of region.townPositions" class="map-symbol town" [class.team1]="town.team === 0" [class.team2]="town.team === 1"
-        [attr.transform]="'translate(' + town.x + ' ' + town.y + ') scale(0.045) translate(-110 -100)'">
+        [attr.transform]="'translate(' + town.x + ' ' + town.y + ') scale(0.045) translate(-110 ' + (region.cropArea.height / -2) +')'">
         <use href="#map-town-symbol"></use>
       </g>
     </svg>
-    <img class="heatmap" [attr.src]="regionHeatMaps[i]"/>
+    <img class="heatmap" [attr.src]="regionHeatMaps[i]" *ngIf="regionHeatMaps[i]" />
   </div>
 </div>
 <div #heatmapRender class="heatmap-render"></div>

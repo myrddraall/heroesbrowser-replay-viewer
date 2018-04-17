@@ -1,5 +1,5 @@
 import { Component, Input, HostBinding } from '@angular/core';
-import { MapViewMode } from '../../types';
+import { MapViewMode, MapRegion } from '../../types';
 
 @Component({
   selector: 'bg-wrapper',
@@ -10,6 +10,10 @@ export class BgWrapperComponent {
 
   @Input()
   public backgroundImage: string;
+
+  @Input()
+  public regions: MapRegion[];
+
 
   @Input()
   public viewMode: MapViewMode = MapViewMode.MINIMAP;

@@ -31,7 +31,7 @@ export class MapRegion {
     public towers: IPoint[];
     public cores: IPoint[];
 
-    private get mapRect() {
+    public get mapRect() {
         if (this.mapSize) {
             return { x: 0, y: 0, width: this.mapSize.x, height: this.mapSize.y };
         }

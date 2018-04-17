@@ -7,7 +7,7 @@ import { MapRegion } from '../../../../types';
 @Component({
     selector: 'cursed-hollow-bg-0',
     template:
-        `<bg-wrapper [backgroundImage]="backgroundImage" [viewMode]="viewMode">
+        `<bg-wrapper [backgroundImage]="backgroundImage" [viewMode]="viewMode"  [regions]="mapRegions">
   ${minimap}
 </bg-wrapper>
 `,

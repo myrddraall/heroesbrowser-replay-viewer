@@ -28,6 +28,7 @@ export class GlobeMapComponent extends AbstractSectionComponent implements After
   public MapViewMode = MapViewMode;
   public viewMode = MapViewMode.MINIMAP;
   public heatmap: IPoint[];
+  public hasError = false;
 
   constructor(
     private replayViewer: ReplayViewerComponent,
@@ -47,6 +48,7 @@ export class GlobeMapComponent extends AbstractSectionComponent implements After
 
   private async replayLoaded() {
     try {
+      this.hasError = false;
       this.clearNotSupported();
       this.setLoadingMessage('Loading Data');
       this.replay = this.replayViewer.replay;
@@ -55,6 +57,7 @@ export class GlobeMapComponent extends AbstractSectionComponent implements After
       this.changeDetectorRef.markForCheck();
     } catch (e) {
       if (e.name === 'ReplayVersionOutOfRangeError') {
+        this.hasError = true;
         this.setNotSupportedMessage(e.message);
         return;
       }
@@ -70,6 +73,11 @@ export class GlobeMapComponent extends AbstractSectionComponent implements After
       this.viewMode = 0;
     }
     this.changeDetectorRef.markForCheck();
+  }
+
+  public onMapviewError(err: Error) {
+    this.hasError = true;
+    this.setNotSupportedMessage(err.message);
   }
 
 }
