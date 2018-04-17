@@ -38,7 +38,10 @@ export class ReplayHeaderComponent implements OnInit {
   }
 
   public cleanName(name: string): string {
-    return name.replace(/[^\w\d]/g, '');
+    if (name) {
+      return name.replace(/[^\w\d]/g, '');
+    }
+    return undefined;
   }
 
 
