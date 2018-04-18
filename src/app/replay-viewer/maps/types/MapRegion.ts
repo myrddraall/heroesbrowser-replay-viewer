@@ -1,4 +1,4 @@
-import { IPoint, IRect } from '@heroesbrowser/heroprotocol';
+import { IPoint, IRect, IMapPOI } from '@heroesbrowser/heroprotocol';
 import { MapCoordinateMapper } from './MapCoordinateMapper';
 
 export interface ITeamPoint extends IPoint {
@@ -23,6 +23,8 @@ export class MapRegion {
     private _calulatedTowns: IPoint[];
     private _calulatedTowers: IPoint[];
     private _calulatedCores: IPoint[];
+    private _calculatedPOIs: IMapPOI[];
+
     private _points: IPoint[][];
 
     public mapSize: IPoint;
@@ -30,6 +32,7 @@ export class MapRegion {
     public towns: IPoint[];
     public towers: IPoint[];
     public cores: IPoint[];
+    public pointsOfInterest: IMapPOI[];
 
     public get mapRect() {
         if (this.mapSize) {
@@ -47,6 +50,7 @@ export class MapRegion {
         this.towns = null;
         this.towers = null;
         this.cores = null;
+        this.pointsOfInterest = null;
         this._points = [];
 
         this._calulatedPoints = [];
@@ -54,6 +58,7 @@ export class MapRegion {
         this._calulatedTowns = [];
         this._calulatedTowers = [];
         this._calulatedCores = [];
+        this._calculatedPOIs = [];
     }
 
     public get viewBox(): string {
@@ -81,6 +86,7 @@ export class MapRegion {
         this._calulatedTowers = this.calculate(this.towers);
         this._calulatedTowns = this.calculate(this.towns);
         this._calulatedWells = this.calculate(this.wells);
+        this._calculatedPOIs = this.calculate(this.pointsOfInterest);
         this._calulatedPoints = [];
         for (let i = 0; i < this._points.length; i++) {
             const cPointSet = this.calculate(this._points[i]);
@@ -88,7 +94,7 @@ export class MapRegion {
         }
     }
 
-    public calculate(source: IPoint[], scale: number = 1) {
+    public calculate<T extends IPoint>(source: T[], scale: number = 1): T[] {
         if (source) {
             const mapper = new MapCoordinateMapper(source, this.mapRect);
             let mapped = mapper
@@ -121,5 +127,9 @@ export class MapRegion {
 
     public get townPositions(): IPoint[] {
         return this._calulatedTowns;
+    }
+
+    public get poiPositions(): IMapPOI[] {
+        return this._calculatedPOIs;
     }
 }

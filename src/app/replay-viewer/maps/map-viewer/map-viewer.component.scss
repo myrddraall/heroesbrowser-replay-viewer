@@ -21,8 +21,24 @@
       svg {
         width: 100%;
         height: auto;
+        .poi{
+          
+          &.team1 {
+            color: lighten(blue, 10);
+          }
+          &.team2 {
+            color: lighten(red, 10);
+          }
+          &.team3 {
+            color: lighten(yellow, 10);
+          }
+          &.team4 {
+            color: lighten(aqua, 5);
+          }
+        }
       }
     }
+    
     .map-symbol {
       opacity: 0.4;
       &.team1 {

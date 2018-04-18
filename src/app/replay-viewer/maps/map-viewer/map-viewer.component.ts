@@ -16,13 +16,14 @@ import {
   EventEmitter
 } from '@angular/core';
 import { snakeCase } from 'change-case';
-import { Replay, ReplayMapAnalyser, IMapDescriptor, IRect, IPoint, MapNotSupportedError } from '@heroesbrowser/heroprotocol';
+import { Replay, ReplayMapAnalyser, IMapDescriptor, IRect, IPoint, MapNotSupportedError, IMapPOI } from '@heroesbrowser/heroprotocol';
 
 import { MapRegion, MapCoordinateMapper, MapDebugData, MapViewMode } from '../types';
 import { BattlegroundMapBGBase } from '../bg/bg-base/BattlegroundMapBGBase';
 import { MapBackgroundComponentMap } from '../bg';
 import * as heatmap from 'heatmapjs';
 import * as linq from 'linq';
+import { MapPOIIcons } from './MapPOIIcons';
 
 @Component({
   selector: 'map-viewer',
@@ -37,6 +38,8 @@ export class MapViewerComponent implements AfterViewInit, OnChanges {
   public regions: MapRegion[] = [];
   public regionHeatMaps: string[] = [];
   public showDebug = false;
+
+  public mapPOIIcons = MapPOIIcons;
 
   @Output()
   public error: EventEmitter<Error> = new EventEmitter();
@@ -154,35 +157,39 @@ export class MapViewerComponent implements AfterViewInit, OnChanges {
     const scaleFactor = 10;
     const region = this.regions[index];
     const heatmapRegionPoints = region.calculate(this.heatmap, scaleFactor);
+     if (heatmapRegionPoints.length) {
+      this.renderer.setStyle(this.heatmapRenderTarget.nativeElement, 'width', (region.cropArea.width * scaleFactor) + 'px');
+      this.renderer.setStyle(this.heatmapRenderTarget.nativeElement, 'height', (region.cropArea.height * scaleFactor) + 'px');
 
-    this.renderer.setStyle(this.heatmapRenderTarget.nativeElement, 'width', (region.cropArea.width * scaleFactor) + 'px');
-    this.renderer.setStyle(this.heatmapRenderTarget.nativeElement, 'height', (region.cropArea.height * scaleFactor) + 'px');
+      const inst = heatmap.create({
+        container: this.heatmapRenderTarget.nativeElement,
+        radius: 25,
+        // blur: .999
+      });
 
-    const inst = heatmap.create({
-      container: this.heatmapRenderTarget.nativeElement,
-      radius: 25,
-      // blur: .999
-    });
+      const min = linq.from(heatmapRegionPoints).min(_ => _['value']);
+      const max = linq.from(heatmapRegionPoints).max(_ => _['value']);
 
-    const min = linq.from(heatmapRegionPoints).min(_ => _['value']);
-    const max = linq.from(heatmapRegionPoints).max(_ => _['value']);
+      inst.setData({
+        min,
+        max,
+        data: heatmapRegionPoints
+      });
 
-    inst.setData({
-      min,
-      max,
-      data: heatmapRegionPoints
-    });
-
-    const container: HTMLElement = this.heatmapRenderTarget.nativeElement;
-    const canvas = <HTMLCanvasElement>container.querySelector('.heatmap-canvas');
-    this.regionHeatMaps[index] = canvas.toDataURL();
-    canvas.remove();
+      const container: HTMLElement = this.heatmapRenderTarget.nativeElement;
+      const canvas = <HTMLCanvasElement>container.querySelector('.heatmap-canvas');
+      this.regionHeatMaps[index] = canvas.toDataURL();
+      canvas.remove();
+    }
   }
 
   public async render() {
     const mapDesc = this.mapDescriptor;
     const regions = this.regions = this.mapComponent.instance.mapRegions;
     const locations = await this.replayMapAnalyser.getMajorLocations();
+
+    const poi = await this.replayMapAnalyser.getPointsOfInterest();
+    console.log('POI', poi);
 
     const debugPoints = await this.replayMapAnalyser.getMercSpawns();
 
@@ -202,6 +209,7 @@ export class MapViewerComponent implements AfterViewInit, OnChanges {
       region.towers = locations.towers;
       region.towns = locations.towns;
       region.wells = locations.wells;
+      region.pointsOfInterest = poi;
 
       region.addPointSet(debugPoints);
 
@@ -244,5 +252,9 @@ export class MapViewerComponent implements AfterViewInit, OnChanges {
       this.showDebug = !this.showDebug;
       this.changeDetectorRef.markForCheck();
     }
+  }
+
+  public poiIcon(poi: IMapPOI) {
+    return MapPOIIcons[poi.type] || MapPOIIcons.UNKNOWN;
   }
 }
