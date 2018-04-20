@@ -21,8 +21,7 @@
       svg {
         width: 100%;
         height: auto;
-        .poi{
-          
+        .poi {
           &.team1 {
             color: lighten(blue, 10);
           }
@@ -38,7 +37,6 @@
         }
       }
     }
-    
     .map-symbol {
       opacity: 0.4;
       &.team1 {
@@ -50,24 +48,27 @@
     }
   }
 }
-.map-vector-icons{
+
+.map-vector-icons {
   position: absolute;
-  top:0px;
-  left:0px;
-  z-index:9;
+  top: 0px;
+  left: 0px;
+  z-index: 9;
 }
-.heatmap{
+
+.heatmap {
   position: absolute;
   pointer-events: none;
-  top:0px;
-  left:0px;
-  z-index:10;
-  width:100%;
-  height:100%;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
 }
-.heatmap-render{
+
+.heatmap-render {
   background-color: white;
-   display: none;
+  display: none;
 }
 
 .debug {
@@ -75,5 +76,11 @@
     width: 30%;
     height: auto;
     border: 1px solid red;
+  }
+}
+
+.debug-mode {
+  .poi {
+    opacity: 0.25;
   }
 }

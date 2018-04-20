@@ -9,12 +9,11 @@
   }
   ::ng-deep {
     //// default minimap colors 
-    .outline {
-      stroke: #261931; //rgb(179, 149, 190);
-      fill: transparent;
+    .border {
+      fill: #5f4471;
     }
     .bg {
-      stroke: #5f4471;
+      stroke: #261931;
       fill: #261931;
     }
     .terrain {
@@ -26,7 +25,7 @@
       stroke: black;
     } //// high contrast minimap colors 
     :host-context(.high-contrast) {
-      .outline {
+      .border {
         stroke: transparent; //rgb(179, 149, 190);
         fill: transparent;
       }

@@ -134,7 +134,7 @@
 
 
 </svg>
-<div class="map-container" (click)="containerClicked($event)">
+<div class="map-container" (click)="containerClicked($event)" [class.debug-mode]="showDebug">
   <div class="map-bg">
     <div #mapContainerRef style="display: none;"></div>
   </div>
