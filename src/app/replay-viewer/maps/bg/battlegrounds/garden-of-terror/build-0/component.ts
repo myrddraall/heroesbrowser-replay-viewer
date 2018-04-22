@@ -19,7 +19,7 @@ import { MapRegion } from '../../../../types';
 export class GardenOfTerrorBG0Component extends BattlegroundMapBGBase {
 
     constructor() {
-        super('assets/maps/garden-of-terror-v1.png');
+        super('assets/maps/garden-of-terror-v1.jpg');
     }
 
     public get mapRegions(): MapRegion[] {
