@@ -6,6 +6,11 @@
   }
   .mat-sidenav-content {
     padding: 40px;
+    display: flex;
+    justify-content: center;
+    map-viewer{
+      flex-grow: 1;
+    }
   }
   .mat-sidenav {
     display: flex;

@@ -19,6 +19,10 @@
     .terrain {
       fill: #5f4471;
       stroke: black;
+      &.special{
+        fill: #5f447134;
+        stroke: rgba(0, 0, 0, 0.25);
+      }
     }
     .nexus {
       fill: #5f4471;

@@ -1,0 +1,23 @@
+:host {
+  ::ng-deep {
+    .background-image-container[region="0"] {
+      top: -5%;
+      height: 100%;
+      left: -5%;
+      width: 100%;
+      .background-image {
+        top: -9.4%;
+        height: 113.6%;
+        left: -1.2%;
+        width: 101%;
+      }
+    }
+  }
+
+  .minimap {
+    top: 0.6%;
+    height: 90.8%;
+    left: -0.6%;
+    width: 90%;
+  }
+}
