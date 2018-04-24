@@ -26,6 +26,7 @@
     "@angular/platform-browser-dynamic": "5.2.9",
     "@angular/router": "5.2.9",
     "@heroesbrowser/heroprotocol": "^0.1.2",
+    "angulartics2": "^5.3.0",
     "change-case": "^3.0.2",
     "chart.js": "^2.7.2",
     "chartjs-plugin-zoom": "^0.6.3",

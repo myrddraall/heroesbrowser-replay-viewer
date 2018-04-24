@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
+
+  constructor(angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics) {}
 }
