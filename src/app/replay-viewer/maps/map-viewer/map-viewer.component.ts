@@ -13,17 +13,41 @@ import {
   ElementRef,
   Renderer2,
   Output,
-  EventEmitter
+  EventEmitter,
+  HostListener
 } from '@angular/core';
 import { snakeCase } from 'change-case';
 import { Replay, ReplayMapAnalyser, IMapDescriptor, IRect, IPoint, MapNotSupportedError, IMapPOI } from '@heroesbrowser/heroprotocol';
 
-import { MapRegion, MapCoordinateMapper, MapDebugData, MapViewMode } from '../types';
+import { MapRegion, MapCoordinateMapper, MapDebugData, MapViewMode, MapIconCategory } from '../types';
 import { BattlegroundMapBGBase } from '../bg/bg-base/BattlegroundMapBGBase';
 import { MapBackgroundComponentMap } from '../bg';
 import * as heatmap from 'heatmapjs';
 import * as linq from 'linq';
 import { MapPOIIcons } from './MapPOIIcons';
+
+import * as panzoom from 'panzoom';
+
+class Bounding {
+  constructor(private elm: HTMLElement) {
+
+  }
+
+  get top(): number {
+    return this.elm.offsetHeight + 125;
+  }
+  get bottom(): number {
+    return -this.elm.offsetHeight;
+  }
+
+  get left(): number {
+    return this.elm.offsetWidth + 125;
+  }
+  get right(): number {
+    return this.elm.offsetHeight + 125;
+  }
+
+}
 
 @Component({
   selector: 'map-viewer',
@@ -51,6 +75,9 @@ export class MapViewerComponent implements AfterViewInit, OnChanges {
   public heatmap: IPoint[];
 
   @Input()
+  public iconVisibility: MapIconCategory[];
+
+  @Input()
   public viewMode: MapViewMode = MapViewMode.MINIMAP;
 
   @ViewChild('mapContainerRef', { read: ViewContainerRef })
@@ -58,6 +85,10 @@ export class MapViewerComponent implements AfterViewInit, OnChanges {
 
   @ViewChild('heatmapRender')
   public heatmapRenderTarget: ElementRef;
+
+  @ViewChild('mapContainer', { read: ElementRef })
+  private mapContainer: ElementRef;
+
 
   private mapComponent: ComponentRef<BattlegroundMapBGBase>;
   private replayMapAnalyser: ReplayMapAnalyser;
@@ -71,6 +102,12 @@ export class MapViewerComponent implements AfterViewInit, OnChanges {
   public ngAfterViewInit() {
     this.createMapComponent();
     this.renderHeatmap();
+    (<any>panzoom)(this.mapContainer.nativeElement, {
+      maxZoom: 5,
+      minZoom: 1,
+      bounds: true,
+      boundsPadding: 0
+    });
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -157,7 +194,7 @@ export class MapViewerComponent implements AfterViewInit, OnChanges {
     const scaleFactor = 10;
     const region = this.regions[index];
     const heatmapRegionPoints = region.calculate(this.heatmap, scaleFactor);
-     if (heatmapRegionPoints.length) {
+    if (heatmapRegionPoints.length) {
       this.renderer.setStyle(this.heatmapRenderTarget.nativeElement, 'width', (region.cropArea.width * scaleFactor) + 'px');
       this.renderer.setStyle(this.heatmapRenderTarget.nativeElement, 'height', (region.cropArea.height * scaleFactor) + 'px');
 
@@ -257,4 +294,22 @@ export class MapViewerComponent implements AfterViewInit, OnChanges {
   public poiIcon(poi: IMapPOI) {
     return MapPOIIcons[poi.type] || MapPOIIcons.UNKNOWN;
   }
+
+  public showIcon(poi: IMapPOI): boolean {
+    if (!this.iconVisibility) {
+      return false;
+    }
+    if (poi.team < 2 && this.iconVisibility.indexOf(MapIconCategory.STRUCTURES) === -1) {
+      return false;
+    }
+    if (poi.team === 2 && this.iconVisibility.indexOf(MapIconCategory.NEUTRAL) === -1) {
+      return false;
+    }
+    if (poi.team === 3 && this.iconVisibility.indexOf(MapIconCategory.OBJECTIVE) === -1) {
+      return false;
+    }
+    return true;
+  }
+
+
 }

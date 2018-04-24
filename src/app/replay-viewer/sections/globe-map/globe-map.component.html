@@ -1,9 +1,9 @@
 <mat-sidenav-container [hidden]="hasError">
   <mat-sidenav mode="side" opened="true" position="end">
-    <button (click)="cycleViewMode()">{{MapViewMode[viewMode]}}</button>
+    <map-controls [(mapViewMode)]="viewMode" [(iconVisibility)]="iconVisibility"></map-controls>
   </mat-sidenav>
   <mat-sidenav-content>
-    <map-viewer [replay]="replay" [viewMode]="viewMode" [heatmap]="heatmap" (error)="onMapviewError($event)"></map-viewer>
+    <map-viewer [replay]="replay" [viewMode]="viewMode" [heatmap]="heatmap" (error)="onMapviewError($event)" [iconVisibility]="iconVisibility"></map-viewer>
   </mat-sidenav-content>
 </mat-sidenav-container>
 <div #statusRef></div>

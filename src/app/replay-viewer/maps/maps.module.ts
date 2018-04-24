@@ -1,18 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MapViewerComponent } from './map-viewer/map-viewer.component';
-import {  BgWrapperComponent, MapBackgroundComponents} from './bg';
+import { BgWrapperComponent, MapBackgroundComponents } from './bg';
+import { MapControlsComponent } from './map-viewer/components/map-controls/map-controls.component';
+import { MatMenuModule, MatSelectModule } from '@angular/material';
 @NgModule({
     imports: [
-        CommonModule
+        CommonModule,
+        MatSelectModule,
+        MatMenuModule
     ],
     exports: [
-        MapViewerComponent
+        MapViewerComponent,
+        MapControlsComponent
     ],
     declarations: [
         MapViewerComponent,
         BgWrapperComponent,
-        ...MapBackgroundComponents
+        ...MapBackgroundComponents,
+        MapControlsComponent
     ],
     providers: [],
     entryComponents: [

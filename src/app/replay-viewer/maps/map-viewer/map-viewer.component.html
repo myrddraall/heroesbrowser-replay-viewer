@@ -134,7 +134,7 @@
 
 
 </svg>
-<div class="map-container" (click)="containerClicked($event)" [class.debug-mode]="showDebug">
+<div #mapContainer class="map-container" (click)="containerClicked($event)" [class.debug-mode]="showDebug">
   <div class="map-bg">
     <div #mapContainerRef style="display: none;"></div>
   </div>
@@ -147,8 +147,10 @@
       </g>
 
       <g [attr.transform]="'translate(0 ' + (region.cropArea.height / -2) + ')'">
-        <use *ngFor="let poi of region.poiPositions" class="poi" [ngClass]="[poi.type, 'team' + (poi.team + 1)]" [attr.href]="poiIcon(poi).icon"
-          [attr.width]="poiIcon(poi).size" [attr.x]="poi.x" [attr.y]="poi.y" [attr.transform]="'translate(' + (poiIcon(poi).size / -2) + ' 0)'"></use>
+        <ng-container  *ngFor="let poi of region.poiPositions">
+          <use *ngIf="showIcon(poi)" class="poi" [ngClass]="[poi.type, 'team' + (poi.team + 1)]" [attr.href]="poiIcon(poi).icon"
+            [attr.width]="poiIcon(poi).size" [attr.x]="poi.x" [attr.y]="poi.y" [attr.transform]="'translate(' + (poiIcon(poi).size / -2) + ' 0)'"></use>
+        </ng-container>
       </g>
       <!--
       <g *ngFor="let core of region.corePositions" class="map-symbol core" [class.team1]="core.team === 0" [class.team2]="core.team === 1"

@@ -13,7 +13,7 @@ import { Replay, ReplayMapAnalyser, IPoint } from '@heroesbrowser/heroprotocol';
 import { AbstractSectionComponent } from '../AbstractSection';
 import * as linq from 'linq';
 
-import { MapViewMode } from '../../maps';
+import { MapViewMode, MapIconCategory } from '../../maps';
 
 @Component({
   selector: 'globe-map',
@@ -27,6 +27,11 @@ export class GlobeMapComponent extends AbstractSectionComponent implements After
   public replay: Replay;
   public MapViewMode = MapViewMode;
   public viewMode = MapViewMode.MINIMAP;
+  public iconVisibility: MapIconCategory[] = [
+    MapIconCategory.STRUCTURES,
+    MapIconCategory.NEUTRAL,
+    MapIconCategory.OBJECTIVE
+  ];
   public heatmap: IPoint[];
   public hasError = false;
 
@@ -54,6 +59,8 @@ export class GlobeMapComponent extends AbstractSectionComponent implements After
       this.replay = this.replayViewer.replay;
       this.replayMapAnalyser = new ReplayMapAnalyser(this.replay);
       this.heatmap = await this.replayMapAnalyser.getMinionDeathHeatmap();
+      // const gd = await this.replayMapAnalyser.getGlobeDeaths();
+      //  console.log('GLOBE DEATH', gd);
       this.changeDetectorRef.markForCheck();
     } catch (e) {
       if (e.name === 'ReplayVersionOutOfRangeError') {

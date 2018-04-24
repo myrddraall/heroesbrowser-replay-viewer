@@ -33,6 +33,7 @@
     "heatmapjs": "^2.0.2",
     "linq": "^3.1.0",
     "moment": "^2.22.0",
+    "panzoom": "^4.5.0",
     "rxjs": "^5.5.8",
     "zone.js": "^0.8.25"
   },
@@ -61,6 +62,7 @@
     "typescript": "^2.6.2"
   },
   "linkedDependencies": [
-    "@heroesbrowser/heroprotocol"
+    "@heroesbrowser/heroprotocol",
+    "panzoom"
   ]
 }

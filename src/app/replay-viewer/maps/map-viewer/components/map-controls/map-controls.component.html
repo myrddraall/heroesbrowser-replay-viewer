@@ -1,0 +1,18 @@
+<mat-form-field color="accent">
+  <mat-select placeholder="View" [(value)]="mapViewMode">
+    <mat-option [value]="MapViewMode.MINIMAP">Minimap</mat-option>
+    <mat-option [value]="MapViewMode.IMAGE">Image</mat-option>
+    <mat-option [value]="MapViewMode.BOTH">Both</mat-option>
+    <mat-option [value]="MapViewMode.NONE">No Background</mat-option>
+  </mat-select>
+
+
+</mat-form-field>
+
+<mat-form-field color="accent">
+  <mat-select placeholder="Show" [(value)]="iconVisibility" multiple>
+    <mat-option [value]="MapIconCategory.STRUCTURES">Structures</mat-option>
+    <mat-option [value]="MapIconCategory.NEUTRAL">Neutral</mat-option>
+    <mat-option [value]="MapIconCategory.OBJECTIVE">Objectives</mat-option>
+  </mat-select>
+</mat-form-field>
