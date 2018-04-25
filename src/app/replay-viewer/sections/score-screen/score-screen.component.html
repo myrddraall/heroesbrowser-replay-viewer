@@ -1,4 +1,4 @@
-<section *ngIf="scoreData">
+<section *ngIf="scoreData" [hidden]="state !== SectionState.READY">
   <mat-table #table class="score-table" [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="hero">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>

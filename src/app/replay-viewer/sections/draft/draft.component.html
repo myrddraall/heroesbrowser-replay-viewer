@@ -1,4 +1,4 @@
-<section *ngIf="dataSource">
+<section *ngIf="dataSource && state === SectionState.READY" [hidden]="state !== SectionState.READY">
   <div class="draft">
     <div class="draft-item" *ngFor="let draft of dataSource" [class.team1]="draft.team === 0" [class.team2]="draft.team === 1" [class.pick]="draft.type ==='pick'" [class.ban]="draft.type ==='ban'">
       <div class="player-cell">

@@ -27,9 +27,7 @@ import * as linq from 'linq';
   styleUrls: ['./score-screen.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ScoreScreenComponent extends AbstractSectionComponent implements AfterViewInit {
-
-  private replay: Replay;
+export class ScoreScreenComponent extends AbstractSectionComponent {
   private scoreScreenAnalyser: ScoreAnalyser;
   private highScores: {
     game: { [stat: string]: number },
@@ -55,21 +53,12 @@ export class ScoreScreenComponent extends AbstractSectionComponent implements Af
   ];
 
   constructor(
-    private replayViewer: ReplayViewerComponent,
+    replayViewer: ReplayViewerComponent,
     changeDetectorRef: ChangeDetectorRef,
     componentFactoryResolver: ComponentFactoryResolver
   ) {
-    super(componentFactoryResolver, changeDetectorRef);
-    replayViewer.onReplayLoaded.subscribe(replay => {
-      this.replayLoaded();
-    });
+    super(replayViewer, componentFactoryResolver, changeDetectorRef);
     this.dataSource.sortingDataAccessor = this.getSortData.bind(this);
-  }
-
-
-  public ngAfterViewInit() {
-    super.ngAfterViewInit();
-    this.replayLoaded();
   }
 
   private getSortData(data: ISimplePlayerScore, sortHeaderId: string): string | number {
@@ -95,126 +84,65 @@ export class ScoreScreenComponent extends AbstractSectionComponent implements Af
     }
   }
 
-  private async replayLoaded() {
-    try {
-      this.clearNotSupported();
-      this.setLoadingMessage('Loading Score Screen Data');
-      this.scoreData = null;
-      const hs = {
-        'Takedowns': 0,
-        'Deaths': Number.MAX_SAFE_INTEGER,
-        'SoloKill': 0,
-        'Assists': 0,
-        'ExperienceContribution': 0,
-        'Healing': 0,
-        'SiegeDamage': 0,
-        'HeroDamage': 0,
-        'DamageTaken': 0
-      };
+  protected async loadReplayView() {
+    this.scoreData = null;
+    const hs = {
+      'Takedowns': 0,
+      'Deaths': Number.MAX_SAFE_INTEGER,
+      'SoloKill': 0,
+      'Assists': 0,
+      'ExperienceContribution': 0,
+      'Healing': 0,
+      'SiegeDamage': 0,
+      'HeroDamage': 0,
+      'DamageTaken': 0
+    };
 
-      this.highScores = {
-        game: Object.assign({}, hs),
-        0: Object.assign({}, hs),
-        1: Object.assign({}, hs)
-      };
+    this.highScores = {
+      game: Object.assign({}, hs),
+      0: Object.assign({}, hs),
+      1: Object.assign({}, hs)
+    };
 
-      this.replay = this.replayViewer.replay;
-      this.replayDescription = this.replayViewer.replayDescription;
-      this.scoreScreenAnalyser = new ScoreAnalyser(this.replay);
+    this.replayDescription = this.replayViewer.replayDescription;
+    this.scoreScreenAnalyser = new ScoreAnalyser(this.replay);
 
-      // const pa = new PlayerAnalyser(this.replay);
-      // await pa.testPlayerData;
+    // const pa = new PlayerAnalyser(this.replay);
+    // await pa.testPlayerData;
 
-      this.scoreData = await this.scoreScreenAnalyser.scoreScreenData;
+    this.scoreData = await this.scoreScreenAnalyser.scoreScreenData;
 
-      const scoreData = this.scoreData.playerScores;
-      for (let i = 0; i < scoreData.length; i++) {
-        const pScore = scoreData[i];
+    const scoreData = this.scoreData.playerScores;
+    for (let i = 0; i < scoreData.length; i++) {
+      const pScore = scoreData[i];
 
-        for (const stat in pScore.stats) {
-          if (pScore.stats.hasOwnProperty(stat)) {
-            const value = pScore.stats[stat];
-            if (stat === 'Deaths') {
-              if (this.highScores.game[stat] > value) {
-                this.highScores.game[stat] = value;
-              }
-              if (this.highScores[pScore.team][stat] > value) {
-                this.highScores[pScore.team][stat] = value;
-              }
-            } else {
-              if (this.highScores.game[stat] < value) {
-                this.highScores.game[stat] = value;
-              }
-              if (this.highScores[pScore.team][stat] < value) {
-                this.highScores[pScore.team][stat] = value;
-              }
+      for (const stat in pScore.stats) {
+        if (pScore.stats.hasOwnProperty(stat)) {
+          const value = pScore.stats[stat];
+          if (stat === 'Deaths') {
+            if (this.highScores.game[stat] > value) {
+              this.highScores.game[stat] = value;
+            }
+            if (this.highScores[pScore.team][stat] > value) {
+              this.highScores[pScore.team][stat] = value;
+            }
+          } else {
+            if (this.highScores.game[stat] < value) {
+              this.highScores.game[stat] = value;
+            }
+            if (this.highScores[pScore.team][stat] < value) {
+              this.highScores[pScore.team][stat] = value;
             }
           }
         }
       }
-      const sorted = linq.from(scoreData).orderBy(p => p.team).toArray();
-      this.dataSource.data = sorted;
-       setTimeout(() => {
-         this.dataSource.sort = this.sort;
-         this.sort.start = 'desc';
-       });
-
-      /* const scoreDataSet: IPlayerScoreRecord[] = [];
-       for (let i = 0; i < scoreData.length; i++) {
-         const player = this.replayDescription.players[i];
-         const pScore = scoreData[i];
-         for (const stat in pScore) {
-           if (pScore.hasOwnProperty(stat)) {
-             const value = pScore[stat];
-             if (stat === 'Deaths') {
-               if (this.highScores.game[stat] > value) {
-                 this.highScores.game[stat] = value;
-               }
-               if (this.highScores[player.team][stat] > value) {
-                 this.highScores[player.team][stat] = value;
-               }
-             } else {
-               if (this.highScores.game[stat] < value) {
-                 this.highScores.game[stat] = value;
-               }
-               if (this.highScores[player.team][stat] < value) {
-                 this.highScores[player.team][stat] = value;
-               }
-             }
-           }
-         }
-
-         scoreDataSet.push({
-           hero: player.hero,
-           name: player.name,
-           team: player.team,
-           won: player.won,
-           hasChatSilence: player.hasChatSilence,
-           hasVoiceSilence: player.hasVoiceSilence,
-           scores: pScore
-         });
-       }
-
-       const sorted = linq.from(scoreDataSet).orderBy(p => p.team).toArray();
-
-     this.dataSource.data = sorted;
-
-       setTimeout(() => {
-         this.dataSource.sort = this.sort;
-         this.sort.start = 'desc';
-       });
-       */
-      this.changeDetectorRef.markForCheck();
-    } catch (e) {
-      this.scoreData = null;
-      if (e.name === 'ReplayVersionOutOfRangeError') {
-        this.setNotSupportedMessage(e.message);
-        return;
-      }
-      throw e;
-    } finally {
-      this.clearLoading();
     }
+    const sorted = linq.from(scoreData).orderBy(p => p.team).toArray();
+    this.dataSource.data = sorted;
+    setTimeout(() => {
+      this.dataSource.sort = this.sort;
+      this.sort.start = 'desc';
+    });
   }
 
   public isBest(statName: string, player: ISimplePlayerScore, scope: string | number = 'game'): boolean {

@@ -21,40 +21,20 @@ import * as linq from 'linq';
   changeDetection: ChangeDetectionStrategy.OnPush
 })*/
 export class StubComponent extends AbstractSectionComponent implements AfterViewInit {
-  private replay: Replay;
 
   constructor(
-    private replayViewer: ReplayViewerComponent,
+    replayViewer: ReplayViewerComponent,
     changeDetectorRef: ChangeDetectorRef,
     componentFactoryResolver: ComponentFactoryResolver
   ) {
-    super(componentFactoryResolver, changeDetectorRef);
-    replayViewer.onReplayLoaded.subscribe(replay => {
-      this.replayLoaded();
-    });
-
+    super(replayViewer, componentFactoryResolver, changeDetectorRef);
   }
   public ngAfterViewInit() {
     super.ngAfterViewInit();
-    this.replayLoaded();
+    this.loadReplayView();
   }
 
-  private async replayLoaded() {
-    try {
-      this.clearNotSupported();
-      this.setLoadingMessage('Loading XP Data');
-      this.replay = this.replayViewer.replay;
-
-      this.changeDetectorRef.markForCheck();
-    } catch (e) {
-      if (e.name === 'ReplayVersionOutOfRangeError') {
-        this.setNotSupportedMessage(e.message);
-        return;
-      }
-      throw e;
-    } finally {
-      this.clearLoading();
-    }
+  protected async loadReplayView() {
   }
 
 }

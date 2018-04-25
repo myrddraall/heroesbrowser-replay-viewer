@@ -64,7 +64,6 @@ const lvlXP = [
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class XpBreakdownComponent extends AbstractSectionComponent implements AfterViewInit {
-  private replay: Replay;
   private xpAnalyser: XPAnalyser;
   private xpData: IPeriodicXP[];
 
@@ -165,42 +164,23 @@ export class XpBreakdownComponent extends AbstractSectionComponent implements Af
   }
 
   constructor(
-    private replayViewer: ReplayViewerComponent,
+    replayViewer: ReplayViewerComponent,
     changeDetectorRef: ChangeDetectorRef,
     componentFactoryResolver: ComponentFactoryResolver,
     private renderer: Renderer2
   ) {
-    super(componentFactoryResolver, changeDetectorRef);
-    replayViewer.onReplayLoaded.subscribe(replay => {
-      this.replayLoaded();
-    });
-
+    super(replayViewer, componentFactoryResolver, changeDetectorRef);
   }
   public ngAfterViewInit() {
-    super.ngAfterViewInit();
     this.createChart();
-    this.replayLoaded();
+    super.ngAfterViewInit();
   }
 
-  private async replayLoaded() {
-    try {
-      this.clearNotSupported();
-      this.setLoadingMessage('Loading XP Data');
-      this.replay = this.replayViewer.replay;
+  protected async loadReplayView() {
       this.xpAnalyser = new XPAnalyser(this.replay);
       this.xpData = await this.xpAnalyser.periodicXP;
       this.generateXPOverviewChartData();
       this.updateXPOverviewChartData();
-      this.changeDetectorRef.markForCheck();
-    } catch (e) {
-      if (e.name === 'ReplayVersionOutOfRangeError') {
-        this.setNotSupportedMessage(e.message);
-        return;
-      }
-      throw e;
-    } finally {
-      this.clearLoading();
-    }
   }
 
   private createChart() {

@@ -1,4 +1,4 @@
-<mat-sidenav-container>
+<mat-sidenav-container [hidden]="state !== SectionState.READY">
   <mat-sidenav mode="side" opened="true" position="end">
     <mat-form-field color="accent" >
       <mat-select placeholder="View" [(value)]="chartType">

@@ -35,6 +35,6 @@ body {
   overflow-y: hidden;
 }
 
-[hidden] {
-  display: none !important;
+[hidden], [hidden] * {
+  visibility: hidden !important;
 }
