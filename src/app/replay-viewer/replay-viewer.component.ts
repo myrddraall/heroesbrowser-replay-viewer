@@ -11,8 +11,8 @@ import {
 } from '@angular/core';
 
 import { Router } from '@angular/router';
-
-import { Replay, BasicReplayAnalyser, ReplayDescription } from '@heroesbrowser/heroprotocol';
+import { Angulartics2 } from 'angulartics2';
+import { Replay, BasicReplayAnalyser, ReplayDescription, GameType } from '@heroesbrowser/heroprotocol';
 
 enum FileState {
   NONE,
@@ -47,7 +47,8 @@ export class ReplayViewerComponent implements OnInit {
     private renderer: Renderer2,
     private elmRef: ElementRef,
     private changeDetectorRef: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    private angulartics2: Angulartics2
   ) { }
 
   public get fileState(): FileState {
@@ -132,6 +133,15 @@ export class ReplayViewerComponent implements OnInit {
 
       this.basicReplayAnalyser = new BasicReplayAnalyser(this.replay);
       this.replayDescription = await this.basicReplayAnalyser.replayDescription;
+
+      this.angulartics2.eventTrack.next({
+        action: 'replayLoaded',
+        properties: {
+          category: this.replayDescription.mapName,
+          label: GameType[this.replayDescription.gameType] + '(' + this.replayDescription.fingerPrint + ')'
+        },
+      });
+
       setTimeout(() => {
         this.fileState = FileState.LOADED;
         this.onReplayLoaded.next(this.replay);
@@ -149,8 +159,8 @@ export class ReplayViewerComponent implements OnInit {
 
   private async logGameData() {
     // console.log('header', await this.replay.header);
-     console.log('initData', await this.replay.initData);
-     console.log('details', await this.replay.details);
+    console.log('initData', await this.replay.initData);
+    console.log('details', await this.replay.details);
     // console.log('attributeEvents', await this.replay.attributeEvents);
     console.log('messageEvents', await this.replay.messageEvents);
     console.log('trackerEvents', await this.replay.trackerEvents);
