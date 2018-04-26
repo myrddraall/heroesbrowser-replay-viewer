@@ -1,0 +1,15 @@
+
+<div class="popover"
+[ngClass]="popoverClass"
+[class.mat-tooltip-handset]="(_isHandset | async)!.matches"
+[style.transform-origin]="_transformOrigin"
+[@state]="_visibility"
+(@state.start)="_animationStart()"
+(@state.done)="_animationDone($event)"
+>
+  <ng-container *ngTemplateOutlet="template; context:popoverContext"></ng-container>
+</div>
+
+<ng-template #defaultTemplate let-data="data">
+  <div [innerHTML]="data"></div>
+</ng-template>

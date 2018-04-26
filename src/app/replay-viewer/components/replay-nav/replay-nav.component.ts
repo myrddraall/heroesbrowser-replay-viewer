@@ -43,6 +43,13 @@ export class ReplayNavComponent implements OnChanges {
         };
         overview.children.push(scoreScreen);
 
+        const talents: IReplayNavItemLink = {
+          type: 'link',
+          label: 'Talents',
+          path: ['/talents']
+        };
+        overview.children.push(talents);
+
         const gameType = this.replayDescription.gameType;
         // tslint:disable-next-line:no-bitwise
         if ((gameType & GameType.FLAG_DRAFT) === GameType.FLAG_DRAFT) {

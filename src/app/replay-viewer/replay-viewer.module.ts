@@ -18,14 +18,21 @@ import {
   MatCheckboxModule,
   MatButtonModule,
   MatSelectModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatTooltipModule
 } from '@angular/material';
+
+
 import { DraftComponent } from './sections/draft/draft.component';
 import { SectionNotSupportedComponent } from './components/section-not-supported/section-not-supported.component';
 import { SectionLoadingComponent } from './components/section-loading/section-loading.component';
 import { XpBreakdownComponent } from './sections/xp-breakdown/xp-breakdown.component';
 import { GlobeMapComponent } from './sections/globe-map/globe-map.component';
+import { TalentScreenComponent } from './sections/talent-screen/talent-screen.component';
 import { MapsModule } from './maps/maps.module';
+import { PopoverComponent, PopoverDirective } from './components/popover/popover.component';
+import { TalentIconComponent } from './components/talent-icon/talent-icon.component';
+import { TalentTipComponent } from './components/talent-tip/talent-tip.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -39,6 +46,7 @@ import { MapsModule } from './maps/maps.module';
     MatButtonModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatTooltipModule,
     MapsModule,
     ReplayViewerRoutingModule,
   ],
@@ -53,15 +61,21 @@ import { MapsModule } from './maps/maps.module';
     NavItemComponent,
     ScoreScreenComponent,
     DraftComponent,
+    TalentScreenComponent,
     SectionNotSupportedComponent,
     SectionLoadingComponent,
     XpBreakdownComponent,
-    GlobeMapComponent
+    GlobeMapComponent,
+    PopoverDirective,
+    PopoverComponent,
+    TalentIconComponent,
+    TalentTipComponent
   ],
   providers: [ClipIconService],
   entryComponents: [
     SectionNotSupportedComponent,
-    SectionLoadingComponent
+    SectionLoadingComponent,
+    PopoverComponent
   ]
 })
 export class ReplayViewerModule { }

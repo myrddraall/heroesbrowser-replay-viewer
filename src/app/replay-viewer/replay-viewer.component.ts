@@ -163,8 +163,9 @@ export class ReplayViewerComponent implements OnInit {
     // console.log('details', await this.replay.details);
     // console.log('attributeEvents', await this.replay.attributeEvents);
     // console.log('messageEvents', await this.replay.messageEvents);
-    // console.log('trackerEvents', await this.replay.trackerEvents);
-    // console.log('gameEvents', await this.replay.gameEvents);
+     console.log('trackerEvents', await this.replay.trackerEvents);
+     console.log('gameEvents', await this.replay.gameEvents);
+     console.log('this.replayDescription', this.replayDescription);
   }
 
 }

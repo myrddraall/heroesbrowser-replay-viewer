@@ -5,11 +5,16 @@ import { ScoreScreenComponent } from './sections/score-screen/score-screen.compo
 import { DraftComponent } from './sections/draft/draft.component';
 import { XpBreakdownComponent } from './sections/xp-breakdown/xp-breakdown.component';
 import { GlobeMapComponent } from './sections/globe-map/globe-map.component';
+import { TalentScreenComponent } from './sections/talent-screen/talent-screen.component';
 const replayViewerRoutes: Routes = [
     {
         path: '',
         component: ReplayViewerComponent,
         children: [
+            {
+                path: 'talents',
+                component: TalentScreenComponent
+            },
             {
                 path: 'minion-deaths',
                 component: GlobeMapComponent
