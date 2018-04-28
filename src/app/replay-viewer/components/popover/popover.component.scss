@@ -1,3 +1,10 @@
-:host{
-    max-width: 300px;
+popover .popover {
+  $color: lighten(blue, 20);
+  color: $color;
+  font-weight: 500;
+  border: 2px solid $color;
+  max-width: 350px;
+  background-color: rgba(#09092b, 0.95);
+  padding: 8px;
+  margin: 16px;
 }

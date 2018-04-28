@@ -23,55 +23,55 @@
         <div class="award" *ngFor="let award of player.awards" [attr.tooltip]="award" [attr.award]="award"></div>
       </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="kills">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>
+    <ng-container matColumnDef="kills" >
+      <mat-header-cell *matHeaderCellDef mat-sort-header popover="Total Hero Kills" popoverPosition="above" popoverHideDelay="100000">
         <div class="icon"></div>
       </mat-header-cell>
       <mat-cell *matCellDef="let player" [class.best]="isBest('SoloKill', player)" [class.best-team]="isBest('SoloKill', player, player.team)">{{player.stats.SoloKill}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="assists">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>
+      <mat-header-cell *matHeaderCellDef mat-sort-header popover="Total Hero Kill Assists" popoverPosition="above" >
         <div class="icon"></div>
       </mat-header-cell>
       <mat-cell *matCellDef="let player" [class.best]="isBest('Assists', player)" [class.best-team]="isBest('Assists', player, player.team)">{{player.stats.Assists}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="deaths">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>
+      <mat-header-cell *matHeaderCellDef mat-sort-header popover="Total Deaths" popoverPosition="above">
         <div class="icon"></div>
       </mat-header-cell>
       <mat-cell *matCellDef="let player" [class.best]="isBest('Deaths', player)" [class.best-team]="isBest('Deaths', player, player.team)">
         {{player.stats.Deaths}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="siegeDamage">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>
+      <mat-header-cell *matHeaderCellDef mat-sort-header popover="Siege Damage<br/>Amount of damage delt to enemey Structures and Minions" popoverPosition="above">
         <div class="icon"></div>
       </mat-header-cell>
       <mat-cell *matCellDef="let player" [class.best]="isBest('SiegeDamage', player)" [class.best-team]="isBest('SiegeDamage', player, player.team)">
         {{player.stats.SiegeDamage | number}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="heroDamage">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>
+      <mat-header-cell *matHeaderCellDef mat-sort-header popover="Hero Damage<br/>Amount of damage delt to enemey Heroes" popoverPosition="above">
         <div class="icon"></div>
       </mat-header-cell>
       <mat-cell *matCellDef="let player" [class.best]="isBest('HeroDamage', player)" [class.best-team]="isBest('HeroDamage', player, player.team)">
         {{player.stats.HeroDamage | number}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="healing">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>
+      <mat-header-cell *matHeaderCellDef mat-sort-header popover="Healing/Shielding<br/>Amount of damage prevented and healing done to allied Heroes" popoverPosition="above">
         <div class="icon"></div>
       </mat-header-cell>
       <mat-cell *matCellDef="let player" [class.best]="isBest('Healing', player)" [class.best-team]="isBest('Healing', player, player.team)">
         {{(player.stats.Healing || '') | number}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="damageTaken">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>
+      <mat-header-cell *matHeaderCellDef mat-sort-header popover="Amount of Damage Taken" popoverPosition="above">
         <div class="icon"></div>
       </mat-header-cell>
       <mat-cell *matCellDef="let player" [class.best]="isBest('DamageTaken', player)" [class.best-team]="isBest('DamageTaken', player, player.team)">
         {{(player.stats.DamageTaken || '') | number}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="xp">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>
+      <mat-header-cell *matHeaderCellDef mat-sort-header popover="Experience Contributed" popoverPosition="above">
         <div class="icon"></div>
       </mat-header-cell>
       <mat-cell *matCellDef="let player" [class.best]="isBest('ExperienceContribution', player)" [class.best-team]="isBest('ExperienceContribution', player, player.team)">

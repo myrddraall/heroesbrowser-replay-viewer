@@ -1,28 +1,23 @@
 :host {
   display: block;
-  width:auto;
+  width: auto;
   max-width: 350px;
-  background-color: rgba(black, 0.80);
-  padding: 16px;
-  margin: 16px;
-  border: 2px solid cornflowerblue;
   .header {
     display: flex;
-    
-    margin-bottom: 8px;
     h3 {
+      color: white;
       margin-bottom: 0px;
       flex-grow: 1;
       font-weight: 700;
     }
     .ability {
-      $color: cornflowerblue;
+      $color: lighten(blue, 20);
       color: $color;
-      background-color: rgba($color, 0.2);
+      background-color: rgba($color, 0.1);
       border: 2px solid $color;
       padding: 2px;
       border-radius: 4px;
-      min-width:32px;
+      min-width: 32px;
       text-align: center;
       font-weight: 700;
       &::before {
@@ -40,16 +35,14 @@
       &.ability-d::before {
         content: "Trait (D)";
       }
-
       &.ability-z::before {
         content: "Z";
       }
-  
       &.ability-r {
         $color: rgb(243, 166, 0);
         border-color: $color;
         color: $color;
-        background-color: rgba($color, 0.2);
+        background-color: rgba($color, 0.1);
         &::before {
           content: "Heroic (R)";
         }
@@ -58,7 +51,7 @@
         $color: rgb(211, 67, 67);
         border-color: $color;
         color: $color;
-        background-color: rgba($color, 0.2);
+        background-color: rgba($color, 0.1);
         &::before {
           content: "Active";
         }
@@ -67,7 +60,7 @@
         $color: rgb(0, 185, 145);
         border-color: $color;
         color: $color;
-        background-color: rgba($color, 0.2);
+        background-color: rgba($color, 0.1);
         &::before {
           content: "Passive";
         }
@@ -83,6 +76,15 @@
         }
       }
     }
+  }
+  .cooldown {
+    color: white;
+  }
+  .mana {
+    color: white;
+  }
+  .description {
+    margin-top: 8px;
   }
   ::ng-deep {
     .quest,
