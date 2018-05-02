@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform, Inject, LOCALE_ID } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 @Pipe({
   name: 'duration'
@@ -7,7 +7,7 @@ export class DurationPipe implements PipeTransform {
 
   private decimalPipe: DecimalPipe;
 
-  public constructor(locale: string) {
+  public constructor(@Inject(LOCALE_ID) locale: string) {
     this.decimalPipe = new DecimalPipe(locale);
   }
 

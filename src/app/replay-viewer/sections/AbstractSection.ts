@@ -97,7 +97,7 @@ export abstract class AbstractSectionComponent implements AfterViewInit, OnDestr
 
     protected setLoadingMessage(message: string) {
         if (this.loadingRef.instance.message !== message) {
-            this.state = message ? SectionState.LOADING : SectionState.READY;
+            this.state = message ? SectionState.LOADING : (this.state === SectionState.ERROR ? SectionState.ERROR : SectionState.READY);
             this.loadingRef.instance.message = message;
             this.changeDetectorRef.markForCheck();
         }
