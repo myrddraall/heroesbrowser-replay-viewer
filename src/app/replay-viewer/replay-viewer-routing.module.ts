@@ -6,11 +6,17 @@ import { DraftComponent } from './sections/draft/draft.component';
 import { XpBreakdownComponent } from './sections/xp-breakdown/xp-breakdown.component';
 import { GlobeMapComponent } from './sections/globe-map/globe-map.component';
 import { TalentScreenComponent } from './sections/talent-screen/talent-screen.component';
+import { PlayerStatsComponent } from './sections/player-stats/player-stats.component';
+
 const replayViewerRoutes: Routes = [
     {
         path: '',
         component: ReplayViewerComponent,
         children: [
+            {
+                path: 'player-stats/:subsection',
+                component: PlayerStatsComponent
+            },
             {
                 path: 'talents',
                 component: TalentScreenComponent

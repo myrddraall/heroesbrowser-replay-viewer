@@ -1,0 +1,410 @@
+//@import '../shared/hero_table';/
+//@include hero_table();
+$cellPaddingHori: 8px;
+$cellPaddingVert: 4px;
+$blueBgLight: #1b3874;
+$blueBgDark: #111034;
+$redBgLight: #660730;
+$redBgDark: #27021f;
+@mixin cellBgGrad($colorLight, $colorDark) {
+  background: linear-gradient(to right, rgba($colorDark, 0) 0%, rgba($colorDark, 1) 30%) 100%;
+  border-image: linear-gradient(to right, rgba($colorLight, 0) 0%, $colorLight 30%) 1;
+  border-top-width: 1px;
+  border-top-style: solid;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    border-right: 1px solid $colorLight;
+    z-index: 5;
+  }
+  /* &::before {
+    border-image: linear-gradient(to right, rgba($colorLight, 0) 14%, rgba($colorLight, 0.3) 20%) 1;
+  } //
+  /* 
+    
+    */
+}
+
+:host {
+  display: block;
+  min-height: 100%;
+  height: 100%;
+  .mat-drawer-container {
+    height: 100%;
+    background-color: transparent;
+  }
+  .mat-sidenav-content {
+    padding: 40px;
+    padding-top: 8px;
+  }
+  .mat-sidenav {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    border-width: 1px;
+    border-style: solid;
+    border: none;
+    border-left: solid;
+    border-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(blueviolet, 0.4), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)) 200 100%;
+    padding: 40px;
+    min-width: 375px;
+    .mat-selection-list {
+      .mat-list-option {
+        &.drop-above,
+        &.drop-below {
+          ::ng-deep * {
+            pointer-events: none !important;
+          }
+        }
+        &.drop-above {
+          border-top: 1px solid yellow;
+        }
+        &.drop-below {
+          border-bottom: 1px solid yellow;
+        }
+        height: 24px;
+        ::ng-deep {
+          .mat-list-item-content {
+            padding: 0px;
+          }
+        }
+      }
+    }
+  }
+  table {
+    background-color: #0d0119;
+    thead {
+      th {
+        min-width: 48px;
+        >span {
+          writing-mode: vertical-rl;
+          visibility: hidden;
+          font-size: 12px;
+          font-weight: 400;
+        }
+        .header-bg {
+          // width: 100%;
+          height: 100%;
+          position: absolute;
+          bottom: 28px;
+          left: 100%; // background-color: red;
+        }
+        >.header-text {
+          //width: 0px;
+          height: 0px;
+          position: absolute;
+          left: 100%;
+          bottom: 28px;
+          z-index: 10;
+        }
+        .mat-header-cell {
+          display: block;
+          transform-origin: left bottom;
+          transform: rotateZ(-45deg); //position: absolute;
+          border-bottom: 1px solid rgba(white, 0.5);
+          padding: 4px; // bottom: 16px;
+          //right: 16px;
+          ::ng-deep {
+            .mat-sort-header-container {
+              // width: 0px;
+              // height: 0px;
+              //transform: rotateZ(-45deg);
+            }
+          }
+        }
+      }
+    }
+    tbody {
+      tr {
+        td {
+          font-weight: 300;
+          &::before {
+            content: " ";
+            position: absolute;
+            top: 1px;
+            left: -1px;
+            bottom: 0px;
+            right: 1px;
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-right-width: 1px;
+            border-right-style: solid;
+            z-index: 4;
+            opacity: 0.3;
+          }
+        }
+        &.team1 {
+          //@include cellBgGrad($blueBgLight, $blueBgDark);
+          td {
+            border-top: 1px solid $blueBgLight;
+            background-color: $blueBgDark;
+            &::before {
+              border-color: $blueBgLight;
+            }
+            &:last-of-type {
+              border-right: 1px solid $blueBgLight;
+            }
+          }
+          th {
+            .cell {
+              @include cellBgGrad($blueBgLight, $blueBgDark);
+              .hero-container {
+                &::before {
+                  background: linear-gradient(to right, #0d0119 1%, transparent 25%, transparent 70%, $blueBgDark 99%) 100%;
+                }
+              }
+            }
+          }
+          &:last-of-type {
+            th {
+              .cell {
+                border-bottom-style: solid;
+                border-bottom-width: 1px;
+              }
+            }
+            td {
+              border-bottom: 1px solid $blueBgLight;
+            }
+          }
+        }
+        &.team2 {
+          td {
+            border-top: 1px solid $redBgLight;
+            background-color: $redBgDark;
+            &::before {
+              border-color: $redBgLight;
+            }
+            &:last-of-type {
+              border-right: 1px solid $redBgLight;
+            }
+          } //@include cellBgGrad($redBgLight, $redBgDark);
+          th {
+            .cell {
+              @include cellBgGrad($redBgLight, $redBgDark);
+              .hero-container {
+                &::before {
+                  background: linear-gradient(to right, #0d0119 1%, transparent 25%, transparent 70%, $redBgDark 99%) 100%;
+                }
+              }
+            }
+          }
+          &:last-of-type {
+            th {
+              .cell {
+                border-bottom-style: solid;
+                border-bottom-width: 1px;
+              }
+            }
+            td {
+              border-bottom: 1px solid $redBgLight;
+            }
+          }
+        }
+      }
+      th,
+      td {
+        white-space: nowrap;
+        text-align: right; //  border-right: 1px solid white;
+      }
+      td {
+        padding: {
+          top: $cellPaddingVert;
+          bottom: $cellPaddingVert;
+        }
+        ;
+        padding: {
+          left: $cellPaddingHori;
+          right: $cellPaddingHori;
+        }
+        ; //border-top: 1px solid white;
+      }
+      th {
+        position: sticky;
+        left: 0;
+        z-index: 5;
+        padding: 0px;
+        >.cell {
+          display: flex;
+          align-items: center;
+          z-index: 7;
+          width: 100%;
+          height: 100%;
+          padding-right: $cellPaddingHori;
+          /*padding: {
+            top: $cellPaddingVert;
+            bottom: $cellPaddingVert;
+          }
+          
+          padding: {
+            left: $cellPaddingHori * 4;
+            right: $cellPaddingHori;
+          }*/
+          .name {
+            flex-grow: 1;
+            .hero {
+              font-weight: 700;
+              line-height: 20px;
+            }
+            .player {
+              font-size: 11px;
+              line-height: 12px;
+              font-weight: 500;
+            }
+          }
+          .hero-container {
+            width: 64px;
+            height: 42px;
+            overflow: hidden;
+            margin-right: $cellPaddingHori;
+            hero-icon {
+              position: absolute;
+              top: -30%;
+            }
+            &::before {
+              content: "";
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              top: 0px;
+              left: 0px;
+              z-index: 7;
+            }
+          }
+        }
+        >.bg {
+          position: absolute;
+          height: 100%;
+          width: 100vw;
+          right: 0px;
+          top: 0;
+          z-index: 6;
+          background-color: #0d0119;
+        }
+      }
+    }
+  }
+}
+
+.preset-select {
+  display: flex;
+  align-items: center;
+  .mat-form-field {
+    flex-grow: 1;
+  }
+  button {
+    margin-left: 8px;
+    line-height: 26px;
+    min-width: 64px;
+  }
+}
+
+::ng-deep {
+  .preset-options {
+    .mat-optgroup {
+      color: blue;
+      .mat-optgroup-label {
+        height: 24px;
+        line-height: 16px;
+        padding: 4px;
+        font-size: 12px;
+      }
+    }
+    .mat-option {
+      height: 24px;
+      line-height: 24px;
+      padding: 4px;
+      padding-left: 8px;
+      padding-bottom: 6px;
+      font-size: 12px;
+      .mat-option-text {
+        display: flex;
+        align-items: center;
+        label {
+          flex-grow: 1;
+        }
+        button {
+          width: 18px;
+          height: 18px;
+          line-height: 22px;
+          .mat-icon {
+            line-height: 10px;
+            width: 15px;
+            height: 15px;
+            font-size: 19px;
+            font-weight: 700;
+            color: red;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*mat-table {
+    .mat-header-cell {
+      overflow: visible;
+      min-width: 48px;
+      max-width: 48px;
+      ::ng-deep{
+        .mat-sort-header-container {
+          transform: rotateZ(-45deg) translateY(50%);
+        }
+      }
+    }
+    .mat-row {
+      .mat-cell {
+        font-size: 12px;
+        font-weight: 400;
+        text-shadow: none;
+        min-width: 48px;
+        max-width: 48px;
+      }
+    }
+  }
+  mat-table {
+    .best-team {
+      font-weight: 500;
+    }
+    .best {
+      font-weight: 700;
+    }
+  }
+}
+
+.score-table {
+  .mat-row {
+    &.team1 {
+      $glowColor: blue;
+      .mat-cell {
+        &.best-team {
+          color: lighten($color: $glowColor, $amount: 45);
+          font-weight: 700;
+        }
+        &.best {
+          font-weight: 700;
+          color: lighten($color: $glowColor, $amount: 45);
+          text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor;
+        }
+      }
+    }
+    &.team2 {
+      $glowColor: red;
+      .mat-cell {
+        &.best-team {
+          color: lighten($color: $glowColor, $amount: 45);
+          font-weight: 700;
+        }
+        &.best {
+          font-weight: 700;
+          color: lighten($color: $glowColor, $amount: 45);
+          text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor;
+        }
+      }
+    }
+  }
+}
+*/

@@ -72,7 +72,9 @@ export class ReplayViewerComponent implements OnInit {
 
   @HostListener('dragover', ['$event'])
   public handleDragOver(event: DragEvent) {
-    return false;
+    if (event.dataTransfer.types[0] === 'Files') {
+      event.preventDefault();
+    }
   }
 
   @HostListener('dragleave', ['$event'])
@@ -85,8 +87,10 @@ export class ReplayViewerComponent implements OnInit {
 
   @HostListener('dragenter', ['$event'])
   public handleDragEnter(event: DragEvent) {
-    this.fileState = FileState.DRAGGING;
-    return false;
+    console.log(event.dataTransfer.types.length, event.dataTransfer.types.join(','));
+    if (event.dataTransfer.types[0] === 'Files') {
+      this.fileState = FileState.DRAGGING;
+    }
   }
 
   @HostListener('drop', ['$event'])
@@ -127,7 +131,7 @@ export class ReplayViewerComponent implements OnInit {
       this.replay.dispose();
     }
     try {
-      await this.router.navigate(['/']);
+      // await this.router.navigate(['/']);
       this.replay = new Replay(replayData);
       await this.replay.initialize();
 
@@ -163,9 +167,9 @@ export class ReplayViewerComponent implements OnInit {
     // console.log('details', await this.replay.details);
     // console.log('attributeEvents', await this.replay.attributeEvents);
     // console.log('messageEvents', await this.replay.messageEvents);
-     console.log('trackerEvents', await this.replay.trackerEvents);
-     console.log('gameEvents', await this.replay.gameEvents);
-     console.log('this.replayDescription', this.replayDescription);
+    console.log('trackerEvents', await this.replay.trackerEvents);
+    console.log('gameEvents', await this.replay.gameEvents);
+    console.log('this.replayDescription', this.replayDescription);
   }
 
 }

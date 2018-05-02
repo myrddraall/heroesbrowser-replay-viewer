@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, ChangeDetectionStrategy, SimpleChanges } from '@angular/core';
 import { ReplayDescription, GameType } from '@heroesbrowser/heroprotocol';
 import { IReplayNavItem, IReplayNavItemLink, IReplayNavItemSection } from './nav-item/IReplayNavItemData';
+import { StatSubsections } from '../../sections/player-stats/data/section-columns';
 
 @Component({
   selector: 'replay-nav',
@@ -43,6 +44,7 @@ export class ReplayNavComponent implements OnChanges {
         };
         overview.children.push(scoreScreen);
 
+
         const talents: IReplayNavItemLink = {
           type: 'link',
           label: 'Talents',
@@ -68,17 +70,35 @@ export class ReplayNavComponent implements OnChanges {
         };
         overview.children.push(xpBreakdown);
 
-       // if (this.replayDescription.mapName === 'Cursed Hollow') {
-          const globeMap: IReplayNavItemLink = {
-            type: 'link',
-            label: 'Minion Deaths',
-            path: ['/minion-deaths']
-          };
-          overview.children.push(globeMap);
-     //   }
-
+        // if (this.replayDescription.mapName === 'Cursed Hollow') {
+        const globeMap: IReplayNavItemLink = {
+          type: 'link',
+          label: 'Minion Deaths',
+          path: ['/minion-deaths']
+        };
+        overview.children.push(globeMap);
+        //   }
 
         this.navData.push(overview);
+
+
+        const stats: IReplayNavItemSection = {
+          type: 'section',
+          label: 'Statistics',
+          children: []
+        };
+
+        for (let i = 0; i < StatSubsections.length; i++) {
+          const section = StatSubsections[i];
+          const sectionLink: IReplayNavItemLink = {
+            type: 'link',
+            label: section.title,
+            path: ['/player-stats', section.id]
+          };
+          stats.children.push(sectionLink);
+        }
+
+        this.navData.push(stats);
       } else {
         this.navData = undefined;
       }

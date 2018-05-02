@@ -1,0 +1,75 @@
+<mat-sidenav-container [hidden]="state !== SectionState.READY">
+  <mat-sidenav mode="side" opened="true" position="end">
+    <div class="preset-select">
+      <mat-form-field color="accent">
+        <input type="text" #presetName #autoTrigger="matAutocompleteTrigger" matInput placeholder="Presets" [matAutocomplete]="auto"
+          [value]="currentFilterName" (mousedown)="autoTrigger.openPanel()" (focus)="autoTrigger.openPanel()" (keydown)="handlePresetKeyPress($event)">
+      </mat-form-field>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="handlePresetSelected($event)" class="preset-options">
+        <mat-optgroup label="Built In">
+          <mat-option *ngFor="let filter of presetFilterArray" [value]="filter">
+            {{ filter }}
+          </mat-option>
+        </mat-optgroup>
+        <mat-optgroup label="User Defined" *ngIf="savedFilterArray?.length || currentFilterName ==='Custom'">
+          <mat-option value="Custom" *ngIf="currentFilterName ==='Custom'">
+            Custom
+            <span>*</span>
+          </mat-option>
+          <mat-option *ngFor="let filter of savedFilterArray" [value]="filter">
+            <label>{{ filter }}</label>
+            <button mat-icon-button (click)="deletePreset(filter)" color="warn">
+              <mat-icon aria-label="Example icon-button with a heart icon">remove</mat-icon>
+            </button>
+          </mat-option>
+        </mat-optgroup>
+      </mat-autocomplete>
+      <button mat-raised-button color="accent" [disabled]="currentFilterName !== 'Custom' || presetName.value === 'Custom'" (click)="savePreset(presetName.value)">Save</button>
+    </div>
+    <mat-selection-list #selectedStats dense (selectionChange)="handleColumnVisibilityChange($event)">
+      <mat-list-option *ngFor="let statCol of currentStatColumns" [disableRipple]="true" [value]="statCol.id" [selected]="statCol.selected"
+        (dragstart)="handleFilterDragStart($event, statCol)" (dragover)="handleFilterDragOver($event, statCol)" (dragleave)="handleFilterDragLeave($event, statCol)"
+        (drop)="handleFilterDrop($event, statCol)" draggable="true">
+        {{statColumnMap[statCol.id].label || statCol.id}}
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <table matSort cellspacing="0">
+      <thead>
+        <tr>
+          <th></th>
+          <th *ngFor="let statCol of currentDisplayColumns" [matColumnDef]="statCol.id">
+            <span class="header-size">{{statCol.label || statCol.id}}</span>
+            <div class="header-bg"></div>
+            <div class="header-text">
+              <mat-header-cell mat-sort-header xpopover="Total Hero Kills" xpopoverPosition="above">
+                {{statCol.label || statCol.id}}
+              </mat-header-cell>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <ng-container *ngIf="dataSource?.sort">
+        <tr *ngFor="let player of sorted" [class.team1]="player.team === 0" [class.team2]="player.team === 1">
+          <th>
+            <div class="bg"></div>
+            <div class="cell">
+              <div class="hero-container">
+                <hero-icon [hero]="player.hero" shape="none"></hero-icon>
+              </div>
+              <div class="name">
+                <div class="hero">{{player.hero}}</div>
+                <div class="player">{{player.name}}</div>
+              </div>
+            </div>
+          </th>
+          <td *ngFor="let statCol of currentDisplayColumns">
+            {{getValue(player, statCol.id)}}
+          </td>
+        </tr>
+      </ng-container>
+    </table>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<div #statusRef></div>

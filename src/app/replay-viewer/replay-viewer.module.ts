@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReplayViewerComponent } from './replay-viewer.component';
 import { ReplayHeaderComponent } from './components/replay-header/replay-header.component';
 import { HeroIconComponent } from './components/hero-icon/hero-icon.component';
@@ -10,16 +10,21 @@ import { ReplayNavComponent } from './components/replay-nav/replay-nav.component
 import { NavItemComponent } from './components/replay-nav/nav-item/nav-item.component';
 import { ReplayViewerRoutingModule } from './replay-viewer-routing.module';
 import { ScoreScreenComponent } from './sections/score-screen/score-screen.component';
+import { PlayerStatsComponent } from './sections/player-stats/player-stats.component';
 import {
   MatSidenavModule,
   MatProgressBarModule,
   MatTableModule,
   MatSortModule,
+  MatInputModule,
   MatCheckboxModule,
   MatButtonModule,
+  MatIconModule,
   MatSelectModule,
   MatFormFieldModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatListModule,
+  MatAutocompleteModule
 } from '@angular/material';
 
 
@@ -33,20 +38,28 @@ import { MapsModule } from './maps/maps.module';
 import { PopoverComponent, PopoverDirective } from './components/popover/popover.component';
 import { TalentIconComponent } from './components/talent-icon/talent-icon.component';
 import { TalentTipComponent } from './components/talent-tip/talent-tip.component';
+import { DurationPipe } from './pipes/duration.pipe';
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     MatSidenavModule,
     MatProgressBarModule,
     MatTableModule,
     MatSortModule,
     MatCheckboxModule,
+    MatAutocompleteModule,
     MatButtonModule,
     MatSelectModule,
+    MatInputModule,
+    MatIconModule,
     MatFormFieldModule,
     MatTooltipModule,
+    MatListModule,
+    MatAutocompleteModule,
     MapsModule,
     ReplayViewerRoutingModule,
   ],
@@ -60,6 +73,7 @@ import { TalentTipComponent } from './components/talent-tip/talent-tip.component
     ReplayNavComponent,
     NavItemComponent,
     ScoreScreenComponent,
+    PlayerStatsComponent,
     DraftComponent,
     TalentScreenComponent,
     SectionNotSupportedComponent,
@@ -69,7 +83,8 @@ import { TalentTipComponent } from './components/talent-tip/talent-tip.component
     PopoverDirective,
     PopoverComponent,
     TalentIconComponent,
-    TalentTipComponent
+    TalentTipComponent,
+    DurationPipe
   ],
   providers: [ClipIconService],
   entryComponents: [
