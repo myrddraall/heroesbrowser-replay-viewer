@@ -1,5 +1,6 @@
 export enum StatColumnType {
-    NUMBER = '#',
+    INTEGER = '#',
+    DECIMAL = '#.#',
     PERCENT = '%',
     DURATION = 'd'
 }
@@ -18,88 +19,70 @@ export interface IStatColumnSelection {
     selected: boolean;
 }
 
-
-
 export const StatColumns: IStatColumn[] = [
     {
         id: 'Takedowns',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'Deaths',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'TownKills',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'SoloKill',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'Assists',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'MetaExperience',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'TeamTakedowns',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'ExperienceContribution',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'Healing',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'SiegeDamage',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'StructureDamage',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'MinionDamage',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'HeroDamage',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'MercCampCaptures',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'WatchTowerCaptures',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'SelfHealing',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'TimeSpentDead',
@@ -111,38 +94,31 @@ export const StatColumns: IStatColumn[] = [
     },
     {
         id: 'CreepDamage',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'SummonDamage',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'DamageTaken',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'DamageSoaked',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'KilledTreasureGoblin',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'HighestKillStreak',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'ProtectionGivenToAllies',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'TimeSilencingEnemyHeroes',
@@ -158,53 +134,43 @@ export const StatColumns: IStatColumn[] = [
     },
     {
         id: 'ClutchHealsPerformed',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'EscapesPerformed',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'VengeancesPerformed',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'TeamfightEscapesPerformed',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'OutnumberedDeaths',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'TeamfightHealingDone',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'TeamfightDamageTaken',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'TeamfightHeroDamage',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'EndOfMatchAwardMostAltarDamageDone',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'EndOfMatchAwardGivenToNonwinner',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'OnFireTimeOnFire',
@@ -212,8 +178,7 @@ export const StatColumns: IStatColumn[] = [
     },
     {
         id: 'LunarNewYearSuccesfulArtifactTurnIns',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'TimeOnPoint',
@@ -221,38 +186,31 @@ export const StatColumns: IStatColumn[] = [
     },
     {
         id: 'LunarNewYearEventCompleted',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'StarcraftDailyEventCompleted',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'StarcraftPiecesCollected',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'LunarNewYearRoosterEventCompleted',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'TouchByBlightPlague',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'PachimariMania',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'DamageDoneToImmortal',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'KillParticipation',
@@ -261,23 +219,19 @@ export const StatColumns: IStatColumn[] = [
     },
     {
         id: 'AverageDamageTakenPerLife',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.INTEGER,
     },
     {
         id: 'KDARatio',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.DECIMAL,
     },
     {
         id: 'KDRatio',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.DECIMAL,
     },
     {
         id: 'ADRatio',
-        type: StatColumnType.NUMBER,
-        format: '1.0-2'
+        type: StatColumnType.DECIMAL,
     },
     {
         id: 'PercentDamageHealed',

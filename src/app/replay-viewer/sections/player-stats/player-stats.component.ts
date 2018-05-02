@@ -289,11 +289,13 @@ export class PlayerStatsComponent extends AbstractSectionComponent {
     const value = player.stats[propId];
     switch (def.type) {
       case StatColumnType.PERCENT:
-        return this.percentPipe.transform(value, def.format || '1.0-2');
+        return this.percentPipe.transform(value, def.format || '1.2-2');
       case StatColumnType.DURATION:
         return this.durationPipe.transform(value, undefined, undefined, '0s');
+      case StatColumnType.DECIMAL:
+        return this.decimalPipe.transform(value, def.format || '1.2-2');
       default:
-        return this.decimalPipe.transform(value, def.format || '1.0-2');
+        return this.decimalPipe.transform(value, def.format || '1.0-0');
     }
   }
 

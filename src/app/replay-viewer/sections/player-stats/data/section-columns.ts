@@ -2,30 +2,28 @@
 export interface IStatsSection {
     id: string;
     title: string;
-    columns: string[];
 }
 
 
 export const StatSubsections: IStatsSection[] = [
     {
+        id: 'pvp',
+        title: 'PvP Combat',
+    },
+   /* {
+        id: 'pve',
+        title: 'PvE Combat',
+    },
+    {
+        id: 'tanking',
+        title: 'Tanking',
+    },*/
+    {
         id: 'cc',
         title: 'Crowd Control',
-        columns:  [
-            'TimeCCdEnemyHeroes',
-            'TimeSilencingEnemyHeroes',
-            'TimeRootingEnemyHeroes',
-            'TimeStunningEnemyHeroes'
-        ]
     },
     {
         id: 'healing',
         title: 'Healing',
-        columns:  [
-            'Healing',
-            'SelfHealing',
-            'ClutchHealsPerformed',
-            'TeamfightHealingDone',
-            'PercentDamageHealed'
-        ]
     },
 ];
