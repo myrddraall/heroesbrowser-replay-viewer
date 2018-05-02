@@ -306,8 +306,9 @@ export class PlayerStatsComponent extends AbstractSectionComponent {
 
     this.statData = linq.from(statData).orderBy(p => p.team).toArray();
     this.dataSource.data = this.statData;
-
-    this.dataSource.sort = this.sort;
-    this.sort.start = 'desc';
+    setTimeout(() => {
+      this.dataSource.sort = this.sort;
+      this.sort.start = 'desc';
+    });
   }
 }
