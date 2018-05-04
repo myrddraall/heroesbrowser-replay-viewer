@@ -1,51 +1,54 @@
 <mat-sidenav-container *ngIf="statData" [hidden]="state !== SectionState.READY">
   <mat-sidenav mode="side" opened="true" position="end">
-    <div class="preset-select">
-      <mat-form-field color="accent">
-        <input type="text" #presetName #autoTrigger="matAutocompleteTrigger" matInput placeholder="Presets" [matAutocomplete]="auto"
-          [value]="currentFilterName" (mousedown)="autoTrigger.openPanel()" (focus)="autoTrigger.openPanel()" (keydown)="handlePresetKeyPress($event)">
-      </mat-form-field>
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="handlePresetSelected($event)" class="preset-options">
-        <mat-optgroup label="Built In">
-          <mat-option *ngFor="let filter of presetFilterArray" [value]="filter">
-            {{ filter }}
-          </mat-option>
-        </mat-optgroup>
-        <mat-optgroup label="User Defined" *ngIf="savedFilterArray?.length || currentFilterName ==='Custom'">
-          <mat-option value="Custom" *ngIf="currentFilterName ==='Custom'">
-            Custom
-            <span>*</span>
-          </mat-option>
-          <mat-option *ngFor="let filter of savedFilterArray" [value]="filter">
-            <label>{{ filter }}</label>
-            <button mat-icon-button (click)="deletePreset(filter)" color="warn">
-              <mat-icon aria-label="Example icon-button with a heart icon">remove</mat-icon>
-            </button>
-          </mat-option>
-        </mat-optgroup>
-      </mat-autocomplete>
-      <button mat-raised-button color="accent" [disabled]="currentFilterName !== 'Custom' || presetName.value === 'Custom'" (click)="savePreset(presetName.value)">Save</button>
+    <div class="side-content">
+      <div class="preset-select">
+        <mat-form-field color="accent">
+          <input type="text" #presetName #autoTrigger="matAutocompleteTrigger" matInput placeholder="Presets" [matAutocomplete]="auto"
+            [value]="currentFilterName" (mousedown)="autoTrigger.openPanel()" (focus)="autoTrigger.openPanel()" (keydown)="handlePresetKeyPress($event)">
+        </mat-form-field>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="handlePresetSelected($event)" class="preset-options">
+          <mat-optgroup label="Built In">
+            <mat-option *ngFor="let filter of presetFilterArray" [value]="filter">
+              {{ filter }}
+            </mat-option>
+          </mat-optgroup>
+          <mat-optgroup label="User Defined" *ngIf="savedFilterArray?.length || currentFilterName ==='Custom'">
+            <mat-option value="Custom" *ngIf="currentFilterName ==='Custom'">
+              Custom
+              <span>*</span>
+            </mat-option>
+            <mat-option *ngFor="let filter of savedFilterArray" [value]="filter">
+              <label>{{ filter }}</label>
+              <button mat-icon-button (click)="deletePreset(filter)" color="warn">
+                <mat-icon aria-label="Example icon-button with a heart icon">remove</mat-icon>
+              </button>
+            </mat-option>
+          </mat-optgroup>
+        </mat-autocomplete>
+        <button mat-raised-button color="accent" [disabled]="currentFilterName !== 'Custom' || presetName.value === 'Custom'" (click)="savePreset(presetName.value)">Save</button>
+      </div>
+      <input type="hidden" [value]="filterJsonString"/>
+      <mat-selection-list #selectedStats dense (selectionChange)="handleColumnVisibilityChange($event)">
+        <mat-list-option *ngFor="let statCol of currentStatColumns" [disableRipple]="true" [value]="statCol.id" [selected]="statCol.selected"
+          (dragstart)="handleFilterDragStart($event, statCol)" (dragover)="handleFilterDragOver($event, statCol)" (dragleave)="handleFilterDragLeave($event, statCol)"
+          (drop)="handleFilterDrop($event, statCol)" draggable="true"
+          [popover]="{col: statCol, notes: statData.statNotes[statCol.id]}" popoverPosition="left" [popoverTemplate]="headerPopover" popoverShowDelay="1000">
+          {{statColumnMap[statCol.id].label || statCol.id}}
+        </mat-list-option>
+      </mat-selection-list>
     </div>
-    <mat-selection-list #selectedStats dense (selectionChange)="handleColumnVisibilityChange($event)">
-      <mat-list-option *ngFor="let statCol of currentStatColumns" [disableRipple]="true" [value]="statCol.id" [selected]="statCol.selected"
-        (dragstart)="handleFilterDragStart($event, statCol)" (dragover)="handleFilterDragOver($event, statCol)" (dragleave)="handleFilterDragLeave($event, statCol)"
-        (drop)="handleFilterDrop($event, statCol)" draggable="true">
-        {{statColumnMap[statCol.id].label || statCol.id}}
-      </mat-list-option>
-    </mat-selection-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    {{SectionState[state]}}
     <table matSort cellspacing="0">
       <thead>
         <tr>
           <th></th>
-          <th *ngFor="let statCol of currentDisplayColumns" [matColumnDef]="statCol.id">
-            <span class="header-size">{{statCol.label || statCol.id}}</span>
+          <th *ngFor="let statCol of currentDisplayColumns" [matColumnDef]="statCol.id" >
+            <span class="header-size">{{statCol.label || statCol.id}} <span class="notes">&nbsp;*</span></span>
             <div class="header-bg"></div>
             <div class="header-text">
-              <mat-header-cell mat-sort-header xpopover="Total Hero Kills" xpopoverPosition="above">
-                {{statCol.label || statCol.id}}
+              <mat-header-cell mat-sort-header [popover]="{col: statCol, notes: statData.statNotes[statCol.id]}" popoverPosition="left" [popoverTemplate]="headerPopover" >
+                {{statCol.label || statCol.id}} <span class="notes" *ngIf="statData.statNotes[statCol.id]">&nbsp;*</span>
               </mat-header-cell>
             </div>
           </th>
@@ -73,5 +76,14 @@
     </table>
   </mat-sidenav-content>
 </mat-sidenav-container>
-<!--<pre>{{statColumns | json}}</pre>-->
 <div #statusRef></div>
+
+<ng-template #headerPopover let-col="data.col" let-notes="data.notes">
+  <div class="header-tip">
+      <h3>{{col.label || col.id}}</h3>
+      <div class="description" *ngIf="col.description">{{col.description}}</div>
+      <div class="note" *ngFor="let note of notes"><div class="star">*</div><div class="text">{{note}}</div></div>
+  </div>
+</ng-template>
+<!--<pre>{{statColumns | json}}</pre>-->
+<pre>{{sorted | json}}</pre>

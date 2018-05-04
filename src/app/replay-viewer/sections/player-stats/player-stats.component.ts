@@ -23,7 +23,8 @@ import {
   ScoreAnalyser,
   IPlayerScore,
   IPlayerScoreStats,
-  IScoreScreenData
+  IScoreScreenData,
+  IPlayerStatData
 } from '@heroesbrowser/heroprotocol';
 import {
   MatTableDataSource,
@@ -63,7 +64,7 @@ export class PlayerStatsComponent extends AbstractSectionComponent {
 
   @ViewChild(MatSort) private sort: MatSort;
   public dataSource: MatTableDataSource<IPlayerScore> = new MatTableDataSource();
-  public statData: IPlayerScore[];
+  public statData: IPlayerStatData;
 
   private decimalPipe: DecimalPipe;
   private percentPipe: PercentPipe;
@@ -284,6 +285,10 @@ export class PlayerStatsComponent extends AbstractSectionComponent {
     return sortedData;
   }
 
+  public get filterJsonString(): string {
+    return JSON.stringify(this.currentStatColumns);
+  }
+
   public getValue(player: IPlayerScore, propId: string): string {
     const def = this.statColumnMap[propId];
     const value = player.stats[propId];
@@ -302,12 +307,12 @@ export class PlayerStatsComponent extends AbstractSectionComponent {
   protected async loadReplayView() {
     // this.replayDescription = this.replayViewer.replayDescription;
     this.scoreScreenAnalyser = new ScoreAnalyser(this.replay);
-    const statData = await this.scoreScreenAnalyser.playerScoresFull;
+    this.statData = await this.scoreScreenAnalyser.playerScoresFull;
 
-    console.log('statData', statData);
+    console.log('statData', this.statData);
 
-    this.statData = linq.from(statData).orderBy(p => p.team).toArray();
-    this.dataSource.data = this.statData;
+    const statData = linq.from(this.statData.playerStats).orderBy(p => p.team).toArray();
+    this.dataSource.data = statData;
     setTimeout(() => {
       this.dataSource.sort = this.sort;
       this.sort.start = 'desc';

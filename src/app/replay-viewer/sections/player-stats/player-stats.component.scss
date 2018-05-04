@@ -52,6 +52,12 @@ $redBgDark: #27021f;
     border-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(blueviolet, 0.4), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)) 200 100%;
     padding: 40px;
     min-width: 375px;
+    .preset-select {
+      position: sticky;
+      top: 0;
+      background-color: #0d0119;
+      z-index: 15;
+    }
     .mat-selection-list {
       .mat-list-option {
         &.drop-above,
@@ -107,6 +113,9 @@ $redBgDark: #27021f;
           transform: rotateZ(-45deg); //position: absolute;
           border-bottom: 1px solid rgba(white, 0.5);
           padding: 4px; // bottom: 16px;
+          .notes{
+            color: red;
+          }
           //right: 16px;
           ::ng-deep {
             .mat-sort-header-container {
@@ -344,67 +353,19 @@ $redBgDark: #27021f;
   }
 }
 
-/*mat-table {
-    .mat-header-cell {
-      overflow: visible;
-      min-width: 48px;
-      max-width: 48px;
-      ::ng-deep{
-        .mat-sort-header-container {
-          transform: rotateZ(-45deg) translateY(50%);
-        }
-      }
-    }
-    .mat-row {
-      .mat-cell {
-        font-size: 12px;
-        font-weight: 400;
-        text-shadow: none;
-        min-width: 48px;
-        max-width: 48px;
-      }
-    }
+.header-tip {
+  h3{
+    margin-bottom: 0px;
+    color:white;
   }
-  mat-table {
-    .best-team {
-      font-weight: 500;
+  .note {
+    display: flex;
+    .star {
+      color: red;
+      padding-right:4px;
     }
-    .best {
-      font-weight: 700;
+    .text {
+      flex-grow: 1;
     }
   }
 }
-
-.score-table {
-  .mat-row {
-    &.team1 {
-      $glowColor: blue;
-      .mat-cell {
-        &.best-team {
-          color: lighten($color: $glowColor, $amount: 45);
-          font-weight: 700;
-        }
-        &.best {
-          font-weight: 700;
-          color: lighten($color: $glowColor, $amount: 45);
-          text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor;
-        }
-      }
-    }
-    &.team2 {
-      $glowColor: red;
-      .mat-cell {
-        &.best-team {
-          color: lighten($color: $glowColor, $amount: 45);
-          font-weight: 700;
-        }
-        &.best {
-          font-weight: 700;
-          color: lighten($color: $glowColor, $amount: 45);
-          text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor, 0px 0px 4px $glowColor;
-        }
-      }
-    }
-  }
-}
-*/

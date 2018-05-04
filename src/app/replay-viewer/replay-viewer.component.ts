@@ -13,6 +13,7 @@ import {
 import { Router } from '@angular/router';
 import { Angulartics2 } from 'angulartics2';
 import { Replay, BasicReplayAnalyser, ReplayDescription, GameType } from '@heroesbrowser/heroprotocol';
+import * as linq from 'linq';
 
 enum FileState {
   NONE,
@@ -165,11 +166,19 @@ export class ReplayViewerComponent implements OnInit {
     // console.log('header', await this.replay.header);
     // console.log('initData', await this.replay.initData);
     // console.log('details', await this.replay.details);
-    // console.log('attributeEvents', await this.replay.attributeEvents);
+     // console.log('attributeEvents', await this.replay.attributeEvents);
     // console.log('messageEvents', await this.replay.messageEvents);
     console.log('trackerEvents', await this.replay.trackerEvents);
     console.log('gameEvents', await this.replay.gameEvents);
-    console.log('this.replayDescription', this.replayDescription);
+    // console.log('this.replayDescription', this.replayDescription);
+
+
+    const joinLeave = linq.from(await this.replay.gameEvents)
+      .where(_ => _._event === 'NNet.Game.SGameUserLeaveEvent' || _._event === 'NNet.Game.SGameUserJoinEvent')
+      .toArray();
+
+      console.log('joinLeave', joinLeave);
   }
+
 
 }

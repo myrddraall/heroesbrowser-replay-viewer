@@ -6,19 +6,47 @@ export const PrebuiltColumnFilters: { [section: string]: { [filter: string]: ISt
     tanking: {
         [DEFAULT_COL_FILTER_NAME]: [
             {
-                id: 'TimeCCdEnemyHeroes',
+                id: 'AverageDamageTakenPerLife',
                 selected: true
             },
             {
-                id: 'TimeRootingEnemyHeroes',
+                id: 'DamageTaken',
                 selected: true
             },
             {
-                id: 'TimeSilencingEnemyHeroes',
+                id: 'DamageSoaked',
                 selected: true
             },
             {
-                id: 'TimeStunningEnemyHeroes',
+                id: 'TeamfightDamageTaken',
+                selected: true
+            },
+            {
+                id: 'KillParticipation',
+                selected: true
+            },
+            {
+                id: 'TimeSpentDead',
+                selected: true
+            },
+            {
+                id: 'Deaths',
+                selected: true
+            },
+            {
+                id: 'AverageTeamfightDamageTakenPerLife',
+                selected: true
+            },
+            {
+                id: 'PercentDamageTaken',
+                selected: true
+            },
+            {
+                id: 'PercentTeamfightDamageTaken',
+                selected: true
+            },
+            {
+                id: 'PercentGameSpentDead',
                 selected: true
             }
         ]
@@ -26,95 +54,171 @@ export const PrebuiltColumnFilters: { [section: string]: { [filter: string]: ISt
     pvp: {
         [DEFAULT_COL_FILTER_NAME]: [
             {
-              id: 'KillParticipation',
-              selected: true
+                id: 'KillParticipation',
+                selected: true
             },
             {
-              id: 'AverageDamageTakenPerLife',
-              selected: true
+                id: 'AverageDamageTakenPerLife',
+                selected: true
             },
             {
-              id: 'KDARatio',
-              selected: true
+                id: 'KDARatio',
+                selected: true
             },
             {
-              id: 'HighestKillStreak',
-              selected: true
+                id: 'HighestKillStreak',
+                selected: true
             },
             {
-              id: 'Takedowns',
-              selected: true
+                id: 'Takedowns',
+                selected: true
             },
             {
-              id: 'Deaths',
-              selected: true
+                id: 'Deaths',
+                selected: true
             },
             {
-              id: 'Assists',
-              selected: true
+                id: 'Assists',
+                selected: true
             },
             {
-              id: 'SoloKill',
-              selected: true
+                id: 'SoloKill',
+                selected: true
             },
             {
-              id: 'TimeSpentDead',
-              selected: true
+                id: 'TimeSpentDead',
+                selected: true
             },
             {
-              id: 'OutnumberedDeaths',
-              selected: true
+                id: 'OutnumberedDeaths',
+                selected: true
             },
             {
-              id: 'HeroDamage',
-              selected: true
+                id: 'HeroDamage',
+                selected: true
             },
             {
-              id: 'DamageTaken',
-              selected: true
+                id: 'DamageTaken',
+                selected: true
             },
             {
-              id: 'TeamfightDamageTaken',
-              selected: true
+                id: 'TeamfightDamageTaken',
+                selected: true
             },
             {
-              id: 'KDRatio',
-              selected: false
+                id: 'SummonDamage',
+                selected: false
             },
             {
-              id: 'ADRatio',
-              selected: false
+                id: 'KDRatio',
+                selected: false
             },
             {
-              id: 'EscapesPerformed',
-              selected: false
+                id: 'ADRatio',
+                selected: false
             },
             {
-              id: 'VengeancesPerformed',
-              selected: false
+                id: 'EscapesPerformed',
+                selected: false
             },
             {
-              id: 'TeamfightEscapesPerformed',
-              selected: false
+                id: 'VengeancesPerformed',
+                selected: false
+            },
+            {
+                id: 'TeamfightEscapesPerformed',
+                selected: false
+            },
+            {
+                id: 'AverageHeroDamagePerLife',
+                selected: false
+            },
+            {
+                id: 'AverageTeamfightHeroDamagePerLife',
+                selected: false
+            },
+            {
+                id: 'AverageTeamfightDamageTakenPerLife',
+                selected: false
+            },
+            {
+                id: 'PercentHeroDamage',
+                selected: false
+            },
+            {
+                id: 'PercentTeamfightHeroDamage',
+                selected: false
+            },
+            {
+                id: 'PercentDamageTaken',
+                selected: false
+            },
+            {
+                id: 'PercentTeamfightDamageTaken',
+                selected: false
+            },
+            {
+                id: 'PercentGameSpentDead',
+                selected: false
+            },
+            {
+                id: 'PercentTimeOnFire',
+                selected: false
             }
-          ]
+        ]
     },
     pve: {
         [DEFAULT_COL_FILTER_NAME]: [
             {
-                id: 'TimeCCdEnemyHeroes',
+                id: 'ExperienceContribution',
                 selected: true
             },
             {
-                id: 'TimeRootingEnemyHeroes',
+                id: 'SiegeDamage',
                 selected: true
             },
             {
-                id: 'TimeSilencingEnemyHeroes',
+                id: 'StructureDamage',
                 selected: true
             },
             {
-                id: 'TimeStunningEnemyHeroes',
+                id: 'MinionDamage',
+                selected: true
+            },
+            {
+                id: 'MercCampCaptures',
+                selected: true
+            },
+            {
+                id: 'WatchTowerCaptures',
+                selected: true
+            },
+            {
+                id: 'CreepDamage',
+                selected: true
+            },
+            {
+                id: 'AverageSiegeDamagePerLife',
+                selected: true
+            },
+            {
+                id: 'PercentSiegeDamage',
+                selected: true
+            },
+            {
+                id: 'PercentStructureDamage',
+                selected: true
+            },
+            {
+                id: 'PercentMinionDamage',
+                selected: true
+            },
+            {
+                id: 'PercentCreepDamage',
+                selected: true
+            },
+            {
+                id: 'PercentXPContribution',
                 selected: true
             }
         ]
@@ -160,7 +264,51 @@ export const PrebuiltColumnFilters: { [section: string]: { [filter: string]: ISt
             {
                 id: 'PercentDamageHealed',
                 selected: true
+            },
+            {
+                id: 'ProtectionGivenToAllies',
+                selected: true
+            },
+            {
+                id: 'AverageHealingPerLife',
+                selected: true
+            },
+            {
+                id: 'AverageTeamfightHealingPerLife',
+                selected: true
+            },
+            {
+                id: 'PercentHealing',
+                selected: true
+            },
+            {
+                id: 'PercentProtection',
+                selected: true
+            },
+            {
+                id: 'PercentTeamfightHealing',
+                selected: true
             }
         ]
-    }
+    },
+    misc: {
+        [DEFAULT_COL_FILTER_NAME]: [
+            {
+                id: 'Disconnects',
+                selected: true
+            },
+            {
+                id: 'Reconnects',
+                selected: true
+            },
+            {
+                id: 'TimeDisconnected',
+                selected: true
+            },
+            {
+                id: 'PercentOfGameDisconnected',
+                selected: true
+            }
+        ]
+    },
 };

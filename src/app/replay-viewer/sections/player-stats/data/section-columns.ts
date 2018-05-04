@@ -10,14 +10,14 @@ export const StatSubsections: IStatsSection[] = [
         id: 'pvp',
         title: 'PvP Combat',
     },
-   /* {
-        id: 'pve',
-        title: 'PvE Combat',
-    },
     {
         id: 'tanking',
         title: 'Tanking',
-    },*/
+    },
+    {
+         id: 'pve',
+         title: 'PvE Combat',
+     },
     {
         id: 'cc',
         title: 'Crowd Control',
@@ -25,5 +25,9 @@ export const StatSubsections: IStatsSection[] = [
     {
         id: 'healing',
         title: 'Healing',
+    },
+    {
+        id: 'misc',
+        title: 'Misc. Stats',
     },
 ];

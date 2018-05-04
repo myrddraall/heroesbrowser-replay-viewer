@@ -218,10 +218,6 @@ export const StatColumns: IStatColumn[] = [
         format: '1.0-0'
     },
     {
-        id: 'AverageDamageTakenPerLife',
-        type: StatColumnType.INTEGER,
-    },
-    {
         id: 'KDARatio',
         type: StatColumnType.DECIMAL,
     },
@@ -234,7 +230,107 @@ export const StatColumns: IStatColumn[] = [
         type: StatColumnType.DECIMAL,
     },
     {
+        id: 'AverageHeroDamagePerLife',
+        type: StatColumnType.INTEGER,
+    },
+    {
+        id: 'AverageTeamfightHeroDamagePerLife',
+        type: StatColumnType.INTEGER,
+    },
+    {
+        id: 'AverageSiegeDamagePerLife',
+        type: StatColumnType.INTEGER,
+    },
+    {
+        id: 'AverageHealingPerLife',
+        type: StatColumnType.INTEGER,
+    },
+    {
+        id: 'AverageTeamfightHealingPerLife',
+        type: StatColumnType.INTEGER,
+    },
+    {
+        id: 'AverageDamageTakenPerLife',
+        type: StatColumnType.INTEGER,
+    },
+    {
+        id: 'AverageTeamfightDamageTakenPerLife',
+        type: StatColumnType.INTEGER,
+    },
+    {
+        id: 'PercentHeroDamage',
+        type: StatColumnType.PERCENT
+    },
+    {
+        id: 'PercentTeamfightHeroDamage',
+        type: StatColumnType.PERCENT
+    },
+    {
+        id: 'PercentSiegeDamage',
+        type: StatColumnType.PERCENT
+    },
+    {
+        id: 'PercentStructureDamage',
+        type: StatColumnType.PERCENT
+    },
+    {
+        id: 'PercentMinionDamage',
+        type: StatColumnType.PERCENT
+    },
+    {
+        id: 'PercentCreepDamage',
+        type: StatColumnType.PERCENT
+    },
+    {
+        id: 'PercentHealing',
+        type: StatColumnType.PERCENT
+    },
+    {
+        id: 'PercentProtection',
+        type: StatColumnType.PERCENT
+    },
+    {
+        id: 'PercentTeamfightHealing',
+        type: StatColumnType.PERCENT
+    },
+    {
+        id: 'PercentDamageTaken',
+        type: StatColumnType.PERCENT
+    },
+    {
+        id: 'PercentTeamfightDamageTaken',
+        type: StatColumnType.PERCENT
+    },
+    {
+        id: 'PercentXPContribution',
+        type: StatColumnType.PERCENT
+    },
+    {
+        id: 'PercentGameSpentDead',
+        type: StatColumnType.PERCENT
+    },
+    {
+        id: 'PercentTimeOnFire',
+        type: StatColumnType.PERCENT
+    },
+    {
         id: 'PercentDamageHealed',
+        type: StatColumnType.PERCENT
+    },
+    {
+        id: 'Disconnects',
+        type: StatColumnType.INTEGER
+    },
+    {
+        id: 'Reconnects',
+        type: StatColumnType.INTEGER
+    },
+    {
+        id: 'TimeDisconnected',
+        type: StatColumnType.DURATION
+    },
+    {
+        id: 'PercentOfGameDisconnected',
         type: StatColumnType.PERCENT
     }
 ];
