@@ -24,7 +24,8 @@ import {
   IPlayerScore,
   IPlayerScoreStats,
   IScoreScreenData,
-  IPlayerStatData
+  IPlayerStatData,
+  ReplayStatSupport
 } from '@heroesbrowser/heroprotocol';
 import {
   MatTableDataSource,
@@ -129,12 +130,17 @@ export class PlayerStatsComponent extends AbstractSectionComponent {
   }
 
   private updateDisplayColumns() {
-    this.currentDisplayColumns = [];
-    for (let i = 0; i < this.currentStatColumns.length; i++) {
-      const col = this.currentStatColumns[i];
-      if (col.selected) {
-        const colDef = this.statColumnMap[col.id];
-        this.currentDisplayColumns.push(colDef);
+    if (this.statData) {
+      this.currentDisplayColumns = [];
+      for (let i = 0; i < this.currentStatColumns.length; i++) {
+        const col = this.currentStatColumns[i];
+        if (col.selected) {
+          const colDef = this.statColumnMap[col.id];
+          const support = this.statData.statSupport[col.id];
+          if (support !== ReplayStatSupport.NONE) {
+            this.currentDisplayColumns.push(colDef);
+          }
+        }
       }
     }
   }
@@ -304,6 +310,13 @@ export class PlayerStatsComponent extends AbstractSectionComponent {
     }
   }
 
+  public getSupportedClass(statName: string): string {
+    if (this.statData && this.statData.statSupport[statName]) {
+      return 'support-' + ReplayStatSupport[this.statData.statSupport[statName]].toLowerCase();
+    }
+    return 'support-full';
+  }
+
   protected async loadReplayView() {
     // this.replayDescription = this.replayViewer.replayDescription;
     this.scoreScreenAnalyser = new ScoreAnalyser(this.replay);
@@ -316,6 +329,7 @@ export class PlayerStatsComponent extends AbstractSectionComponent {
     setTimeout(() => {
       this.dataSource.sort = this.sort;
       this.sort.start = 'desc';
+      this.updateDisplayColumns();
     });
   }
 }

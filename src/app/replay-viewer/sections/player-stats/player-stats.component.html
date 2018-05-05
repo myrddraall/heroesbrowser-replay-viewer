@@ -33,7 +33,7 @@
           (dragstart)="handleFilterDragStart($event, statCol)" (dragover)="handleFilterDragOver($event, statCol)" (dragleave)="handleFilterDragLeave($event, statCol)"
           (drop)="handleFilterDrop($event, statCol)" draggable="true"
           [popover]="{col: statCol, notes: statData.statNotes[statCol.id]}" popoverPosition="left" [popoverTemplate]="headerPopover" popoverShowDelay="1000">
-          {{statColumnMap[statCol.id].label || statCol.id}}
+          <div>{{statColumnMap[statCol.id].label || statCol.id}}<span class="support-note-marker"  [ngClass]="[getSupportedClass(statCol.id)]" *ngIf="statData.statSupport[statCol.id]">&nbsp;*</span></div>
         </mat-list-option>
       </mat-selection-list>
     </div>
@@ -42,13 +42,19 @@
     <table matSort cellspacing="0">
       <thead>
         <tr>
-          <th></th>
+          <th>
+            <div class="support-legend">
+              <div><span class="support-note-marker support-partial">*&nbsp;</span>Some Roles</div>
+              <div><span class="support-note-marker support-flawed">*&nbsp;</span>Flawed Support</div>
+              <div><span class="support-note-marker support-none">*&nbsp;</span>Not Supported</div>
+            </div>
+          </th>
           <th *ngFor="let statCol of currentDisplayColumns" [matColumnDef]="statCol.id" >
-            <span class="header-size">{{statCol.label || statCol.id}} <span class="notes">&nbsp;*</span></span>
+            <span class="header-size">{{statCol.label || statCol.id}} <span class="support-note-marker" [ngClass]="[getSupportedClass(statCol.id)]">&nbsp;*</span></span>
             <div class="header-bg"></div>
             <div class="header-text">
-              <mat-header-cell mat-sort-header [popover]="{col: statCol, notes: statData.statNotes[statCol.id]}" popoverPosition="left" [popoverTemplate]="headerPopover" >
-                {{statCol.label || statCol.id}} <span class="notes" *ngIf="statData.statNotes[statCol.id]">&nbsp;*</span>
+              <mat-header-cell mat-sort-header [popover]="{col: statCol, notes: statData.statNotes[statCol.id]}" popoverPosition="left" [popoverTemplate]="headerPopover" popoverHideDelay="100000" >
+                {{statCol.label || statCol.id}} <span class="support-note-marker" [ngClass]="[getSupportedClass(statCol.id)]" *ngIf="statData.statSupport[statCol.id]">&nbsp;*</span>
               </mat-header-cell>
             </div>
           </th>
@@ -82,8 +88,8 @@
   <div class="header-tip">
       <h3>{{col.label || col.id}}</h3>
       <div class="description" *ngIf="col.description">{{col.description}}</div>
-      <div class="note" *ngFor="let note of notes"><div class="star">*</div><div class="text">{{note}}</div></div>
+      <div class="note" *ngFor="let note of notes"><div class="support-note-marker" [ngClass]="[getSupportedClass(col.id)]">*</div><div class="text">{{note}}</div></div>
   </div>
 </ng-template>
 <!--<pre>{{statColumns | json}}</pre>-->
-<pre>{{sorted | json}}</pre>
+<!--<pre>{{sorted | json}}</pre> -->

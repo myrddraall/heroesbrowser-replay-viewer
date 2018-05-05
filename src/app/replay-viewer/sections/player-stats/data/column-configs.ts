@@ -18,6 +18,10 @@ export const PrebuiltColumnFilters: { [section: string]: { [filter: string]: ISt
                 selected: true
             },
             {
+                id: 'AverageDamageSoakedPerLife',
+                selected: true
+            },
+            {
                 id: 'TeamfightDamageTaken',
                 selected: true
             },
@@ -39,6 +43,10 @@ export const PrebuiltColumnFilters: { [section: string]: { [filter: string]: ISt
             },
             {
                 id: 'PercentDamageTaken',
+                selected: true
+            },
+            {
+                id: 'PercentDamageSoaked',
                 selected: true
             },
             {

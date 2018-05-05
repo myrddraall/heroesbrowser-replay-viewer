@@ -81,6 +81,7 @@ $redBgDark: #27021f;
       }
     }
   }
+ 
   table {
     background-color: #0d0119;
     thead {
@@ -91,6 +92,7 @@ $redBgDark: #27021f;
           visibility: hidden;
           font-size: 12px;
           font-weight: 400;
+          white-space: nowrap;
         }
         .header-bg {
           // width: 100%;
@@ -106,16 +108,16 @@ $redBgDark: #27021f;
           left: 100%;
           bottom: 28px;
           z-index: 10;
+          
         }
         .mat-header-cell {
           display: block;
+          white-space: nowrap;
           transform-origin: left bottom;
           transform: rotateZ(-45deg); //position: absolute;
           border-bottom: 1px solid rgba(white, 0.5);
           padding: 4px; // bottom: 16px;
-          .notes{
-            color: red;
-          }
+         
           //right: 16px;
           ::ng-deep {
             .mat-sort-header-container {
@@ -360,12 +362,37 @@ $redBgDark: #27021f;
   }
   .note {
     display: flex;
-    .star {
-      color: red;
+    .support-note-marker {
       padding-right:4px;
+      top:12px;
     }
     .text {
       flex-grow: 1;
     }
+  }
+}
+
+
+.support-legend{
+  text-align: left;
+  font-weight: 300;
+  .support-note-marker{
+    top: 8px;
+  }
+}
+.support-note-marker{
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 0px;
+  top:3px;
+ 
+  &.support-partial{
+    color: yellow;
+  }
+  &.support-flawed{
+    color: orange;
+  }
+  &.support-none{
+    color: red;
   }
 }
