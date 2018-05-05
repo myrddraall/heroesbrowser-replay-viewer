@@ -32,7 +32,7 @@
         <mat-list-option *ngFor="let statCol of currentStatColumns" [disableRipple]="true" [value]="statCol.id" [selected]="statCol.selected"
           (dragstart)="handleFilterDragStart($event, statCol)" (dragover)="handleFilterDragOver($event, statCol)" (dragleave)="handleFilterDragLeave($event, statCol)"
           (drop)="handleFilterDrop($event, statCol)" draggable="true"
-          [popover]="{col: statCol, notes: statData.statNotes[statCol.id]}" popoverPosition="left" [popoverTemplate]="headerPopover" popoverShowDelay="1000">
+          [popover]="{col: statColumnMap[statCol.id], notes: statData.statNotes[statCol.id]}" popoverPosition="left" [popoverTemplate]="headerPopover" popoverShowDelay="1000">
           <div>{{statColumnMap[statCol.id].label || statCol.id}}<span class="support-note-marker"  [ngClass]="[getSupportedClass(statCol.id)]" *ngIf="statData.statSupport[statCol.id]">&nbsp;*</span></div>
         </mat-list-option>
       </mat-selection-list>
@@ -53,7 +53,7 @@
             <span class="header-size">{{statCol.label || statCol.id}} <span class="support-note-marker" [ngClass]="[getSupportedClass(statCol.id)]">&nbsp;*</span></span>
             <div class="header-bg"></div>
             <div class="header-text">
-              <mat-header-cell mat-sort-header [popover]="{col: statCol, notes: statData.statNotes[statCol.id]}" popoverPosition="left" [popoverTemplate]="headerPopover" popoverHideDelay="100000" >
+              <mat-header-cell mat-sort-header [popover]="{col: statCol, notes: statData.statNotes[statCol.id]}" popoverPosition="left" [popoverTemplate]="headerPopover" >
                 {{statCol.label || statCol.id}} <span class="support-note-marker" [ngClass]="[getSupportedClass(statCol.id)]" *ngIf="statData.statSupport[statCol.id]">&nbsp;*</span>
               </mat-header-cell>
             </div>
