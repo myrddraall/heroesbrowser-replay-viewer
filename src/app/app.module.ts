@@ -2,6 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HeroProtocol } from '@heroesbrowser/heroprotocol';
 import { environment } from '../environments/environment';
+import { RouterModule } from '@angular/router';
+import {
+  MatMenuModule,
+  MatIconModule,
+  MatButtonModule,
+  MatTabsModule,
+  MatSidenavModule
+} from '@angular/material';
 import { AppComponent } from './app.component';
 import { ReplayViewerModule } from './replay-viewer/replay-viewer.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,7 +21,13 @@ HeroProtocol.env = environment.production ? 'production' : 'developement';
   ],
   imports: [
     BrowserModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTabsModule,
+    MatSidenavModule,
     ReplayViewerModule,
+    RouterModule,
     AppRoutingModule
   ],
   providers: [],

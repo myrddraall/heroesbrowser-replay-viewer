@@ -1,6 +1,6 @@
 import {
   Component,
-  OnInit,
+  OnDestroy,
   HostListener,
   ViewChild,
   ElementRef,
@@ -14,10 +14,13 @@ import { Router } from '@angular/router';
 import { Angulartics2 } from 'angulartics2';
 import { Replay, BasicReplayAnalyser, ReplayDescription, GameType } from '@heroesbrowser/heroprotocol';
 import * as linq from 'linq';
+import { ReplayService, ReplayState } from './services/replay-service/replay.service';
+import { Subscription } from 'rxjs/Subscription';
 
 enum FileState {
   NONE,
   DRAGGING,
+  INITIALIZING,
   LOADING,
   PARSING,
   LOADED,
@@ -30,13 +33,15 @@ enum FileState {
   styleUrls: ['./replay-viewer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReplayViewerComponent implements OnInit {
+export class ReplayViewerComponent implements OnDestroy {
   public FileState = FileState;
   private _fileState: FileState = FileState.NONE;
+
+  private _subscriptions: Subscription[] = [];
   public onReplayLoaded: EventEmitter<Replay> = new EventEmitter();
   public loadError: Error;
   public replay: Replay;
-  private basicReplayAnalyser: BasicReplayAnalyser;
+  // private basicReplayAnalyser: BasicReplayAnalyser;
 
   @ViewChild('fileInput')
   private fileInputRef: ElementRef;
@@ -49,8 +54,45 @@ export class ReplayViewerComponent implements OnInit {
     private elmRef: ElementRef,
     private changeDetectorRef: ChangeDetectorRef,
     private router: Router,
-    private angulartics2: Angulartics2
-  ) { }
+    private angulartics2: Angulartics2,
+    private replayService: ReplayService
+  ) {
+
+    this._subscriptions.push(replayService.stateChange.subscribe(state => {
+      switch (state) {
+        case ReplayState.NONE:
+          this.fileState = FileState.NONE;
+          break;
+        case ReplayState.INITIALIZING:
+          this.fileState = FileState.INITIALIZING;
+          break;
+        case ReplayState.LOADING:
+          this.fileState = FileState.LOADING;
+          break;
+        case ReplayState.PARSING:
+          this.fileState = FileState.PARSING;
+          break;
+        case ReplayState.LOADED:
+          this.fileState = FileState.LOADED;
+          break;
+      }
+    }));
+
+    this._subscriptions.push(replayService.replayDescriptionChange.subscribe(replayDesc => {
+      this.replayDescription = replayDesc;
+      this.changeDetectorRef.markForCheck();
+    }));
+
+    this._subscriptions.push(replayService.replayChange.subscribe(replay => {
+      this.replay = replay;
+      this.onReplayLoaded.next(replay);
+      if (replay) {
+        this.logGameData();
+      }
+      this.changeDetectorRef.markForCheck();
+    }));
+
+  }
 
   public get fileState(): FileState {
     return this._fileState;
@@ -61,9 +103,6 @@ export class ReplayViewerComponent implements OnInit {
       this._fileState = value;
       this.changeDetectorRef.markForCheck();
     }
-  }
-
-  ngOnInit() {
   }
 
   @HostListener('dragstart', ['$event'])
@@ -127,7 +166,15 @@ export class ReplayViewerComponent implements OnInit {
   }
 
   public async handleReplayLoaded(replayData: ArrayBuffer) {
-    this.fileState = FileState.PARSING;
+    try {
+      this.replayService.loadReplay(replayData);
+
+    } catch (e) {
+      console.error(e);
+      this.loadError = e;
+      this.fileState = FileState.ERROR;
+    }
+    /*this.fileState = FileState.PARSING;
     if (this.replay) {
       this.replay.dispose();
     }
@@ -159,14 +206,14 @@ export class ReplayViewerComponent implements OnInit {
       this.fileState = FileState.ERROR;
       this.replay.dispose();
       this.replay = undefined;
-    }
+    }*/
   }
 
   private async logGameData() {
     // console.log('header', await this.replay.header);
     // console.log('initData', await this.replay.initData);
     // console.log('details', await this.replay.details);
-     // console.log('attributeEvents', await this.replay.attributeEvents);
+    // console.log('attributeEvents', await this.replay.attributeEvents);
     // console.log('messageEvents', await this.replay.messageEvents);
     console.log('trackerEvents', await this.replay.trackerEvents);
     console.log('gameEvents', await this.replay.gameEvents);
@@ -177,8 +224,15 @@ export class ReplayViewerComponent implements OnInit {
       .where(_ => _._event === 'NNet.Game.SGameUserLeaveEvent' || _._event === 'NNet.Game.SGameUserJoinEvent')
       .toArray();
 
-      console.log('joinLeave', joinLeave);
+    console.log('joinLeave', joinLeave);
   }
 
+  public ngOnDestroy() {
+    for (let i = 0; i < this._subscriptions.length; i++) {
+      const sub = this._subscriptions[i];
+      sub.unsubscribe();
+    }
+    this._subscriptions = undefined;
+  }
 
 }

@@ -1,13 +1,13 @@
 {
   "name": "replay-viewer",
-  "version": "0.0.0",
+  "version": "0.8.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod",
-    "docs": "ng build --prod -bh /heroesbrowser-replay-viewer/ -op ./docs",
-    "devdocs": "ng build -bh /heroesbrowser-replay-viewer/ -op ./docs",
+    "build": "gulp prebuild && ng build --prod",
+    "docs": "gulp prebuild && ng build --prod -bh /heroesbrowser-replay-viewer/ -op ./docs",
+    "devdocs": "gulp prebuild && ng build -bh /heroesbrowser-replay-viewer/ -op ./docs",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

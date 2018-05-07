@@ -39,6 +39,10 @@ import { PopoverComponent, PopoverDirective } from './components/popover/popover
 import { TalentIconComponent } from './components/talent-icon/talent-icon.component';
 import { TalentTipComponent } from './components/talent-tip/talent-tip.component';
 import { DurationPipe } from './pipes/duration.pipe';
+import { AboutComponent } from './sections/about/about.component';
+import { AppSettingComponent } from './components/app-setting/app-setting.component';
+import { ReplayService } from './services/replay-service/replay.service';
+import { FaqComponent } from './sections/faq/faq.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -64,7 +68,8 @@ import { DurationPipe } from './pipes/duration.pipe';
     ReplayViewerRoutingModule,
   ],
   exports: [
-    ReplayViewerComponent
+    ReplayViewerComponent,
+    AppSettingComponent
   ],
   declarations: [
     ReplayViewerComponent,
@@ -84,9 +89,12 @@ import { DurationPipe } from './pipes/duration.pipe';
     PopoverComponent,
     TalentIconComponent,
     TalentTipComponent,
-    DurationPipe
+    DurationPipe,
+    AboutComponent,
+    AppSettingComponent,
+    FaqComponent
   ],
-  providers: [ClipIconService],
+  providers: [ClipIconService, ReplayService],
   entryComponents: [
     SectionNotSupportedComponent,
     SectionLoadingComponent,

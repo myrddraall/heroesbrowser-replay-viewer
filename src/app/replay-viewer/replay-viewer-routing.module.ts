@@ -10,7 +10,7 @@ import { PlayerStatsComponent } from './sections/player-stats/player-stats.compo
 
 const replayViewerRoutes: Routes = [
     {
-        path: '',
+        path: 'replay',
         component: ReplayViewerComponent,
         children: [
             {

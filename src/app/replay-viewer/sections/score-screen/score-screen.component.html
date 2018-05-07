@@ -24,7 +24,7 @@
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="kills" >
-      <mat-header-cell *matHeaderCellDef mat-sort-header popover="Total Hero Kills" popoverPosition="above" popoverHideDelay="100000">
+      <mat-header-cell *matHeaderCellDef mat-sort-header popover="Total Hero Kills" popoverPosition="above">
         <div class="icon"></div>
       </mat-header-cell>
       <mat-cell *matCellDef="let player" [class.best]="isBest('SoloKill', player)" [class.best-team]="isBest('SoloKill', player, player.team)">{{player.stats.SoloKill}}</mat-cell>

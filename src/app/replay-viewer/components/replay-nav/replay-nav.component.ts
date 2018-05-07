@@ -40,7 +40,7 @@ export class ReplayNavComponent implements OnChanges {
         const scoreScreen: IReplayNavItemLink = {
           type: 'link',
           label: 'Score Screen',
-          path: ['/score']
+          path: ['/replay', 'score']
         };
         overview.children.push(scoreScreen);
 
@@ -48,7 +48,7 @@ export class ReplayNavComponent implements OnChanges {
         const talents: IReplayNavItemLink = {
           type: 'link',
           label: 'Talents',
-          path: ['/talents']
+          path: ['/replay', 'talents']
         };
         overview.children.push(talents);
 
@@ -58,7 +58,7 @@ export class ReplayNavComponent implements OnChanges {
           const draft: IReplayNavItemLink = {
             type: 'link',
             label: 'Draft',
-            path: ['/draft']
+            path: ['/replay', 'draft']
           };
           overview.children.push(draft);
         }
@@ -66,7 +66,7 @@ export class ReplayNavComponent implements OnChanges {
         const xpBreakdown: IReplayNavItemLink = {
           type: 'link',
           label: 'Experience',
-          path: ['/xp-breakdown']
+          path: ['/replay', 'xp-breakdown']
         };
         overview.children.push(xpBreakdown);
 
@@ -74,7 +74,7 @@ export class ReplayNavComponent implements OnChanges {
         const globeMap: IReplayNavItemLink = {
           type: 'link',
           label: 'Minion Deaths',
-          path: ['/minion-deaths']
+          path: ['/replay', 'minion-deaths']
         };
         overview.children.push(globeMap);
         //   }
@@ -93,7 +93,7 @@ export class ReplayNavComponent implements OnChanges {
           const sectionLink: IReplayNavItemLink = {
             type: 'link',
             label: section.title,
-            path: ['/player-stats', section.id]
+            path: ['/replay', 'player-stats', section.id]
           };
           stats.children.push(sectionLink);
         }

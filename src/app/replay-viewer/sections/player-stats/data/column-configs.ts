@@ -62,118 +62,394 @@ export const PrebuiltColumnFilters: { [section: string]: { [filter: string]: ISt
     pvp: {
         [DEFAULT_COL_FILTER_NAME]: [
             {
-                id: 'KillParticipation',
-                selected: true
+                'id': 'KDARatio',
+                'selected': true
             },
             {
-                id: 'AverageDamageTakenPerLife',
-                selected: true
+                'id': 'KDRatio',
+                'selected': false
             },
             {
-                id: 'KDARatio',
-                selected: true
+                'id': 'ADRatio',
+                'selected': false
             },
             {
-                id: 'HighestKillStreak',
-                selected: true
+                'id': 'KillParticipation',
+                'selected': true
             },
             {
-                id: 'Takedowns',
-                selected: true
+                'id': 'HighestKillStreak',
+                'selected': true
             },
             {
-                id: 'Deaths',
-                selected: true
+                'id': 'Deaths',
+                'selected': true
             },
             {
-                id: 'Assists',
-                selected: true
+                'id': 'Takedowns',
+                'selected': true
             },
             {
-                id: 'SoloKill',
-                selected: true
+                'id': 'Assists',
+                'selected': true
             },
             {
-                id: 'TimeSpentDead',
-                selected: true
+                'id': 'SoloKill',
+                'selected': true
             },
             {
-                id: 'OutnumberedDeaths',
-                selected: true
+                'id': 'TimeSpentDead',
+                'selected': true
             },
             {
-                id: 'HeroDamage',
-                selected: true
+                'id': 'PercentGameSpentDead',
+                'selected': false
             },
             {
-                id: 'DamageTaken',
-                selected: true
+                'id': 'HeroDamage',
+                'selected': true
             },
             {
-                id: 'TeamfightDamageTaken',
-                selected: true
+                'id': 'AverageHeroDamagePerLife',
+                'selected': false
             },
             {
-                id: 'SummonDamage',
-                selected: false
+                'id': 'PercentHeroDamage',
+                'selected': false
             },
             {
-                id: 'KDRatio',
-                selected: false
+                'id': 'AverageTeamfightHeroDamagePerLife',
+                'selected': false
             },
             {
-                id: 'ADRatio',
-                selected: false
+                'id': 'PercentTeamfightHeroDamage',
+                'selected': false
             },
             {
-                id: 'EscapesPerformed',
-                selected: false
+                'id': 'SummonDamage',
+                'selected': false
             },
             {
-                id: 'VengeancesPerformed',
-                selected: false
+                'id': 'DamageSoaked',
+                'selected': true
             },
             {
-                id: 'TeamfightEscapesPerformed',
-                selected: false
+                'id': 'AverageDamageSoakedPerLife',
+                'selected': false
             },
             {
-                id: 'AverageHeroDamagePerLife',
-                selected: false
+                'id': 'PercentDamageSoaked',
+                'selected': false
             },
             {
-                id: 'AverageTeamfightHeroDamagePerLife',
-                selected: false
+                'id': 'DamageTaken',
+                'selected': true
             },
             {
-                id: 'AverageTeamfightDamageTakenPerLife',
-                selected: false
+                'id': 'AverageDamageTakenPerLife',
+                'selected': false
             },
             {
-                id: 'PercentHeroDamage',
-                selected: false
+                'id': 'PercentDamageTaken',
+                'selected': false
             },
             {
-                id: 'PercentTeamfightHeroDamage',
-                selected: false
+                'id': 'TeamfightDamageTaken',
+                'selected': false
             },
             {
-                id: 'PercentDamageTaken',
-                selected: false
+                'id': 'AverageTeamfightDamageTakenPerLife',
+                'selected': false
             },
             {
-                id: 'PercentTeamfightDamageTaken',
-                selected: false
+                'id': 'PercentTeamfightDamageTaken',
+                'selected': false
             },
             {
-                id: 'PercentGameSpentDead',
-                selected: false
+                'id': 'OutnumberedDeaths',
+                'selected': false
             },
             {
-                id: 'PercentTimeOnFire',
-                selected: false
+                'id': 'EscapesPerformed',
+                'selected': false
+            },
+            {
+                'id': 'TeamfightEscapesPerformed',
+                'selected': false
+            },
+            {
+                'id': 'VengeancesPerformed',
+                'selected': false
+            },
+            {
+                'id': 'OnFireTimeOnFire',
+                'selected': true
+            },
+            {
+                'id': 'PercentTimeOnFire',
+                'selected': false
             }
-        ]
+        ],
+        'Per Life Stats': [
+            {
+                'id': 'KDARatio',
+                'selected': true
+            },
+            {
+                'id': 'KDRatio',
+                'selected': false
+            },
+            {
+                'id': 'ADRatio',
+                'selected': false
+            },
+            {
+                'id': 'KillParticipation',
+                'selected': true
+            },
+            {
+                'id': 'HighestKillStreak',
+                'selected': true
+            },
+            {
+                'id': 'Deaths',
+                'selected': true
+            },
+            {
+                'id': 'Takedowns',
+                'selected': true
+            },
+            {
+                'id': 'Assists',
+                'selected': false
+            },
+            {
+                'id': 'SoloKill',
+                'selected': false
+            },
+            {
+                'id': 'TimeSpentDead',
+                'selected': false
+            },
+            {
+                'id': 'PercentGameSpentDead',
+                'selected': false
+            },
+            {
+                'id': 'HeroDamage',
+                'selected': true
+            },
+            {
+                'id': 'AverageHeroDamagePerLife',
+                'selected': true
+            },
+            {
+                'id': 'PercentHeroDamage',
+                'selected': false
+            },
+            {
+                'id': 'AverageTeamfightHeroDamagePerLife',
+                'selected': false
+            },
+            {
+                'id': 'PercentTeamfightHeroDamage',
+                'selected': false
+            },
+            {
+                'id': 'SummonDamage',
+                'selected': false
+            },
+            {
+                'id': 'DamageSoaked',
+                'selected': true
+            },
+            {
+                'id': 'AverageDamageSoakedPerLife',
+                'selected': true
+            },
+            {
+                'id': 'PercentDamageSoaked',
+                'selected': false
+            },
+            {
+                'id': 'DamageTaken',
+                'selected': true
+            },
+            {
+                'id': 'AverageDamageTakenPerLife',
+                'selected': true
+            },
+            {
+                'id': 'PercentDamageTaken',
+                'selected': false
+            },
+            {
+                'id': 'TeamfightDamageTaken',
+                'selected': false
+            },
+            {
+                'id': 'AverageTeamfightDamageTakenPerLife',
+                'selected': false
+            },
+            {
+                'id': 'PercentTeamfightDamageTaken',
+                'selected': false
+            },
+            {
+                'id': 'OutnumberedDeaths',
+                'selected': false
+            },
+            {
+                'id': 'EscapesPerformed',
+                'selected': false
+            },
+            {
+                'id': 'TeamfightEscapesPerformed',
+                'selected': false
+            },
+            {
+                'id': 'VengeancesPerformed',
+                'selected': false
+            },
+            {
+                'id': 'OnFireTimeOnFire',
+                'selected': false
+            },
+            {
+                'id': 'PercentTimeOnFire',
+                'selected': false
+            }
+        ],
+        'Percent Stats': [
+            {
+              'id': 'KDARatio',
+              'selected': true
+            },
+            {
+              'id': 'KDRatio',
+              'selected': false
+            },
+            {
+              'id': 'ADRatio',
+              'selected': false
+            },
+            {
+              'id': 'KillParticipation',
+              'selected': true
+            },
+            {
+              'id': 'HighestKillStreak',
+              'selected': true
+            },
+            {
+              'id': 'Deaths',
+              'selected': true
+            },
+            {
+              'id': 'Takedowns',
+              'selected': true
+            },
+            {
+              'id': 'Assists',
+              'selected': false
+            },
+            {
+              'id': 'SoloKill',
+              'selected': false
+            },
+            {
+              'id': 'TimeSpentDead',
+              'selected': true
+            },
+            {
+              'id': 'PercentGameSpentDead',
+              'selected': true
+            },
+            {
+              'id': 'HeroDamage',
+              'selected': true
+            },
+            {
+              'id': 'AverageHeroDamagePerLife',
+              'selected': false
+            },
+            {
+              'id': 'PercentHeroDamage',
+              'selected': true
+            },
+            {
+              'id': 'AverageTeamfightHeroDamagePerLife',
+              'selected': false
+            },
+            {
+              'id': 'PercentTeamfightHeroDamage',
+              'selected': false
+            },
+            {
+              'id': 'SummonDamage',
+              'selected': false
+            },
+            {
+              'id': 'DamageSoaked',
+              'selected': true
+            },
+            {
+              'id': 'AverageDamageSoakedPerLife',
+              'selected': false
+            },
+            {
+              'id': 'PercentDamageSoaked',
+              'selected': true
+            },
+            {
+              'id': 'DamageTaken',
+              'selected': true
+            },
+            {
+              'id': 'AverageDamageTakenPerLife',
+              'selected': false
+            },
+            {
+              'id': 'PercentDamageTaken',
+              'selected': true
+            },
+            {
+              'id': 'TeamfightDamageTaken',
+              'selected': false
+            },
+            {
+              'id': 'AverageTeamfightDamageTakenPerLife',
+              'selected': false
+            },
+            {
+              'id': 'PercentTeamfightDamageTaken',
+              'selected': false
+            },
+            {
+              'id': 'OutnumberedDeaths',
+              'selected': false
+            },
+            {
+              'id': 'EscapesPerformed',
+              'selected': false
+            },
+            {
+              'id': 'TeamfightEscapesPerformed',
+              'selected': false
+            },
+            {
+              'id': 'VengeancesPerformed',
+              'selected': false
+            },
+            {
+              'id': 'OnFireTimeOnFire',
+              'selected': true
+            },
+            {
+              'id': 'PercentTimeOnFire',
+              'selected': true
+            }
+          ]
     },
     pve: {
         [DEFAULT_COL_FILTER_NAME]: [
