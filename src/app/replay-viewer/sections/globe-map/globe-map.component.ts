@@ -12,7 +12,7 @@ import { ReplayViewerComponent } from '../../replay-viewer.component';
 import { Replay, ReplayMapAnalyser, IPoint, IUnitLifeFilter } from '@heroesbrowser/heroprotocol';
 import { AbstractSectionComponent } from '../AbstractSection';
 import * as linq from 'linq';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { MapViewMode, MapIconCategory } from '../../maps';
 

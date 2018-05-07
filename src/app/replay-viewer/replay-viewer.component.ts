@@ -15,7 +15,7 @@ import { Angulartics2 } from 'angulartics2';
 import { Replay, BasicReplayAnalyser, ReplayDescription, GameType } from '@heroesbrowser/heroprotocol';
 import * as linq from 'linq';
 import { ReplayService, ReplayState } from './services/replay-service/replay.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 enum FileState {
   NONE,

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Replay, ReplayDescription, BasicReplayAnalyser } from '@heroesbrowser/heroprotocol';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
 
 export enum ReplayState {
   NONE,

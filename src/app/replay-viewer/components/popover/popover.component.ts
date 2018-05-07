@@ -52,11 +52,8 @@ import { AriaDescriber, FocusMonitor } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
 import { ESCAPE } from '@angular/cdk/keycodes';
 
-import { takeUntil } from 'rxjs/operators/takeUntil';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import { filter } from 'rxjs/operators/filter';
-import { take } from 'rxjs/operators/take';
+import { takeUntil ,  filter ,  take } from 'rxjs/operators';
+import { Observable ,  Subject } from 'rxjs';
 
 import { popoverAnimations } from './popover-animations';
 

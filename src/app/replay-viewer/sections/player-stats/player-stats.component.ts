@@ -38,7 +38,7 @@ import {
 import { AbstractSectionComponent } from '../AbstractSection';
 import * as linq from 'linq';
 import { cloneDeep } from 'lodash';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { StatSubsections, IStatsSection } from './data/section-columns';
 import { StatColumns, StatColumnType, IStatColumn, IStatColumnSelection } from './data/stat-columns';
 import { DEFAULT_COL_FILTER_NAME, PrebuiltColumnFilters } from './data/column-configs';

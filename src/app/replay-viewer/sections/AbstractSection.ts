@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { SectionNotSupportedComponent } from '../components/section-not-supported/section-not-supported.component';
 import { SectionLoadingComponent } from '../components/section-loading/section-loading.component';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { ReplayViewerComponent } from '../replay-viewer.component';
 import { Replay } from '@heroesbrowser/heroprotocol';
 
