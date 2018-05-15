@@ -22,8 +22,19 @@
 <mat-sidenav-container class="app-content">
   <mat-sidenav mode="over" opened="false" #sideNav>
     <app-settings></app-settings>
+    <nav class="recent-replays" *ngIf="allowRecentReplays">
+      <h4>Recent Replays</h4>
+      <ul>
+        <li *ngFor="let recent of recentReplays | async; let i = index" (click)="loadRecent(recent.fingerPrint)" [class.loaded]="isRecentReplayLoaded(recent.fingerPrint)" [style.order]="100 - i" [popover]="recent" popoverPosition="right" [popoverTemplate]="popoverTPL">{{recent.mapName}}</li>
+      </ul>
+    </nav>
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<ng-template #popoverTPL let-data="data">
+  <recent-replay-tooltip [replayDescription]="data"></recent-replay-tooltip>
+</ng-template>
+

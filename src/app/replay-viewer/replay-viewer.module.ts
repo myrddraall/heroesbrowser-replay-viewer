@@ -43,6 +43,7 @@ import { AboutComponent } from './sections/about/about.component';
 import { AppSettingComponent } from './components/app-setting/app-setting.component';
 import { ReplayService } from './services/replay-service/replay.service';
 import { FaqComponent } from './sections/faq/faq.component';
+import { RecentReplayTooltipComponent } from './components/recent-replay-tooltip/recent-replay-tooltip.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -69,7 +70,9 @@ import { FaqComponent } from './sections/faq/faq.component';
   ],
   exports: [
     ReplayViewerComponent,
-    AppSettingComponent
+    AppSettingComponent,
+    PopoverDirective,
+    RecentReplayTooltipComponent
   ],
   declarations: [
     ReplayViewerComponent,
@@ -92,7 +95,8 @@ import { FaqComponent } from './sections/faq/faq.component';
     DurationPipe,
     AboutComponent,
     AppSettingComponent,
-    FaqComponent
+    FaqComponent,
+    RecentReplayTooltipComponent
   ],
   providers: [ClipIconService, ReplayService],
   entryComponents: [

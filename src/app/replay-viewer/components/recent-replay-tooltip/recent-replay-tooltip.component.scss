@@ -1,0 +1,17 @@
+
+.header{
+    h4{
+        margin: 0px;
+        color:white;
+    }
+    .subheader{
+        display: flex;
+        .left{
+            padding-right: 4px;
+        }
+        .right{
+            padding-left: 4px;
+            text-align: right;
+        }
+    }
+}

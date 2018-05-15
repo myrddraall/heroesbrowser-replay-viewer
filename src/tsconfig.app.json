@@ -13,6 +13,9 @@
       ],
       "rxjs/*": [
         "../node_modules/rxjs/*"
+      ],
+      "rxjs": [
+        "../node_modules/rxjs"
       ]
     }
   },
@@ -21,6 +24,7 @@
     "**/*.spec.ts"
   ],
   "angularCompilerOptions": {
-    "preserveWhitespaces": false
+    "preserveWhitespaces": false,
+    "enableIvy": false
   }
 }

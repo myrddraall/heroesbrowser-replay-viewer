@@ -16,6 +16,7 @@ import { Replay, BasicReplayAnalyser, ReplayDescription, GameType } from '@heroe
 import * as linq from 'linq';
 import { ReplayService, ReplayState } from './services/replay-service/replay.service';
 import { Subscription } from 'rxjs';
+import { AppComponent } from '../app.component';
 
 enum FileState {
   NONE,
@@ -55,9 +56,13 @@ export class ReplayViewerComponent implements OnDestroy {
     private changeDetectorRef: ChangeDetectorRef,
     private router: Router,
     private angulartics2: Angulartics2,
-    private replayService: ReplayService
+    private replayService: ReplayService,
+    private app: AppComponent
   ) {
 
+    this._subscriptions.push(app.loadRecentReplay.subscribe(fp => {
+      replayService.loadRecentReplay(fp);
+    }));
     this._subscriptions.push(replayService.stateChange.subscribe(state => {
       switch (state) {
         case ReplayState.NONE:
