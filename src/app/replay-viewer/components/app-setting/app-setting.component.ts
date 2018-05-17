@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { SettingsService } from '../../services/settings.service';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './app-setting.component.html',
   styleUrls: ['./app-setting.component.scss']
 })
-export class AppSettingComponent implements OnInit {
+export class AppSettingComponent {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  constructor(
+    public settingsService: SettingsService
+  ) { }
 }

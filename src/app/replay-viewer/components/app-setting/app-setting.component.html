@@ -1,0 +1,6 @@
+
+<section>
+    <h4>Recent Replay Settings</h4>
+    <mat-checkbox popover="When enabled save the 5 most recently loaded replays in local storage. Requires 5-30 MB of loacal stortage space depending on the size of the replays" popoverPosition="right" [(ngModel)]="settingsService.allowRecentReplays">Enable Recent Replays</mat-checkbox>
+    <button mat-raised-button color="warn" (click)="settingsService.clearRecentReplays()" [disabled]="!settingsService.allowRecentReplays">Clear Recent Replays</button>
+</section>

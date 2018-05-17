@@ -1,4 +1,11 @@
-:host{
-    display: block;
-    padding: 30px;
+:host {
+  display: block;
+  padding:20px;
+  section {
+    display: flex;
+    flex-direction: column;
+    >* {
+      margin-bottom: 4px;
+    }
+  }
 }

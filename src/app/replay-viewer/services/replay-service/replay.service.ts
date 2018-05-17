@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Replay, ReplayDescription, BasicReplayAnalyser } from '@heroesbrowser/heroprotocol';
 import { BehaviorSubject } from 'rxjs';
 import { RecentReplayDB, IRecentReplayData, IRecentReplayDescription } from '../../db/RecentReplayDB';
+import { SettingsService } from '../settings.service';
 
 
 export enum ReplayState {
@@ -23,9 +24,11 @@ export class ReplayService {
   private _recentReplayDB = new RecentReplayDB();
   private _recentReplaysPromise: Promise<IRecentReplayDescription[]>;
 
-  constructor() {
+  constructor(
+    private settingsService: SettingsService
+  ) {
     this.init();
-   }
+  }
 
   public get stateChange(): BehaviorSubject<ReplayState> {
     return this._stateSubject;
@@ -63,6 +66,15 @@ export class ReplayService {
 
   private async init() {
     await this.recentReplayList;
+    this.settingsService.allowRecentReplaysChange.subscribe(async (value) => {
+      if (!value) {
+        await this.truncateReplays(0);
+        this._recentReplayDB.delete();
+      }
+    });
+    this.settingsService.clearRecentReplaysEvent.subscribe(() => {
+        this.truncateReplays(0);
+    });
   }
 
   private loadRecentReplays() {
@@ -79,6 +91,7 @@ export class ReplayService {
         rej(e);
       }
     });
+    return this._recentReplaysPromise;
   }
 
   public async loadReplay(replayData: ArrayBuffer): Promise<Replay> {
@@ -96,34 +109,36 @@ export class ReplayService {
       this.stateChange.next(ReplayState.PARSING);
       const basicAnalyser = new BasicReplayAnalyser(replay);
       const desc = await basicAnalyser.replayDescription;
-      let recentCount = 0;
-      const maxRecentReplays = 5;
-      try {
-        const db = this._recentReplayDB;
-        await db.transaction(async () => {
-          const replayRecord = Object.assign({}, desc, { lastAccessed: new Date() });
-          await db.recentReplayStore.put(replayRecord);
-          await db.recentReplayDataStore.put({
-            fingerPrint: replayRecord.fingerPrint,
-            data: data
-          });
-          recentCount = await db.recentReplayStore.count();
-        }, 'readwrite');
-
-        if (recentCount > maxRecentReplays) {
-          this.loadRecentReplays();
-          const recent = await this.recentReplayList;
+      if (this.settingsService.allowRecentReplays) {
+        const maxRecentReplays = 5;
+        try {
+          const db = this._recentReplayDB;
           await db.transaction(async () => {
-            for (let i = 0; i < recentCount - maxRecentReplays; i++) {
-              const element = recent[i];
-              await db.recentReplayStore.delete(element.fingerPrint);
-              await db.recentReplayDataStore.delete(element.fingerPrint);
-            }
+            const replayRecord = Object.assign({}, desc, { lastAccessed: new Date() });
+            await db.recentReplayStore.put(replayRecord);
+            await db.recentReplayDataStore.put({
+              fingerPrint: replayRecord.fingerPrint,
+              data: data
+            });
+            // recentCount = await db.recentReplayStore.count();
           }, 'readwrite');
+
+          /*if (recentCount > maxRecentReplays) {
+            this.loadRecentReplays();
+            const recent = await this.recentReplayList;
+            await db.transaction(async () => {
+              for (let i = 0; i < recentCount - maxRecentReplays; i++) {
+                const element = recent[i];
+                await db.recentReplayStore.delete(element.fingerPrint);
+                await db.recentReplayDataStore.delete(element.fingerPrint);
+              }
+            }, 'readwrite');
+          }
+          this.loadRecentReplays();*/
+          await this.truncateReplays(maxRecentReplays);
+        } catch (e) {
+          console.error(e);
         }
-        this.loadRecentReplays();
-      } catch (e) {
-        console.error(e);
       }
 
 
@@ -144,6 +159,21 @@ export class ReplayService {
 
   public get isDBSupported() {
     return 'indexedDB' in window;
+  }
+
+  public async truncateReplays(max: number) {
+    const db = this._recentReplayDB;
+    const recent = await this.loadRecentReplays();
+    const recentCount = recent.length;
+
+    await db.transaction(async () => {
+      for (let i = 0; i < recentCount - max; i++) {
+        const element = recent[i];
+        await db.recentReplayStore.delete(element.fingerPrint);
+        await db.recentReplayDataStore.delete(element.fingerPrint);
+      }
+    }, 'readwrite');
+    await this.loadRecentReplays();
   }
 
   public async loadRecentReplay(fingerPrint: string): Promise<Replay> {

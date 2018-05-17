@@ -1,5 +1,5 @@
 import { TypedIBDStore } from './AbstractIndexedBDStore';
-
+import { r2p } from '../util';
 export abstract class AbstractIndexedDB {
     private _name: string;
     private _version: number;
@@ -94,5 +94,10 @@ export abstract class AbstractIndexedDB {
         }
         await transactFn();
         this._storeInstances = new Map();
+    }
+
+    public async delete() {
+        await this.close();
+        return r2p<void>(indexedDB.deleteDatabase(this.name));
     }
 }
