@@ -34,9 +34,20 @@ export const StatColumns: IStatColumn[] = [
         label: 'Town Kills'
     },
     {
-        id: 'SoloKill',
+        id: 'MinionsKilled',
+        type: StatColumnType.INTEGER,
+        label: 'Minion Kills'
+    },
+    {
+        id: 'Kills',
         type: StatColumnType.INTEGER,
         label: 'Kills'
+    },
+    {
+        id: 'SoloKill',
+        type: StatColumnType.INTEGER,
+        label: 'Solo Kills',
+        description: 'Number of Player kills without the assistance of team mates'
     },
     {
         id: 'Assists',

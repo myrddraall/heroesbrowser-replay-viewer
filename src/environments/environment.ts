@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  appVerion: '0.9.2'
+  appVerion: '0.9.3'
 };

@@ -320,7 +320,9 @@ export class PlayerStatsComponent extends AbstractSectionComponent {
   protected async loadReplayView() {
     // this.replayDescription = this.replayViewer.replayDescription;
     this.scoreScreenAnalyser = new ScoreAnalyser(this.replay);
+    const start = new Date().getTime();
     this.statData = await this.scoreScreenAnalyser.playerScoresFull;
+    console.log('time to parse stats', new Date().getTime() - start);
 
     console.log('statData', this.statData);
 

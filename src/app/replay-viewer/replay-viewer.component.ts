@@ -12,7 +12,7 @@ import {
 
 import { Router } from '@angular/router';
 import { Angulartics2 } from 'angulartics2';
-import { Replay, BasicReplayAnalyser, ReplayDescription, GameType } from '@heroesbrowser/heroprotocol';
+import { Replay, BasicReplayAnalyser, ReplayDescription, GameType, UnitAnalyser } from '@heroesbrowser/heroprotocol';
 import * as linq from 'linq';
 import { ReplayService, ReplayState } from './services/replay-service/replay.service';
 import { Subscription } from 'rxjs';
@@ -225,11 +225,36 @@ export class ReplayViewerComponent implements OnDestroy {
     // console.log('this.replayDescription', this.replayDescription);
 
 
-    const joinLeave = linq.from(await this.replay.gameEvents)
-      .where(_ => _._event === 'NNet.Game.SGameUserLeaveEvent' || _._event === 'NNet.Game.SGameUserJoinEvent')
-      .toArray();
+     // const uan = new UnitAnalyser(this.replay);
 
-    console.log('joinLeave', joinLeave);
+    // console.log('unitSpawns', await uan.unitSpawns);
+   /* const deaths = await uan.unitLives;
+    const heroDeaths = linq.from(deaths).where(_ => _.isHero === true).toArray();
+    console.log('heroDeaths', heroDeaths);
+    /*const start = new Date().getTime();
+    let last = start;
+    let now = start;
+    console.log(await uan.getMinionsKilledByPlayerCount(0));
+    now = new Date().getTime();
+    console.log('t', now - last);
+    last = now;
+    console.log(await uan.getMinionsKilledByPlayerCount(1));
+    now = new Date().getTime();
+    console.log('t', now - last);
+    last = now;
+    console.log(await uan.getMinionsKilledByPlayerCount(2));
+    now = new Date().getTime();
+    console.log('t', now - last);
+    last = now;
+    console.log(await uan.getMinionsKilledByPlayerCount(3));
+    now = new Date().getTime();
+    console.log('t', now - last);
+    last = now;
+    console.log(await uan.getMinionsKilledByPlayerCount(4));
+    now = new Date().getTime();
+    console.log('t', now - last);
+    last = now;
+    console.log('total', now - start);*/
   }
 
   public ngOnDestroy() {

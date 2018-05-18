@@ -94,6 +94,10 @@ export const PrebuiltColumnFilters: { [section: string]: { [filter: string]: ISt
                 'selected': true
             },
             {
+                'id': 'Kills',
+                'selected': true
+            },
+            {
                 'id': 'SoloKill',
                 'selected': true
             },
@@ -221,6 +225,10 @@ export const PrebuiltColumnFilters: { [section: string]: { [filter: string]: ISt
             },
             {
                 'id': 'Assists',
+                'selected': false
+            },
+            {
+                'id': 'Kills',
                 'selected': false
             },
             {
@@ -354,8 +362,12 @@ export const PrebuiltColumnFilters: { [section: string]: { [filter: string]: ISt
               'selected': false
             },
             {
-              'id': 'SoloKill',
+              'id': 'Kills',
               'selected': false
+            },
+            {
+                'id': 'SoloKill',
+                'selected': false
             },
             {
               'id': 'TimeSpentDead',
@@ -467,6 +479,10 @@ export const PrebuiltColumnFilters: { [section: string]: { [filter: string]: ISt
             },
             {
                 id: 'MinionDamage',
+                selected: true
+            },
+            {
+                id: 'MinionsKilled',
                 selected: true
             },
             {
