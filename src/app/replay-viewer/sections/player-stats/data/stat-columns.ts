@@ -114,7 +114,8 @@ export const StatColumns: IStatColumn[] = [
     {
         id: 'TimeCCdEnemyHeroes',
         type: StatColumnType.DURATION,
-        label: 'Total CC'
+        label: 'Total CC',
+        description: 'Time that enemy players where under the effect of the player\' crowd control.'
     },
     {
         id: 'CreepDamage',
@@ -154,17 +155,27 @@ export const StatColumns: IStatColumn[] = [
     {
         id: 'TimeSilencingEnemyHeroes',
         type: StatColumnType.DURATION,
-        label: 'Silence'
+        label: 'Silence',
+        description: 'Time that enemy players where silenced by the player. Silence includes "Silence" and "Polymorph" effects'
     },
     {
         id: 'TimeRootingEnemyHeroes',
         type: StatColumnType.DURATION,
-        label: 'Roots'
+        label: 'Roots',
+        description: 'Time that enemy players where rooted by the player.'
     },
     {
         id: 'TimeStunningEnemyHeroes',
         type: StatColumnType.DURATION,
-        label: 'Stuns'
+        label: 'Stuns',
+        // tslint:disable-next-line:max-line-length
+        description: 'Time that enemy players where stunned by the player. Stun includes "Stun", "Time Stop", "Stasis" and "Knockback" effects'
+    },
+    {
+        id: 'TimeSlowedEnemyHeroes',
+        type: StatColumnType.DURATION,
+        label: 'Slows',
+        description: 'Time that enemy players where slowed by the player.'
     },
     {
         id: 'ClutchHealsPerformed',
@@ -190,6 +201,12 @@ export const StatColumns: IStatColumn[] = [
         id: 'OutnumberedDeaths',
         type: StatColumnType.INTEGER,
         label: 'Outnumbered Deaths'
+    },
+    {
+        id: 'DeathsToNPCs',
+        type: StatColumnType.INTEGER,
+        label: 'Deaths to NPCs',
+        description: 'Number oof times the player died to NPCs without the involvment of an enemey player. PAY ATTENTION!'
     },
     {
         id: 'TeamfightHealingDone',
@@ -413,5 +430,10 @@ export const StatColumns: IStatColumn[] = [
         id: 'PercentOfGameDisconnected',
         type: StatColumnType.PERCENT,
         label: 'Time Disconnected %'
+    },
+    {
+        id: 'VotesReceived',
+        type: StatColumnType.INTEGER,
+        label: 'Votes Received'
     }
 ];

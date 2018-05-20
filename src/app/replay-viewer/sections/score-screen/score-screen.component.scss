@@ -25,14 +25,62 @@
 @mixin awards($team) {
   &.mat-column-award {
     .award {
-      &[award="MostTeamfightHeroDamageDone"] {
-        @include awardUrl($team, 'Scrapper');
+      &[award="MVP"] {
+        @include awardUrl($team, 'MVP');
+      }
+      &[award="HighestKillStreak"] {
+        @include awardUrl($team, 'skull');
+      }
+      &[award="MostVengeancesPerformed"] {
+        @include awardUrl($team, 'Avenger');
+      }
+      &[award="MostDaredevilEscapes"] {
+        @include awardUrl($team, 'daredevil');
+      }
+      &[award="MostEscapes"] {
+        @include awardUrl($team, 'escapeartist');
+      } 
+      &[award="MostXPContribution"] {
+        @include awardUrl($team, 'experienced');
+      }
+      &[award="MostHeroDamageDone"] {
+        @include awardUrl($team, 'Painbringer');
+      }
+      &[award="MostKills"] {
+        @include awardUrl($team, 'finisher');
+      }
+      &[award="HatTrick"] {
+        @include awardUrl($team, 'hattrick');
+      }
+      &[award="ClutchHealer"] {
+        @include awardUrl($team, 'clutchhealer');
+      }
+      &[award="MostProtection"] {
+        @include awardUrl($team, 'protector');
+      }
+      &[award="0Deaths"] {
+        @include awardUrl($team, 'solesurvivor');
+      }
+      &[award="MostSiegeDamageDone"] {
+        @include awardUrl($team, 'siegemaster');
+      }
+      &[award="MostDamageTaken"] {
+        @include awardUrl($team, 'guardian');
+      }
+      &[award="0OutnumberedDeaths"] {
+        @include awardUrl($team, 'teamplayer');
+      }
+      &[award="MostHealing"] {
+        @include awardUrl($team, 'MainHealer');
+      }
+      &[award="MostStuns"] {
+        @include awardUrl($team, 'stunner');
       }
       &[award="MostRoots"] {
         @include awardUrl($team, 'Trapper');
       }
-      &[award="MVP"] {
-        @include awardUrl($team, 'MVP');
+      &[award="MostSilences"] {
+        @include awardUrl($team, 'Silencer');
       }
       &[award="MostMercCampsCaptured"] {
         @include awardUrl($team, 'headhunter');
@@ -40,74 +88,52 @@
       &[award="MostTeamfightDamageTaken"] {
         @include awardUrl($team, 'bulwark');
       }
-      &[award="HighestKillStreak"] {
-        @include awardUrl($team, 'skull');
+      &[award="MostTeamfightHealingDone"] {
+        @include awardUrl($team, 'combatmedic');
       }
-      &[award="MostSiegeDamageDone"] {
-        @include awardUrl($team, 'siegemaster');
+      &[award="MostTeamfightHeroDamageDone"] {
+        @include awardUrl($team, 'Scrapper');
       }
-      &[award="ClutchHealer"] {
-        @include awardUrl($team, 'clutchhealer');
-      }
-      &[award="MostHeroDamageDone"] {
-        @include awardUrl($team, 'Painbringer');
-      }
-      &[award="MostHealing"] {
-        @include awardUrl($team, 'MainHealer');
-      }
-      &[award="MostDamageTaken"] {
-        @include awardUrl($team, 'guardian');
-      }
-      &[award="MostXPContribution"] {
-        @include awardUrl($team, 'experienced');
-      }
-      &[award="MostSilences"] {
-        @include awardUrl($team, 'Silencer');
-      }
-      &[award="MostVengeancesPerformed"] {
-        @include awardUrl($team, 'Avenger');
-      }
-      &[award="MostEscapes"] {
-        @include awardUrl($team, 'escapeartist');
-      } // MAP SPECIFIC
-      &[award="MostTimeInTemple"] {
-        @include awardUrl($team, 'templemaster');
-      }
-      &[award="MostDamageDoneToZerg"] {
-        @include awardUrl($team, 'zergcrusher');
-      }
+      // MAP SPECIFIC
       &[award="MostDragonShrinesCaptured"] {
         @include awardUrl($team, 'Shriner');
-      }
-      &[award="MostTimeInTemple"] {
-        @include awardUrl($team, 'templemaster');
       }
       &[award="MostCurseDamageDone"] {
         @include awardUrl($team, 'masterofthecurse');
       }
-      &[award="MostSkullsCollected"] {
-        @include awardUrl($team, 'skullcollector');
+      &[award="MostCoinsPaid"] {
+        @include awardUrl($team, 'Moneybags');
       }
       &[award="MostImmortalDamage"] {
         @include awardUrl($team, 'ImmortalSlayer');
       }
-      &[award="MostNukeDamageDone"] {
-        @include awardUrl($team, 'dabomb');
-      }
-      &[award="MostCoinsPaid"] {
-        @include awardUrl($team, 'Moneybags');
-      }
-      &[award="MostTimeOnPoint"] {
-        @include awardUrl($team, 'pointguard');
+      &[award="MostDamageDoneToZerg"] {
+        @include awardUrl($team, 'zergcrusher');
       }
       &[award="MostDamageToPlants"] {
         @include awardUrl($team, 'gardenterror');
       }
+      &[award="MostDamageToMinions"] {
+        @include awardUrl($team, 'guardianslayer');
+      }
+      &[award="MostTimeInTemple"] {
+        @include awardUrl($team, 'templemaster');
+      }
       &[award="MostGemsTurnedIn"] {
         @include awardUrl($team, 'jeweler');
-      } // &[award="MostDamageToMinions"]{
-      //    @include awardUrl($team, 'Moneybags');
-      // }
+      }
+      &[award="MostSkullsCollected"] {
+        @include awardUrl($team, 'skullcollector');
+      }
+      &[award="MostAltarDam"] {
+        @include awardUrl($team, 'cannoneer');
+      }
+      &[award="MostNukeDamageDone"] {
+        @include awardUrl($team, 'dabomb');
+      }
+      &[award="MostTimeOnPoint"] {
+        @include awardUrl($team, 'pointguard');
+      }
     }
   }
 }

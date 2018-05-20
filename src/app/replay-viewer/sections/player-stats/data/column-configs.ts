@@ -520,13 +520,17 @@ export const PrebuiltColumnFilters: { [section: string]: { [filter: string]: ISt
             {
                 id: 'PercentXPContribution',
                 selected: true
-            }
+            },
+            {
+                id: 'DeathsToNPCs',
+                selected: true
+            },
         ]
     },
     cc: {
         [DEFAULT_COL_FILTER_NAME]: [
             {
-                id: 'TimeCCdEnemyHeroes',
+                id: 'TimeStunningEnemyHeroes',
                 selected: true
             },
             {
@@ -538,9 +542,13 @@ export const PrebuiltColumnFilters: { [section: string]: { [filter: string]: ISt
                 selected: true
             },
             {
-                id: 'TimeStunningEnemyHeroes',
+                id: 'TimeSlowedEnemyHeroes',
                 selected: true
-            }
+            },
+            {
+                id: 'TimeCCdEnemyHeroes',
+                selected: true
+            },
         ]
     },
     healing: {
@@ -608,7 +616,11 @@ export const PrebuiltColumnFilters: { [section: string]: { [filter: string]: ISt
             {
                 id: 'PercentOfGameDisconnected',
                 selected: true
-            }
+            },
+            {
+                id: 'VotesReceived',
+                selected: true
+            },
         ]
     },
 };
