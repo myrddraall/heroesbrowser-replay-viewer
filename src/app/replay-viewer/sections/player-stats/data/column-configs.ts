@@ -470,6 +470,10 @@ export const PrebuiltColumnFilters: { [section: string]: { [filter: string]: ISt
                 selected: true
             },
             {
+                id: 'RegenGlobesColleced',
+                selected: true
+            },
+            {
                 id: 'SiegeDamage',
                 selected: true
             },
@@ -487,6 +491,22 @@ export const PrebuiltColumnFilters: { [section: string]: { [filter: string]: ISt
             },
             {
                 id: 'MercCampCaptures',
+                selected: true
+            },
+            {
+                id: 'MercsKilledCamp',
+                selected: true
+            },
+            {
+                id: 'MercsKilledLane',
+                selected: true
+            },
+            {
+                id: 'BossKilledCamp',
+                selected: true
+            },
+            {
+                id: 'BossKilledLane',
                 selected: true
             },
             {

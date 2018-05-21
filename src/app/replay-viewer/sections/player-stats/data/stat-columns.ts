@@ -435,5 +435,35 @@ export const StatColumns: IStatColumn[] = [
         id: 'VotesReceived',
         type: StatColumnType.INTEGER,
         label: 'Votes Received'
-    }
+    },
+    {
+        id: 'MercsKilledCamp',
+        type: StatColumnType.INTEGER,
+        label: 'Merc Kills Jungle',
+        description: 'Number of mercs killed at camps. Only killing blows are counted, it does not mean other players didn\'t help '
+    },
+    {
+        id: 'MercsKilledLane',
+        type: StatColumnType.INTEGER,
+        label: 'Merc Kills Lane',
+        description: 'Number of mercs killed in lane. Only killing blows are counted, it does not mean other players didn\'t help '
+    },
+    {
+        id: 'BossKilledCamp',
+        type: StatColumnType.INTEGER,
+        label: 'Boss Kills Jungle',
+        description: 'Number of bosses killed at camps. Only killing blows are counted, it does not mean other players didn\'t help '
+    },
+    {
+        id: 'BossKilledLane',
+        type: StatColumnType.INTEGER,
+        label: 'Boos Kills Lane',
+        description: 'Number of bosses killed in lane. Only killing blows are counted, it does not mean other players didn\'t help '
+    },
+    {
+        id: 'RegenGlobesColleced',
+        type: StatColumnType.INTEGER,
+        label: 'Regen Globes Colleced'
+    },
+
 ];
