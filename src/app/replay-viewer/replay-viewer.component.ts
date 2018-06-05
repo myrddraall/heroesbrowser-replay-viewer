@@ -19,7 +19,8 @@ import {
   GameType,
   UnitAnalyser,
   isSUnitBornEvent,
-  ISUnitBornEvent
+  ISUnitBornEvent,
+  TimelineAnalyser
 } from '@heroesbrowser/heroprotocol';
 import * as linq from 'linq';
 import { ReplayService, ReplayState } from './services/replay-service/replay.service';
@@ -231,6 +232,9 @@ export class ReplayViewerComponent implements OnDestroy {
     console.log('trackerEvents', await this.replay.trackerEvents);
     console.log('gameEvents', await this.replay.gameEvents);
 
+    const tan = new TimelineAnalyser(this.replay);
+    const r = await tan.getTestUnitData();
+    console.log('UNIT DATA', r);
     // console.log('this.replayDescription', this.replayDescription);
 /*
 

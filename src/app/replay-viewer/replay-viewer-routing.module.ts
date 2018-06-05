@@ -7,12 +7,16 @@ import { XpBreakdownComponent } from './sections/xp-breakdown/xp-breakdown.compo
 import { GlobeMapComponent } from './sections/globe-map/globe-map.component';
 import { TalentScreenComponent } from './sections/talent-screen/talent-screen.component';
 import { PlayerStatsComponent } from './sections/player-stats/player-stats.component';
-
+import { TimelineComponent } from './sections/timeline/timeline.component';
 const replayViewerRoutes: Routes = [
     {
         path: 'replay',
         component: ReplayViewerComponent,
         children: [
+            {
+                path: 'timeline',
+                component: TimelineComponent
+            },
             {
                 path: 'player-stats/:subsection',
                 component: PlayerStatsComponent

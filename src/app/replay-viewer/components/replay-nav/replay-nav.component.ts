@@ -70,15 +70,6 @@ export class ReplayNavComponent implements OnChanges {
         };
         overview.children.push(xpBreakdown);
 
-        // if (this.replayDescription.mapName === 'Cursed Hollow') {
-        const globeMap: IReplayNavItemLink = {
-          type: 'link',
-          label: 'Minion Deaths',
-          path: ['/replay', 'minion-deaths']
-        };
-        overview.children.push(globeMap);
-        //   }
-
         this.navData.push(overview);
 
 
@@ -99,6 +90,32 @@ export class ReplayNavComponent implements OnChanges {
         }
 
         this.navData.push(stats);
+
+        const inprog: IReplayNavItemSection = {
+          type: 'section',
+          label: 'In Progress',
+          children: []
+        };
+
+
+        const globeMap: IReplayNavItemLink = {
+          type: 'link',
+          label: 'Minion Deaths',
+          path: ['/replay', 'minion-deaths']
+        };
+        inprog.children.push(globeMap);
+
+
+        const timeline: IReplayNavItemLink = {
+          type: 'link',
+          label: 'Time Line',
+          path: ['/replay', 'timeline']
+        };
+        inprog.children.push(timeline);
+
+
+        this.navData.push(inprog);
+
       } else {
         this.navData = undefined;
       }

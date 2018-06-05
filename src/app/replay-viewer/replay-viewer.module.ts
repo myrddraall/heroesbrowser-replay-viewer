@@ -44,6 +44,8 @@ import { AppSettingComponent } from './components/app-setting/app-setting.compon
 import { ReplayService } from './services/replay-service/replay.service';
 import { FaqComponent } from './sections/faq/faq.component';
 import { RecentReplayTooltipComponent } from './components/recent-replay-tooltip/recent-replay-tooltip.component';
+import { TimelineComponent } from './sections/timeline/timeline.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -96,7 +98,8 @@ import { RecentReplayTooltipComponent } from './components/recent-replay-tooltip
     AboutComponent,
     AppSettingComponent,
     FaqComponent,
-    RecentReplayTooltipComponent
+    RecentReplayTooltipComponent,
+    TimelineComponent
   ],
   providers: [ClipIconService, ReplayService],
   entryComponents: [

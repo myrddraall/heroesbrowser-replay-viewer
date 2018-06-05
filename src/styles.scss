@@ -4,6 +4,7 @@
 @import url('https://fonts.googleapis.com/css?family=Exo+2:300,400,500,700');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
+@import '~vis/dist/vis.css';
 @import '~@angular/material/theming';
 @include mat-core();
 $custom-typography: mat-typography-config( $font-family: '"Exo 2", monospace');

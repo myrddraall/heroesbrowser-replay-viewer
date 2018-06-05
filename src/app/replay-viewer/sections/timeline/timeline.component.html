@@ -1,0 +1,9 @@
+<mat-sidenav-container *ngIf="state !== SectionState.ERROR" [hidden]="state !== SectionState.READY">
+  <mat-sidenav mode="side" opened="true" position="end">
+    Timeline side
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div #timelineContainer></div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<div #statusRef></div>
