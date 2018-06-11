@@ -191,49 +191,51 @@ export class MapViewerComponent implements AfterViewInit, OnChanges {
   }
 
   private renderHeatmapRegion(index: number) {
-    const scaleFactor = 10;
-    const region = this.regions[index];
-    const heatmapRegionPoints = region.calculate(this.heatmap, scaleFactor);
-    if (heatmapRegionPoints.length) {
-      this.renderer.setStyle(this.heatmapRenderTarget.nativeElement, 'width', (region.cropArea.width * scaleFactor) + 'px');
-      this.renderer.setStyle(this.heatmapRenderTarget.nativeElement, 'height', (region.cropArea.height * scaleFactor) + 'px');
+    try {
+      const scaleFactor = 10;
+      const region = this.regions[index];
+      const heatmapRegionPoints = region.calculate(this.heatmap, scaleFactor);
+      if (heatmapRegionPoints.length) {
+        this.renderer.setStyle(this.heatmapRenderTarget.nativeElement, 'width', (region.cropArea.width * scaleFactor) + 'px');
+        this.renderer.setStyle(this.heatmapRenderTarget.nativeElement, 'height', (region.cropArea.height * scaleFactor) + 'px');
 
-      const inst = heatmap.create({
-        container: this.heatmapRenderTarget.nativeElement,
-        radius: 25,
-        // blur: .999
-      });
+        const inst = heatmap.create({
+          container: this.heatmapRenderTarget.nativeElement,
+          radius: 25,
+          // blur: .999
+        });
 
-      const min = linq.from(heatmapRegionPoints).min(_ => _['value']);
-      const max = linq.from(heatmapRegionPoints).max(_ => _['value']);
+        const min = linq.from(heatmapRegionPoints).min(_ => _['value']);
+        const max = linq.from(heatmapRegionPoints).max(_ => _['value']);
 
-      inst.setData({
-        min,
-        max,
-        data: heatmapRegionPoints
-      });
+        inst.setData({
+          min,
+          max,
+          data: heatmapRegionPoints
+        });
 
-      const container: HTMLElement = this.heatmapRenderTarget.nativeElement;
-      const canvas = <HTMLCanvasElement>container.querySelector('.heatmap-canvas');
-      this.regionHeatMaps[index] = canvas.toDataURL();
-      canvas.remove();
-    }
+        const container: HTMLElement = this.heatmapRenderTarget.nativeElement;
+        const canvas = <HTMLCanvasElement>container.querySelector('.heatmap-canvas');
+        this.regionHeatMaps[index] = canvas.toDataURL();
+        canvas.remove();
+      }
+    } catch (e) { }
   }
 
   public async render() {
     const mapDesc = this.mapDescriptor;
     const regions = this.regions = this.mapComponent.instance.mapRegions;
-    const locations = await this.replayMapAnalyser.getMajorLocations();
+    // const locations = await this.replayMapAnalyser.getMajorLocations();
 
     const poi = await this.replayMapAnalyser.getPointsOfInterest();
     console.log('POI', poi);
 
-    const debugPoints = await this.replayMapAnalyser.getMercSpawns();
+    // const debugPoints = await this.replayMapAnalyser.getMercSpawns();
 
     this.regions[0].mapSize = mapDesc.size;
     this.debugData.mapDescriptor = this.mapDescriptor;
     this.debugData.displayRegions = [];
-    this.debugData.points = new MapCoordinateMapper(debugPoints, this.regions[0].mapRect).flip(false, true).toArray();
+    // this.debugData.points = new MapCoordinateMapper(debugPoints, this.regions[0].mapRect).flip(false, true).toArray();
 
     for (let i = 0; i < regions.length; i++) {
       const region = regions[i];
@@ -242,13 +244,13 @@ export class MapViewerComponent implements AfterViewInit, OnChanges {
 
       region.clear();
       region.mapSize = mapDesc.size;
-      region.cores = locations.cores;
-      region.towers = locations.towers;
-      region.towns = locations.towns;
-      region.wells = locations.wells;
+      /* region.cores = locations.cores;
+       region.towers = locations.towers;
+       region.towns = locations.towns;
+       region.wells = locations.wells;*/
       region.pointsOfInterest = poi;
 
-      region.addPointSet(debugPoints);
+     // region.addPointSet(debugPoints);
 
       region.calculatePositions();
     }

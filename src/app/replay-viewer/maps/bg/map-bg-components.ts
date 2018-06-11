@@ -2,6 +2,7 @@ import { Type } from '@angular/core';
 import { IMapVersion } from './types';
 import { BattlegroundMapBGBase } from './bg-base/BattlegroundMapBGBase';
 import {
+    AlteracPassCompnents, AlteracPassVersions,
     BattlefieldOfEternityCompnents, BattlefieldOfEternityVersions,
     BlackheartsBayCompnents, BlackheartsBayVersions,
     BraxisHoldoutCompnents, BraxisHoldoutVersions,
@@ -19,6 +20,7 @@ import {
 
 
 export const MapBackgroundComponentMap: { [key: string]: IMapVersion[] } = {
+    alterac_pass: AlteracPassVersions,
     battlefield_of_eternity: BattlefieldOfEternityVersions,
     blackheart_s_bay: BlackheartsBayVersions,
     braxis_holdout: BraxisHoldoutVersions,
@@ -35,6 +37,7 @@ export const MapBackgroundComponentMap: { [key: string]: IMapVersion[] } = {
 };
 
 export const MapBackgroundComponents: Type<BattlegroundMapBGBase>[] = [
+    ...AlteracPassCompnents,
     ...BattlefieldOfEternityCompnents,
     ...BlackheartsBayCompnents,
     ...BraxisHoldoutCompnents,

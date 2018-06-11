@@ -13,6 +13,7 @@ import {
 import { AppComponent } from './app.component';
 import { ReplayViewerModule } from './replay-viewer/replay-viewer.module';
 import { AppRoutingModule } from './app-routing.module';
+import { SettingsService } from './replay-viewer/services/settings.service';
 HeroProtocol.env = environment.production ? 'production' : 'developement';
 
 @NgModule({
@@ -30,7 +31,7 @@ HeroProtocol.env = environment.production ? 'production' : 'developement';
     RouterModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [SettingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,3 +11,4 @@ export * from './tomb-of-the-spider-queen';
 export * from './towers-of-doom';
 export * from './volskaya-foundry';
 export * from './warhead-junction';
+export * from './alterac-pass';

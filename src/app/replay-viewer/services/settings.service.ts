@@ -9,9 +9,7 @@ interface IHrsbSettings {
 }
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SettingsService {
 
   private _settingsData: IHrsbSettings = {

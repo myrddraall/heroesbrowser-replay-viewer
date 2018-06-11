@@ -19,7 +19,7 @@ export class TalentIconComponent {
 
   @HostBinding('class.heroic')
   public get isHeroic(): boolean {
-    return this.talent ? this.talent.ability.startsWith('R') : false;
+    return this.talent && this.talent.ability ? this.talent.ability.startsWith('R') : false;
   }
 
   constructor() { }
