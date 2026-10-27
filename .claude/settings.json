@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_resize",
+      "mcp__playwright__browser_wait_for",
+      "mcp__playwright__browser_console_messages",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_network_requests",
+      "Bash(npx tsc -p tsconfig.app.json --noEmit)",
+      "Bash(npx tsc -p tsconfig.app.json --noEmit *)",
+      "Bash(npx tsc --noEmit *)",
+      "Bash(pnpm exec tsc --noEmit *)",
+      "Bash(pnpm exec tsc -p tsconfig.app.json --noEmit)",
+      "Bash(pnpm typecheck)",
+      "Bash(pnpm lint)",
+      "Bash(pnpm test)",
+      "Bash(pnpm test --watch=false)",
+      "Bash(pnpm check)",
+      "Bash(npx ng test --watch=false)",
+      "Bash(npx ng lint)",
+      "Bash(pnpm exec vitest run)",
+      "Bash(npx prettier --check *)"
+    ]
+  }
+}

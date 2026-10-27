@@ -43,3 +43,6 @@ testem.log
 .DS_Store
 Thumbs.db
 /.vscode/launch.json
+
+# Playwright MCP screenshots and logs
+/.playwright-mcp/
